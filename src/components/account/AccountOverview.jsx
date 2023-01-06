@@ -21,7 +21,7 @@ const AccountOverview = ({ account }) => {
 		>
 			<Box sx={{ position: "relative" }}>
 				<img
-					src={account.coverImage}
+					src={`/${process.env.REACT_APP_BASENAME}${account.coverImage}`}
 					style={{
 						width: "100%",
 						height: isMobile === true ? "7rem" : "auto",

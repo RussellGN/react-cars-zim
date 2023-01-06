@@ -127,7 +127,7 @@ const MobileNavigation = ({ mode, setMode }) => {
 								setExpanded(false);
 							}}
 							alt="Remy Sharp"
-							src="/static/undraw_profile_2.svg"
+							src={`/${process.env.REACT_APP_BASENAME}/static/undraw_profile_2.svg`}
 							sx={{
 								width: "5rem",
 								height: "5rem",

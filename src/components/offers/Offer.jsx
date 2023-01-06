@@ -52,7 +52,7 @@ const Offer = ({ listing }) => {
 					{listing.imageCount}
 				</Typography>
 				<img
-					src={listing.coverImage}
+					src={`/${process.env.REACT_APP_BASENAME}${listing.coverImage}`}
 					alt={listing.name}
 					style={{ width: "100%", height: "100%", objectFit: "cover" }}
 				/>

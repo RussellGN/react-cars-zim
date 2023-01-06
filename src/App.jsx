@@ -31,7 +31,7 @@ const App = () => {
 
 	return (
 		<ThemeProvider theme={theme}>
-			<BrowserRouter>
+			<BrowserRouter basename={process.env.REACT_APP_BASENAME}>
 				<CssBaseline />
 				<Navbar mode={mode} setMode={setMode} />
 				<AnimatedRoutes />

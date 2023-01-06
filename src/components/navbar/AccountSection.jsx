@@ -206,7 +206,7 @@ const AccountSection = ({ show, mode, setMode }) => {
 					<Avatar
 						onClick={handleClick}
 						alt="Sharp"
-						src="/static/image.jpg"
+						src={`/${process.env.REACT_APP_BASENAME}/static/image.jpg`}
 						sx={{
 							ml: 2,
 							cursor: "pointer",

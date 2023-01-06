@@ -68,7 +68,11 @@ const Hero = () => {
 				</Grid>
 
 				<Grid item xs={12} md={6}>
-					<img src="/static/image2.png" alt="cars" style={{ width: "100%" }} />
+					<img
+						src={`/${process.env.REACT_APP_BASENAME}/static/image2.png`}
+						alt="cars"
+						style={{ width: "100%" }}
+					/>
 				</Grid>
 			</Grid>
 		</Container>

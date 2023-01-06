@@ -126,7 +126,7 @@ const ViewOffer = () => {
 							{`${imageOnview + 1}/${listing.images.length}`}
 						</Typography>
 						<img
-							src={listing.images[imageOnview]}
+							src={`/${process.env.REACT_APP_BASENAME}${listing.images[imageOnview]}`}
 							alt={listing.name}
 							style={{
 								width: "100%",
