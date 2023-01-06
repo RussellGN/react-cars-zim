@@ -10,6 +10,7 @@
 
 # in order to complete
 
+6. navbar
 7. homepage features
 8. about
 9. contact
