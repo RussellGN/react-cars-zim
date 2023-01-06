@@ -1,7 +1,18 @@
-import { Box, Input } from "@mui/material";
+import { Box, styled } from "@mui/material";
 import { Search } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
+
+const SearchInput = styled("input")(({ theme }) => ({
+	background: "transparent",
+	border: "none",
+	outline: "none",
+	cursor: "pointer",
+	transition: "all 0.2s",
+	fontSize: "inherit",
+	padding: `0 ${theme.spacing(1.5)}`,
+	color: "inherit",
+}));
 
 const SearchForm = ({ show, setOpenDrawer }) => {
 	const inputRef = useRef();
@@ -12,8 +23,9 @@ const SearchForm = ({ show, setOpenDrawer }) => {
 			setOpenDrawer(false);
 		}
 		e.preventDefault();
-		navigate(`/offers?q=${inputRef.current.querySelector("input").value}`);
-		inputRef.current.querySelector("input").blur();
+
+		navigate(`/offers?q=${e.target.search.value}`);
+		inputRef.current.blur();
 	};
 
 	return (
@@ -27,12 +39,18 @@ const SearchForm = ({ show, setOpenDrawer }) => {
 		>
 			<Search color="inherit" />
 
-			<Input
+			<SearchInput
 				ref={inputRef}
+				name="search"
+				type="search"
+				placeholder="Click here to search..."
+			/>
+			{/* <Input
+				name="search"
 				type="search"
 				placeholder="Search..."
 				sx={{ color: "inherit", ml: 2 }}
-			/>
+			/> */}
 		</Box>
 	);
 };

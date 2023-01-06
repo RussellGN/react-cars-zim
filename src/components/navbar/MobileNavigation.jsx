@@ -67,9 +67,7 @@ const MobileNavigation = ({ mode, setMode }) => {
 					sx={{
 						minWidth: 250,
 						px: 5,
-						color: "light.main",
 						height: "100vh",
-						backgroundColor: "dark.main",
 						display: "flex",
 						justifyContent: "center",
 						alignItems: "center",
@@ -78,7 +76,6 @@ const MobileNavigation = ({ mode, setMode }) => {
 				>
 					<IconButton
 						onClick={() => setOpenDrawer(false)}
-						color="inherit"
 						sx={{ position: "absolute", top: "1rem", right: "1rem" }}
 					>
 						<Close />
@@ -96,8 +93,7 @@ const MobileNavigation = ({ mode, setMode }) => {
 
 			<Backdrop
 				sx={{
-					backgroundColor: "rgba(0,0,0,0.8) !important",
-					color: "light.primary",
+					backgroundColor: "rgba(0,0,0,0.9) !important",
 					zIndex: (theme) => theme.zIndex.drawer + 1,
 				}}
 				open={openBackdrop}
@@ -108,8 +104,57 @@ const MobileNavigation = ({ mode, setMode }) => {
 						flexDirection: "column",
 						justifyContent: "center",
 						alignItems: "center",
+						color: "light.primary",
 					}}
 				>
+					<Box
+						sx={{
+							position: "absolute",
+							top: 0,
+							color: "light.primary",
+							left: 0,
+							width: "100%",
+							p: 3,
+							display: "flex",
+							justifyContent: "space-between",
+						}}
+					>
+						<span>
+							<Badge
+								badgeContent={41}
+								max={9}
+								onClick={() => {
+									setOpenBackdrop(false);
+									setExpanded(false);
+								}}
+								color="success"
+								component={Link}
+								to="/notifications"
+								sx={{ cursor: "pointer" }}
+								anchorOrigin={{
+									vertical: "top",
+									horizontal: "left",
+								}}
+							>
+								<Notifications sx={{ color: "light.main" }} />
+							</Badge>
+
+							<IconButton color="light" onClick={changeMode} sx={{ ml: 1 }}>
+								{mode === "dark" ? <LightMode /> : <DarkMode />}
+							</IconButton>
+						</span>
+
+						<IconButton
+							onClick={() => {
+								setOpenBackdrop(false);
+								setExpanded(false);
+							}}
+							color="light"
+						>
+							<Close />
+						</IconButton>
+					</Box>
+
 					<Box
 						sx={{
 							mb: 4,
@@ -142,6 +187,7 @@ const MobileNavigation = ({ mode, setMode }) => {
 						}}
 						to="/"
 						end
+						sx={{ color: "light.main" }}
 					>
 						Home
 					</MobileLink>
@@ -152,6 +198,7 @@ const MobileNavigation = ({ mode, setMode }) => {
 							setExpanded(false);
 						}}
 						to="/offers"
+						sx={{ color: "light.main" }}
 					>
 						Offers
 					</MobileLink>
@@ -162,6 +209,7 @@ const MobileNavigation = ({ mode, setMode }) => {
 							setExpanded(false);
 						}}
 						to="/account"
+						sx={{ color: "light.main" }}
 					>
 						Account
 					</MobileLink>
@@ -169,7 +217,13 @@ const MobileNavigation = ({ mode, setMode }) => {
 					<Typography
 						onClick={handleExpandClick}
 						variant="body1"
-						sx={{ display: "flex", alignItems: "center", my: 2, cursor: "pointer" }}
+						sx={{
+							display: "flex",
+							alignItems: "center",
+							my: 2,
+							cursor: "pointer",
+							color: "light.main",
+						}}
 					>
 						{expanded === true ? "less" : "more"}{" "}
 						<ExpandMoreIcon
@@ -193,84 +247,44 @@ const MobileNavigation = ({ mode, setMode }) => {
 								setExpanded(false);
 							}}
 							to="/about"
+							sx={{ color: "light.main" }}
 						>
 							About
 						</MobileLink>
+
 						<MobileLink
 							onClick={() => {
 								setOpenBackdrop(false);
 								setExpanded(false);
 							}}
 							to="/contact"
+							sx={{ color: "light.main" }}
 						>
 							Contact Us
 						</MobileLink>
+
 						<MobileLink
 							onClick={() => {
 								setOpenBackdrop(false);
 								setExpanded(false);
 							}}
 							to="/report"
+							sx={{ color: "light.main" }}
 						>
 							Report
 						</MobileLink>
+
 						<MobileLink
 							onClick={() => {
 								setOpenBackdrop(false);
 								setExpanded(false);
 							}}
 							to="/login"
+							sx={{ color: "light.main" }}
 						>
 							Login
 						</MobileLink>
 					</Collapse>
-
-					<Box
-						sx={{
-							position: "absolute",
-							top: 0,
-							left: 0,
-							width: "100%",
-							p: 3,
-							display: "flex",
-							justifyContent: "space-between",
-						}}
-					>
-						<span>
-							<Badge
-								badgeContent={41}
-								max={9}
-								onClick={() => {
-									setOpenBackdrop(false);
-									setExpanded(false);
-								}}
-								color="success"
-								component={Link}
-								to="/notifications"
-								sx={{ cursor: "pointer" }}
-								anchorOrigin={{
-									vertical: "top",
-									horizontal: "left",
-								}}
-							>
-								<Notifications sx={{ color: "light.main" }} />
-							</Badge>
-
-							<IconButton color="inherit" onClick={changeMode} sx={{ ml: 1 }}>
-								{mode === "dark" ? <LightMode /> : <DarkMode />}
-							</IconButton>
-						</span>
-
-						<IconButton
-							onClick={() => {
-								setOpenBackdrop(false);
-								setExpanded(false);
-							}}
-							color="inherit"
-						>
-							<Close />
-						</IconButton>
-					</Box>
 				</Box>
 			</Backdrop>
 		</Box>

@@ -19,15 +19,23 @@ const AccountOverview = ({ account }) => {
 				borderColor: "divider",
 			}}
 		>
-			<Box sx={{ position: "relative" }}>
+			<Box
+				sx={{
+					position: "relative",
+					width: "100%",
+					height: isMobile === true ? "7rem" : "10rem",
+					background: "divider",
+					border: `solid thin ${theme.palette.divider}`,
+					borderRadius: theme.radii.border1,
+				}}
+			>
 				<img
 					src={`/${process.env.REACT_APP_BASENAME}${account.coverImage}`}
 					style={{
 						width: "100%",
-						height: isMobile === true ? "7rem" : "auto",
+						height: "100%",
 						objectFit: "cover",
 						borderRadius: theme.radii.border1,
-						border: `solid thin ${theme.palette.divider}`,
 					}}
 				/>
 

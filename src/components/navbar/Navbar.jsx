@@ -4,10 +4,10 @@ import AccountSection from "./AccountSection";
 import HeaderNavigation from "./HeaderNavigation";
 import MobileNavigation from "./MobileNavigation";
 import { useLocation } from "react-router-dom";
+import Alerts from "./Alerts";
 
 const Navbar = ({ mode, setMode }) => {
 	const { pathname } = useLocation();
-
 	for (let route of ["/login", "/signup", "/account-details", "/edit-account-details"]) {
 		if (pathname === route) {
 			return;
@@ -16,18 +16,19 @@ const Navbar = ({ mode, setMode }) => {
 
 	return (
 		<AppBar
+			elevation={1}
 			sx={{
 				position: "sticky",
 				top: 0,
 				left: 0,
-				backgroundColor: "dark.main",
-				color: "light.main",
+				backgroundColor: "background.paper",
+				color: "inherit",
 				py: 2,
 				px: "0 !important", // this is here to prevent the appbar shifing  10px to the left because of the pop-up menus. I dont know why it works, just a bug i caught, or maybe its not
 				mb: 5,
 			}}
 		>
-			<Container maxWidth="lg">
+			<Container>
 				<Stack direction="row" alignItems="flex-end" justifyContent="space-between">
 					<HeaderNavigation />
 					<SearchForm />
@@ -35,6 +36,8 @@ const Navbar = ({ mode, setMode }) => {
 					<MobileNavigation mode={mode} setMode={setMode} />
 				</Stack>
 			</Container>
+
+			<Alerts />
 		</AppBar>
 	);
 };
