@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/RussellGN.github.io/react-cars-zim/static/js/main.bbf37560.js",
-    "index.html": "/RussellGN.github.io/react-cars-zim/index.html",
-    "main.bbf37560.js.map": "/RussellGN.github.io/react-cars-zim/static/js/main.bbf37560.js.map"
+    "main.js": "/react-cars-zim/static/js/main.ed369e88.js",
+    "index.html": "/react-cars-zim/index.html",
+    "main.ed369e88.js.map": "/react-cars-zim/static/js/main.ed369e88.js.map"
   },
   "entrypoints": [
-    "static/js/main.bbf37560.js"
+    "static/js/main.ed369e88.js"
   ]
 }
