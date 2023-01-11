@@ -19,7 +19,10 @@ const Hero = () => {
 				<Grid item xs={12} md="auto">
 					<Typography
 						variant="h3"
-						sx={{ textAlign: { xs: "center", md: "left" }, fontFamily: "cursive" }}
+						sx={{
+							textAlign: { xs: "center", md: "left" },
+							fontFamily: "kalam, cursive, roboto, serif",
+						}}
 					>
 						Buy &amp; Sell Used <br /> Vehicles{" "}
 						<Typography

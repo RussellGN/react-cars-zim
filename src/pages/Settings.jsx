@@ -78,6 +78,7 @@ const NotificationSettings = () => {
 			</FormControl>
 			<div>
 				<Button
+					size="small"
 					variant="contained"
 					sx={{ borderRadius: "30px", textTransform: "capitalize" }}
 				>
@@ -101,12 +102,17 @@ const AccountSettings = () => {
 			</Box>
 			<div>
 				<Button
+					size="small"
 					variant="outlined"
 					sx={{ borderRadius: "30px", textTransform: "capitalize", mr: 2 }}
 				>
 					Deactivate
 				</Button>
-				<Button variant="text" sx={{ borderRadius: "30px", textTransform: "capitalize" }}>
+				<Button
+					size="small"
+					variant="text"
+					sx={{ borderRadius: "30px", textTransform: "capitalize" }}
+				>
 					Delete
 				</Button>
 			</div>

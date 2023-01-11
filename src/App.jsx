@@ -8,7 +8,7 @@ import { useState } from "react";
 const App = () => {
 	const [mode, setMode] = useState("light");
 
-	const theme = createTheme({
+	let theme = createTheme({
 		palette: {
 			mode: mode,
 			text: {
@@ -26,6 +26,12 @@ const App = () => {
 			border1: "10px",
 			border2: "20px",
 			border3: "30px",
+		},
+	});
+
+	theme = createTheme(theme, {
+		gradient: {
+			main: `linear-gradient(to right, ${theme.palette.primary.main},${theme.palette.success.main})`,
 		},
 	});
 

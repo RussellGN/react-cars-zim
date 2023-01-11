@@ -7,7 +7,11 @@ const Logo = () => {
 			component={Link}
 			to="/"
 			variant="h4"
-			sx={{ color: "inherit", textDecoration: "none", fontFamily: "cursive" }}
+			sx={{
+				color: "inherit",
+				textDecoration: "none",
+				fontFamily: "kalam, cursive, roboto, serif",
+			}}
 		>
 			Cars
 			<Typography variant="inherit" component="span" sx={{ color: "primary.main" }}>

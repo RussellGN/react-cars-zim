@@ -1,6 +1,7 @@
 import {
 	Collapse,
 	Typography,
+	Button,
 	Badge,
 	Avatar,
 	styled,
@@ -10,6 +11,7 @@ import {
 	IconButton,
 } from "@mui/material";
 import {
+	Add,
 	LightMode,
 	DarkMode,
 	Close,
@@ -142,6 +144,31 @@ const MobileNavigation = ({ mode, setMode }) => {
 							<IconButton color="light" onClick={changeMode} sx={{ ml: 1 }}>
 								{mode === "dark" ? <LightMode /> : <DarkMode />}
 							</IconButton>
+
+							<Button
+								variant="contained"
+								onClick={() => {
+									setOpenBackdrop(false);
+									setExpanded(false);
+								}}
+								color="success"
+								component={Link}
+								to="/new-listing"
+								sx={{
+									ml: 1,
+									borderRadius: "30px",
+									textTransform: "capitalize",
+								}}
+								endIcon={<Add />}
+							>
+								New
+								<Box
+									component="span"
+									sx={{ display: { xs: "none", sm: "inline" }, ml: 0.7 }}
+								>
+									Listing
+								</Box>
+							</Button>
 						</span>
 
 						<IconButton

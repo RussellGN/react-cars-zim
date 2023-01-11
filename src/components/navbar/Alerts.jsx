@@ -16,10 +16,10 @@ const Alerts = () => {
 				top: "100%",
 				left: 0,
 				right: 0,
-				background: `linear-gradient(to right, ${theme.palette.primary.main},${theme.palette.success.main}) !important`,
+				background: theme.gradient.main,
 			}}
 		>
-			<Container>
+			<Container sx={{ px: 0.2 }}>
 				<Typography
 					variant="caption"
 					color="inherit"
