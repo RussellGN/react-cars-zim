@@ -2,7 +2,8 @@ import Sidebar from "../components/offers/Sidebar";
 import AnimatedRoute from "../components/routes/AnimatedRoute";
 import { Grid, Container, Box } from "@mui/material";
 import Controls from "../components/offers/Controls";
-import Offer from "../components/offers/Offer";
+import Footer from "../components/general/Footer";
+import OffersContent from "../components/offers/OffersContent";
 
 const Offers = () => {
 	const listings = [
@@ -56,15 +57,13 @@ const Offers = () => {
 						<Box sx={{ p: { xs: 0, md: 4 } }}>
 							<Controls />
 
-							<div>
-								{listings?.map((listing) => (
-									<Offer key={listing.id} listing={listing} />
-								))}
-							</div>
+							<OffersContent listings={listings} />
 						</Box>
 					</Grid>
 				</Grid>
 			</Container>
+
+			<Footer marginTop={10} />
 		</AnimatedRoute>
 	);
 };

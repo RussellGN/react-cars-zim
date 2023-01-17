@@ -1,24 +1,33 @@
+import { useState } from "react";
 import { Grid, Typography, Button, useTheme } from "@mui/material";
+import ActiveFilters from "./ActiveFilters";
 import BracketFilter from "./BracketFilter";
 import CheckboxFilter from "./CheckboxFilter";
 
 export const FiltersOnly = () => {
+	const [activeFilterItems, setActiveFilterItems] = useState(["($) 100 +", "(km) 0 +"]);
+
 	const filters = {
 		Location: {
-			Harare: true,
-			Bulawayo: true,
-			Victoria_Falls: false,
-			Masvingo: false,
-			Kwekwe: false,
-			Nyanga_District: false,
+			Harare: [false, 2324],
+			Bulawayo: [false, 43534],
+			Victoria_Falls: [false, 132],
+			Masvingo: [false, 2452],
+			Kwekwe: [false, 10],
+			Nyanga_District: [false, 765],
 		},
 		Brand: {
-			Toyota: false,
-			Nissan: false,
-			Mercedes_Benz: false,
-			Honda: false,
-			BMW: false,
-			Jeep: false,
+			Toyota: [false, 4356],
+			Nissan: [false, 5324],
+			Mercedes_Benz: [false, 734],
+			Honda: [false, 7400],
+			BMW: [false, 234],
+			Jeep: [false, 1324],
+		},
+		Date: {
+			This_Week: [false, 54324],
+			This_Month: [false, 332324],
+			This_Year: [false, 6782324],
 		},
 	};
 
@@ -62,13 +71,34 @@ export const FiltersOnly = () => {
 
 	return (
 		<>
-			<BracketFilter filterLabel={"Price Range - $"} marks={priceMarks} />
+			<ActiveFilters
+				activeFilterItems={activeFilterItems}
+				setActiveFilterItems={setActiveFilterItems}
+			/>
+
+			<BracketFilter
+				filterLabel={"Price Range - $"}
+				marks={priceMarks}
+				activeFilterItems={activeFilterItems}
+				setActiveFilterItems={setActiveFilterItems}
+			/>
 
 			{Object.keys(filters)?.map((filter) => (
-				<CheckboxFilter key={filter} filterLabel={filter} filterItems={filters[filter]} />
+				<CheckboxFilter
+					key={filter}
+					filterLabel={filter}
+					filterItems={filters[filter]}
+					activeFilterItems={activeFilterItems}
+					setActiveFilterItems={setActiveFilterItems}
+				/>
 			))}
 
-			<BracketFilter filterLabel={"Mileage - km"} marks={mileageMarks} />
+			<BracketFilter
+				filterLabel={"Mileage - km"}
+				marks={mileageMarks}
+				activeFilterItems={activeFilterItems}
+				setActiveFilterItems={setActiveFilterItems}
+			/>
 		</>
 	);
 };
@@ -105,11 +135,15 @@ const Sidebar = () => {
 					variant="contained"
 					size="small"
 					color="success"
-					sx={{ borderRadius: theme.radii.border3, textTransform: "capitalize" }}
+					sx={{
+						borderRadius: theme.radii.border3,
+						textTransform: "capitalize",
+					}}
 				>
 					Apply
 				</Button>
 			</Typography>
+
 			<FiltersOnly />
 		</Grid>
 	);

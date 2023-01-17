@@ -20,12 +20,11 @@ const AnimatedRoutes = () => {
 		<AnimatePresence>
 			<Routes location={location} key={location.pathname}>
 				<Route path="/" element={<Home />} />
-				<Route path="/RussellGN.github.io/react-cars-zim" element={<Home />} />
-				<Route path="/react-cars-zim" element={<Home />} />
 				<Route path="/offers" element={<Offers />} />
 				<Route path="/view-offer/:slug" element={<ViewOffer />} />
 				<Route path="/enquire-offer/:slug" element={<Enquire />} />
 				<Route path="/new-listing" element={<NewListing />} />
+				<Route path="/edit-listing" element={<NewListing />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/signup" element={<Signup />} />
 				<Route path="/account" element={<Account />} />

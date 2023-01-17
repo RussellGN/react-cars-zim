@@ -1,10 +1,11 @@
 import React from "react";
 import AnimatedRoute from "../components/routes/AnimatedRoute";
-import { Typography, Grid, Container, Paper, Box, useTheme } from "@mui/material";
-import Offer from "../components/offers/Offer";
+import { Typography, Grid, Container, Box, useTheme } from "@mui/material";
 import AccountOverview from "../components/account/AccountOverview";
 import AccountControls from "../components/account/AccountControls";
 import { useEffect } from "react";
+import Footer from "../components/general/Footer";
+import OffersContent from "../components/offers/OffersContent";
 
 const Account = () => {
 	const account = {
@@ -103,14 +104,14 @@ const Account = () => {
 									</Box> */}
 								</Typography>
 
-								{account?.listings?.map((listing) => (
-									<Offer key={listing.id} listing={listing} />
-								))}
+								<OffersContent listings={account?.listings} />
 							</Box>
 						</Box>
 					</Grid>
 				</Grid>
 			</Container>
+
+			<Footer marginTop={10} />
 		</AnimatedRoute>
 	);
 };

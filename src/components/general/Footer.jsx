@@ -11,12 +11,12 @@ import {
 import { GitHub } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
-const Footer = () => {
+const Footer = ({ marginTop }) => {
 	const theme = useTheme();
 
 	return (
-		<Box sx={{ backgroundColor: "dark.main" }}>
-			<Container sx={{ px: { md: 5 }, py: { xs: 3, md: 10 } }}>
+		<Box sx={{ backgroundColor: "dark.main", marginTop: marginTop }}>
+			<Container sx={{ px: { md: 5 }, py: { xs: 3, md: 7 } }}>
 				<Grid container spacing={2} justifyContent="space-between">
 					<Grid item xs={6} md="auto">
 						<Box

@@ -45,7 +45,7 @@ const Hero = () => {
 					>
 						<Button
 							component={Link}
-							to="/new-offer"
+							to="/new-listing"
 							variant="contained"
 							color="success"
 							endIcon={<Sell />}

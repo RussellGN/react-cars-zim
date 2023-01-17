@@ -345,7 +345,7 @@ const ViewOffer = () => {
 									Delete
 								</MenuItem>
 
-								<MenuItem>
+								<MenuItem component={Link} to={`/edit-listing${listing.slug}`}>
 									<ListItemIcon>
 										<Edit fontSize="small" />
 									</ListItemIcon>

@@ -10,8 +10,12 @@ const SearchInput = styled("input")(({ theme }) => ({
 	cursor: "pointer",
 	transition: "all 0.2s",
 	fontSize: "inherit",
-	padding: `0 ${theme.spacing(1.5)}`,
+	padding: `${theme.spacing(1)} ${theme.spacing(1.5)}`,
+	borderRadius: "20px",
 	color: "inherit",
+	"&:hover, &:focus": {
+		background: theme.palette.divider,
+	},
 }));
 
 const SearchForm = ({ show, setOpenDrawer }) => {

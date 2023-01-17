@@ -121,9 +121,12 @@ const Controls = () => {
 						autoWidth
 						sx={{ width: "fitContent" }}
 					>
-						<MenuItem value="">Latest</MenuItem>
-						<MenuItem value={10}>Oldest</MenuItem>
-						<MenuItem value={22}>Price</MenuItem>
+						<MenuItem value="Latest">Latest</MenuItem>
+						<MenuItem value="Oldest">Oldest</MenuItem>
+						<MenuItem value="Highest Price">Highest Price </MenuItem>
+						<MenuItem value="Lowest Price">Lowest Price</MenuItem>
+						<MenuItem value="Highest Mileage">Highest Mileage </MenuItem>
+						<MenuItem value="Lowest Mileage">Lowest Mileage</MenuItem>
 					</Select>
 				</FormControl>
 			</Box>
