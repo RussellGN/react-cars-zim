@@ -1,6 +1,4 @@
-import { useState } from "react";
 import {
-	ListItemText,
 	ListItemIcon,
 	Menu,
 	MenuItem,
@@ -19,14 +17,15 @@ import {
 	Logout,
 	Notifications,
 	Person,
-	Mail,
 	Warning,
 	InfoOutlined,
 	LocalOffer,
 	Email,
 	Add,
 } from "@mui/icons-material";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
+import { useContext, useState } from "react";
+import { UserContext } from "../../App";
 
 const CustomNotificationIcon = ({ category, sx }) => {
 	switch (category) {
@@ -64,11 +63,13 @@ const CustomNotificationIcon = ({ category, sx }) => {
 };
 
 const AccountSection = ({ show, mode, setMode }) => {
+	const { user } = useContext(UserContext);
+	const location = useLocation();
 	const [anchorEl, setAnchorEl] = useState(null);
 	const open = Boolean(anchorEl);
 	const handleClick = (e) => setAnchorEl(e.currentTarget);
 	const handleClose = () => setAnchorEl(null);
-	const location = useLocation();
+
 	const [anchorNotifsEl, setAnchorNotifsEl] = useState(null);
 	const openNotifs = Boolean(anchorNotifsEl);
 	const handleNotifsClick = (e) => setAnchorNotifsEl(e.currentTarget);
@@ -104,6 +105,7 @@ const AccountSection = ({ show, mode, setMode }) => {
 			body: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis beatae consequuntur repellendus tenetur architecto quo aliquid facilis eum, assumenda ipsam.",
 		},
 	];
+
 	const changeMode = () => {
 		if (mode === "dark") setMode("light");
 		else setMode("dark");
@@ -115,23 +117,27 @@ const AccountSection = ({ show, mode, setMode }) => {
 				alignItems: "center",
 			}}
 		>
-			{location?.pathname === "/notifications" ? (
+			{location?.pathname?.includes("/notifications") ? (
 				""
 			) : (
 				<>
-					<Badge
-						badgeContent={41}
-						max={9}
-						onClick={handleNotifsClick}
-						color="success"
-						sx={{ cursor: "pointer", "&:hover": { opacity: 0.9 } }}
-						anchorOrigin={{
-							vertical: "top",
-							horizontal: "left",
-						}}
-					>
-						<Notifications color="inherit" />
-					</Badge>
+					{user?.username ? (
+						<Badge
+							badgeContent={41}
+							max={9}
+							onClick={handleNotifsClick}
+							color="success"
+							sx={{ cursor: "pointer", "&:hover": { opacity: 0.9 } }}
+							anchorOrigin={{
+								vertical: "top",
+								horizontal: "left",
+							}}
+						>
+							<Notifications color="inherit" />
+						</Badge>
+					) : (
+						""
+					)}
 
 					<Menu
 						open={openNotifs}
@@ -173,7 +179,7 @@ const AccountSection = ({ show, mode, setMode }) => {
 								<MenuItem
 									key={notification.id}
 									component={Link}
-									to="/notifications"
+									to={`/notifications/${notification.id}`}
 								>
 									<CustomNotificationIcon category={notification.category} />
 
@@ -199,108 +205,119 @@ const AccountSection = ({ show, mode, setMode }) => {
 				{mode === "dark" ? <LightMode /> : <DarkMode />}
 			</IconButton>
 
-			{location?.pathname === "/account" ? (
-				""
+			{user?.username ? (
+				!location?.pathname?.includes("/account") ||
+				(location?.pathname?.includes("/account") &&
+					!location.pathname.includes(user.slug)) ? (
+					<>
+						<Avatar
+							onClick={handleClick}
+							alt={user?.username}
+							src={`/${process.env.REACT_APP_BASENAME}${user?.coverImage}`}
+							sx={{
+								ml: 2,
+								cursor: "pointer",
+								transition: "border-color 0.2s",
+								border: "solid medium",
+								borderColor: "success.dark",
+								"&:hover": { borderColor: "success.light" },
+							}}
+						/>
+
+						<Menu
+							open={open}
+							anchorEl={anchorEl}
+							id="account-menu"
+							onClose={handleClose}
+							onClick={handleClose}
+							PaperProps={{
+								elevation: 0,
+								sx: {
+									overflow: "visible",
+									filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+									mt: 1.5,
+									"& .MuiAvatar-root": {
+										width: 32,
+										height: 32,
+										ml: -0.5,
+										mr: 1,
+									},
+									"&:before": {
+										content: '""',
+										display: "block",
+										position: "absolute",
+										top: 0,
+										right: 14,
+										width: 10,
+										height: 10,
+										bgcolor: "background.paper",
+										transform: "translateY(-50%) rotate(45deg)",
+										zIndex: 0,
+									},
+								},
+							}}
+							transformOrigin={{ horizontal: "right", vertical: "top" }}
+							anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+						>
+							<MenuItem component={Link} to={`/account/${user.slug}`}>
+								<ListItemIcon>
+									<Person fontSize="small" />
+								</ListItemIcon>
+								<Typography variant="body1" noWrap>
+									My account
+								</Typography>
+							</MenuItem>
+
+							<MenuItem component={Link} to="/new-listing">
+								<ListItemIcon>
+									<Add fontSize="small" />
+								</ListItemIcon>
+								<Typography variant="body1" noWrap>
+									New listing
+								</Typography>
+							</MenuItem>
+
+							<MenuItem component={Link} to="/signup">
+								<ListItemIcon>
+									<PersonAdd fontSize="small" />
+								</ListItemIcon>
+								Add another account
+							</MenuItem>
+
+							<MenuItem component={Link} to="/settings">
+								<ListItemIcon>
+									<Settings fontSize="small" />
+								</ListItemIcon>
+								Settings
+							</MenuItem>
+
+							<MenuItem>
+								<ListItemIcon>
+									<Logout fontSize="small" />
+								</ListItemIcon>
+								Logout
+							</MenuItem>
+						</Menu>
+					</>
+				) : (
+					""
+				)
 			) : (
-				<>
-					<Avatar
-						onClick={handleClick}
-						alt="Sharp"
-						src={`/${process.env.REACT_APP_BASENAME}/static/image.jpg`}
-						sx={{
-							ml: 2,
-							cursor: "pointer",
-							transition: "border-color 0.2s",
-							border: "solid medium transparent",
-							"&:hover": { borderColor: "success.light" },
-						}}
-					/>
-
-					<Menu
-						open={open}
-						anchorEl={anchorEl}
-						id="account-menu"
-						onClose={handleClose}
-						onClick={handleClose}
-						PaperProps={{
-							elevation: 0,
-							sx: {
-								overflow: "visible",
-								filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-								mt: 1.5,
-								"& .MuiAvatar-root": {
-									width: 32,
-									height: 32,
-									ml: -0.5,
-									mr: 1,
-								},
-								"&:before": {
-									content: '""',
-									display: "block",
-									position: "absolute",
-									top: 0,
-									right: 14,
-									width: 10,
-									height: 10,
-									bgcolor: "background.paper",
-									transform: "translateY(-50%) rotate(45deg)",
-									zIndex: 0,
-								},
-							},
-						}}
-						transformOrigin={{ horizontal: "right", vertical: "top" }}
-						anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-					>
-						<MenuItem component={Link} to="/account">
-							<ListItemIcon>
-								<Person fontSize="small" />
-							</ListItemIcon>
-							<Typography variant="body1" noWrap>
-								My account
-							</Typography>
-						</MenuItem>
-
-						<MenuItem component={Link} to="/new-listing">
-							<ListItemIcon>
-								<Add fontSize="small" />
-							</ListItemIcon>
-							<Typography variant="body1" noWrap>
-								New listing
-							</Typography>
-						</MenuItem>
-
-						<MenuItem component={Link} to="/add-account">
-							<ListItemIcon>
-								<PersonAdd fontSize="small" />
-							</ListItemIcon>
-							Add another account
-						</MenuItem>
-
-						<MenuItem component={Link} to="/settings">
-							<ListItemIcon>
-								<Settings fontSize="small" />
-							</ListItemIcon>
-							Settings
-						</MenuItem>
-
-						<MenuItem component={Link} to="/logout">
-							<ListItemIcon>
-								<Logout fontSize="small" />
-							</ListItemIcon>
-							Logout
-						</MenuItem>
-					</Menu>
-				</>
+				""
 			)}
 
-			<Button
-				component={Link}
-				to="/login"
-				variant="contained"
-				sx={{ ml: 2, borderRadius: "3rem", textTransform: "capitalize" }}
-			>
-				Login
-			</Button>
+			{user?.username ? (
+				""
+			) : (
+				<Button
+					component={Link}
+					to="/login"
+					variant="contained"
+					sx={{ ml: 2, borderRadius: "3rem", textTransform: "capitalize" }}
+				>
+					Login
+				</Button>
+			)}
 		</Box>
 	);
 };

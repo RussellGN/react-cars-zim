@@ -24,16 +24,18 @@ const AnimatedRoutes = () => {
 				<Route path="/view-offer/:slug" element={<ViewOffer />} />
 				<Route path="/enquire-offer/:slug" element={<Enquire />} />
 				<Route path="/new-listing" element={<NewListing />} />
-				<Route path="/edit-listing" element={<NewListing />} />
+				<Route path="/edit-listing/:slug" element={<NewListing />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/signup" element={<Signup />} />
 				<Route path="/account" element={<Account />} />
+				<Route path="/account/:slug" element={<Account />} />
 				<Route path="/account-details" element={<AccountDetails />} />
 				<Route
 					path="/edit-account-details"
 					element={<AccountDetails authenticated={true} />}
 				/>
 				<Route path="/notifications" element={<Notifications />} />
+				<Route path="/notifications/:id" element={<Notifications />} />
 				<Route path="/settings" element={<Settings />} />
 				<Route path="*" element={<NotFound />} />
 			</Routes>

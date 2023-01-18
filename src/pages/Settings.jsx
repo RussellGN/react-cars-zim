@@ -56,7 +56,7 @@ const NotificationSettings = () => {
 								SMS
 								<FormHelperText sx={{ ml: 2 }}>
 									Provide cell number{" "}
-									<MaterialLink component={Link} to="/edit-account">
+									<MaterialLink component={Link} to="/edit-account-details">
 										here
 									</MaterialLink>
 								</FormHelperText>

@@ -18,10 +18,11 @@ import {
 	KeyboardDoubleArrowRight,
 	Filter,
 } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Offer = ({ listing }) => {
 	const theme = useTheme();
+	const { pathname } = useLocation();
 	return (
 		<Box
 			sx={{
@@ -122,9 +123,18 @@ const Offer = ({ listing }) => {
 					>
 						View
 					</Button>
-					<AnchorTag variant="body2" component={Link} to="/account" underline="none">
-						{listing.owner.username}
-					</AnchorTag>
+					{pathname?.includes("/account") ? (
+						""
+					) : (
+						<AnchorTag
+							variant="body2"
+							component={Link}
+							to={`/account/${listing.owner.slug}`}
+							underline="none"
+						>
+							{listing.owner.username}
+						</AnchorTag>
+					)}{" "}
 				</Stack>
 			</Box>
 		</Box>

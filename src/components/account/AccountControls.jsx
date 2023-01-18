@@ -28,7 +28,7 @@ const AccountControls = ({ account }) => {
 			<IconButton component={Link} to="/settings">
 				<Settings />
 			</IconButton>
-			<IconButton component={Link} to="/login">
+			<IconButton>
 				<Logout />
 			</IconButton>
 

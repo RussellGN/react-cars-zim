@@ -1,11 +1,14 @@
 import { Close } from "@mui/icons-material";
 import { useTheme, Box, Typography, Container, IconButton } from "@mui/material";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const Alerts = () => {
 	const [alert, setAlert] = useState({ message: "Welcome! Note this is a developing product" });
 	const theme = useTheme();
+	const { pathname } = useLocation();
 
+	if (pathname !== "/") return;
 	if (alert?.message === "") return;
 
 	return (

@@ -21,11 +21,12 @@ import {
 	ExpandMore as ExpandMoreIcon,
 } from "@mui/icons-material";
 import Logo from "./Logo";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import SearchForm from "./SearchForm";
 import { Link, NavLink } from "react-router-dom";
 
 import * as React from "react";
+import { UserContext } from "../../App";
 
 const MobileLink = styled(NavLink)(({ theme }) => ({
 	color: "inherit",
@@ -39,6 +40,7 @@ const MobileLink = styled(NavLink)(({ theme }) => ({
 }));
 
 const MobileNavigation = ({ mode, setMode }) => {
+	const { user } = useContext(UserContext);
 	const [expanded, setExpanded] = useState(false);
 	const [openDrawer, setOpenDrawer] = useState(false);
 	const [openBackdrop, setOpenBackdrop] = useState(false);
@@ -122,24 +124,28 @@ const MobileNavigation = ({ mode, setMode }) => {
 						}}
 					>
 						<span>
-							<Badge
-								badgeContent={41}
-								max={9}
-								onClick={() => {
-									setOpenBackdrop(false);
-									setExpanded(false);
-								}}
-								color="success"
-								component={Link}
-								to="/notifications"
-								sx={{ cursor: "pointer" }}
-								anchorOrigin={{
-									vertical: "top",
-									horizontal: "left",
-								}}
-							>
-								<Notifications sx={{ color: "light.main" }} />
-							</Badge>
+							{user?.username ? (
+								<Badge
+									badgeContent={41}
+									max={9}
+									onClick={() => {
+										setOpenBackdrop(false);
+										setExpanded(false);
+									}}
+									color="success"
+									component={Link}
+									to="/notifications"
+									sx={{ cursor: "pointer" }}
+									anchorOrigin={{
+										vertical: "top",
+										horizontal: "left",
+									}}
+								>
+									<Notifications sx={{ color: "light.main" }} />
+								</Badge>
+							) : (
+								""
+							)}
 
 							<IconButton color="light" onClick={changeMode} sx={{ ml: 1 }}>
 								{mode === "dark" ? <LightMode /> : <DarkMode />}
@@ -182,30 +188,34 @@ const MobileNavigation = ({ mode, setMode }) => {
 						</IconButton>
 					</Box>
 
-					<Box
-						sx={{
-							mb: 4,
-							p: 0.5,
-							borderRadius: "100%",
-							background:
-								"linear-gradient(to bottom right, rgb(0, 153, 255), rgb(0, 255, 153), rgb(0, 153, 51))",
-						}}
-					>
-						<Avatar
-							component={Link}
-							to="/account"
-							onClick={() => {
-								setOpenBackdrop(false);
-								setExpanded(false);
-							}}
-							alt="Remy Sharp"
-							src={`/${process.env.REACT_APP_BASENAME}/static/undraw_profile_2.svg`}
+					{user?.username ? (
+						<Box
 							sx={{
-								width: "5rem",
-								height: "5rem",
+								mb: 4,
+								p: 0.5,
+								borderRadius: "100%",
+								background:
+									"linear-gradient(to bottom right, rgb(0, 153, 255), rgb(0, 255, 153), rgb(0, 153, 51))",
 							}}
-						/>
-					</Box>
+						>
+							<Avatar
+								component={Link}
+								to={`/account/${user?.slug}`}
+								onClick={() => {
+									setOpenBackdrop(false);
+									setExpanded(false);
+								}}
+								alt={user?.username}
+								src={`/${process.env.REACT_APP_BASENAME}${user.coverImage}`}
+								sx={{
+									width: "5rem",
+									height: "5rem",
+								}}
+							/>
+						</Box>
+					) : (
+						""
+					)}
 
 					<MobileLink
 						onClick={() => {
@@ -230,16 +240,29 @@ const MobileNavigation = ({ mode, setMode }) => {
 						Offers
 					</MobileLink>
 
-					<MobileLink
-						onClick={() => {
-							setOpenBackdrop(false);
-							setExpanded(false);
-						}}
-						to="/account"
-						sx={{ color: "light.main" }}
-					>
-						Account
-					</MobileLink>
+					{user?.username ? (
+						<MobileLink
+							onClick={() => {
+								setOpenBackdrop(false);
+								setExpanded(false);
+							}}
+							to={`/account/${user.slug}`}
+							sx={{ color: "light.main" }}
+						>
+							Account
+						</MobileLink>
+					) : (
+						<MobileLink
+							onClick={() => {
+								setOpenBackdrop(false);
+								setExpanded(false);
+							}}
+							to={`/login`}
+							sx={{ color: "light.main" }}
+						>
+							Login
+						</MobileLink>
+					)}
 
 					<Typography
 						onClick={handleExpandClick}
@@ -306,10 +329,10 @@ const MobileNavigation = ({ mode, setMode }) => {
 								setOpenBackdrop(false);
 								setExpanded(false);
 							}}
-							to="/login"
+							to="/signup"
 							sx={{ color: "light.main" }}
 						>
-							Login
+							Signup
 						</MobileLink>
 					</Collapse>
 				</Box>

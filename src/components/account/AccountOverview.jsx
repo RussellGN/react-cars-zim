@@ -1,6 +1,20 @@
 import { Box, Grid, IconButton, Typography, useMediaQuery, useTheme } from "@mui/material";
-import { Group, Person, LocalPhone, LocationOn, CameraAlt, Email } from "@mui/icons-material";
+import {
+	Group,
+	Person,
+	LocalPhone,
+	LocationOn,
+	CameraAlt,
+	Email,
+	Share,
+} from "@mui/icons-material";
+import { UserContext } from "../../App";
+import { useContext } from "react";
+import { useParams } from "react-router-dom";
+
 const AccountOverview = ({ account }) => {
+	const { user } = useContext(UserContext);
+	const { slug } = useParams();
 	const theme = useTheme();
 
 	const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.values.md}px)`);
@@ -38,24 +52,43 @@ const AccountOverview = ({ account }) => {
 						borderRadius: theme.radii.border1,
 					}}
 				/>
-
-				<IconButton
-					sx={{
-						backgroundColor: "dark.main",
-						color: "light.main",
-						"&:hover": {
+				{slug === user?.slug ? (
+					<IconButton
+						sx={{
 							backgroundColor: "dark.main",
 							color: "light.main",
-						},
-						border: `solid thick ${theme.palette.background.default}`,
-						position: "absolute",
-						bottom: "-1.2rem",
-						right: 0,
-						m: 1,
-					}}
-				>
-					<CameraAlt />
-				</IconButton>
+							"&:hover": {
+								backgroundColor: "dark.main",
+								color: "light.main",
+							},
+							border: `solid thick ${theme.palette.background.default}`,
+							position: "absolute",
+							bottom: "-1.2rem",
+							right: 0,
+							m: 1,
+						}}
+					>
+						<CameraAlt />
+					</IconButton>
+				) : (
+					<IconButton
+						sx={{
+							backgroundColor: "dark.main",
+							color: "light.main",
+							"&:hover": {
+								backgroundColor: "dark.main",
+								color: "light.main",
+							},
+							border: `solid thick ${theme.palette.background.default}`,
+							position: "absolute",
+							bottom: "-1.2rem",
+							right: 0,
+							m: 1,
+						}}
+					>
+						<Share />
+					</IconButton>
+				)}
 			</Box>
 
 			<Box sx={{ p: 1 }}>

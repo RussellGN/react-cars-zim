@@ -5,9 +5,9 @@ const AnimatedRoute = (props) => {
 	return (
 		<motion.div
 			{...props}
-			initial={{ opacity: 0, y: "100%" }}
-			animate={{ opacity: 1, y: 0, transitionDuration: "0.1s" }}
-			exit={{ opacity: 0, y: "-100%" }}
+			initial={{ opacity: 0 }}
+			animate={{ opacity: 1, transitionDuration: "0.1s" }}
+			exit={{ opacity: 0 }}
 		/>
 	);
 };

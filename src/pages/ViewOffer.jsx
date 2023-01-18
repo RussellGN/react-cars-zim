@@ -1,14 +1,10 @@
 import AnimatedRoute from "../components/routes/AnimatedRoute";
-import { useParams } from "react-router-dom";
 import {
-	ListItemIcon,
 	Container,
 	Link as AnchorTag,
 	Stack,
 	Accordion,
 	AccordionSummary,
-	Menu,
-	MenuItem,
 	AccordionDetails,
 	Box,
 	Grid,
@@ -27,23 +23,18 @@ import {
 	KeyboardDoubleArrowRight,
 	Filter,
 	KeyboardDoubleArrowLeft,
-	MoreVert,
-	Delete,
 	Edit,
 	List,
 	Share,
+	DeleteOutlined,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "../App";
 
 const ViewOffer = () => {
-	const [anchorEl, setAnchorEl] = useState(null);
-	const open = Boolean(anchorEl);
-	const OpenOptions = (e) => setAnchorEl(e.currentTarget);
-	const handleClose = () => setAnchorEl(null);
-
+	const { user } = useContext(UserContext);
 	const [imageOnview, setImageOnview] = useState(0);
-	const { slug } = useParams();
 	const theme = useTheme();
 	const listing = {
 		id: 1,
@@ -58,6 +49,7 @@ const ViewOffer = () => {
 		date: new Date(),
 		owner: {
 			username: "generalMotorsHarare",
+			slug: "generalmotorsharare",
 			about: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, dolore!",
 		},
 		coverImage: "/static/hillux1.jpeg",
@@ -79,9 +71,6 @@ const ViewOffer = () => {
 		setImageOnview(newImageOnView);
 	}
 
-	useEffect(() => {
-		window.scrollTo(0, 0);
-	}, []);
 	return (
 		<AnimatedRoute>
 			<Container>
@@ -184,7 +173,11 @@ const ViewOffer = () => {
 					>
 						<Grid container spacing={0} alignItems="center" sx={{ mb: 2 }}>
 							<Grid item xs zeroMinWidth sx={{ pr: 2 }}>
-								<AnchorTag component={Link} to="/account" underline="none">
+								<AnchorTag
+									component={Link}
+									to={`/account/${listing.owner.slug}`}
+									underline="none"
+								>
 									<Typography variant="body1" fontSize="inherit" noWrap>
 										{listing.owner.username}
 									</Typography>
@@ -274,84 +267,49 @@ const ViewOffer = () => {
 							alignItems="center"
 							sx={{ mt: 2 }}
 						>
-							<Button
-								component={Link}
-								to={`/enquire-offer/${listing.slug}`}
-								color="success"
-								variant="contained"
-								sx={{
-									borderRadius: theme.radii.defaultRadius,
-									textTransform: "capitalize",
-								}}
-								endIcon={<KeyboardDoubleArrowRight />}
-							>
-								Enquire
-							</Button>
-
+							{user?.username === listing.owner.username ? (
+								<>
+									<IconButton
+										component={Link}
+										to={`/edit-listing/${listing.slug}`}
+									>
+										<Edit />
+									</IconButton>
+									<IconButton>
+										<DeleteOutlined />
+									</IconButton>
+								</>
+							) : (
+								<>
+									<Button
+										component={Link}
+										to={`/enquire-offer/${listing.slug}`}
+										color="success"
+										variant="contained"
+										sx={{
+											borderRadius: "20px",
+											textTransform: "capitalize",
+										}}
+										endIcon={<KeyboardDoubleArrowRight />}
+									>
+										Enquire
+									</Button>
+									<Button
+										variant="outlined"
+										color="success"
+										endIcon={<List />}
+										sx={{
+											borderRadius: "20px",
+											textTransform: "capitalize",
+										}}
+									>
+										Shortlist
+									</Button>
+								</>
+							)}
 							<IconButton sx={{ ml: "auto" }}>
 								<Share />
 							</IconButton>
-
-							<IconButton onClick={OpenOptions}>
-								<MoreVert />
-							</IconButton>
-
-							<Menu
-								open={open}
-								anchorEl={anchorEl}
-								id="account-menu"
-								onClose={handleClose}
-								onClick={handleClose}
-								PaperProps={{
-									// elevation: 3,
-									sx: {
-										filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-										overflow: "visible",
-										mt: 1.5,
-										"& .MuiAvatar-root": {
-											width: 32,
-											height: 32,
-											ml: -0.5,
-											mr: 1,
-										},
-										"&:before": {
-											content: '""',
-											display: "block",
-											position: "absolute",
-											bottom: 8,
-											left: "100%",
-											width: 10,
-											height: 10,
-											bgcolor: "background.paper",
-											transform: "translateX(-50%) rotate(45deg)",
-											zIndex: 0,
-										},
-									},
-								}}
-								transformOrigin={{ horizontal: "right", vertical: "bottom" }}
-								anchorOrigin={{ horizontal: "left", vertical: "center" }}
-							>
-								<MenuItem>
-									<ListItemIcon>
-										<List fontSize="small" />
-									</ListItemIcon>
-									Shortlist
-								</MenuItem>
-
-								<MenuItem>
-									<ListItemIcon>
-										<Delete fontSize="small" />
-									</ListItemIcon>
-									Delete
-								</MenuItem>
-
-								<MenuItem component={Link} to={`/edit-listing${listing.slug}`}>
-									<ListItemIcon>
-										<Edit fontSize="small" />
-									</ListItemIcon>
-									Edit
-								</MenuItem>
-							</Menu>
 						</Stack>
 					</Box>
 				</Box>
