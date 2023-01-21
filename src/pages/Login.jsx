@@ -1,4 +1,4 @@
-import { Apple, ReplyAll, Google, PersonPinCircle } from "@mui/icons-material";
+import { Apple, Home, Google, PersonPinCircle } from "@mui/icons-material";
 import {
 	Link as MaterialLink,
 	Container,
@@ -11,15 +11,70 @@ import {
 } from "@mui/material";
 import AnimatedRoute from "../components/routes/AnimatedRoute";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../App";
 
 const Login = () => {
 	const theme = useTheme();
 	const navigate = useNavigate();
 
+	const { user, setUser } = useContext(UserContext);
+
 	function handleSubmit(e) {
 		e.preventDefault();
 		console.log({ handle: e.target.handle.value, password: e.target.password.value });
-		navigate("/account");
+		const userData = {
+			username: "KB Motors",
+			slug: "kb-motors",
+			email: "info@kbmotors.com",
+			category: "d",
+			location: "Harare",
+			phoneNumber: "+263 775438940",
+			about: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magnam suscipit quae magni corrupti dignissimos esse dolorum tempora voluptatem dolores inventore!",
+			coverImage: "/static/image3.jpg",
+			listings: [
+				{
+					id: 1,
+					slug: "toyota-hillux-legend-45-1",
+					name: "Toyota Hillux legend 45",
+					mileage: 43000,
+					price: 67000,
+					views: 321,
+					location: "Harare",
+					date: new Date(),
+					owner: { username: "KB Motors", slug: "kb-motors" },
+					coverImage: "/static/hillux1.jpeg",
+					imageCount: 6,
+				},
+				{
+					id: 2,
+					slug: "porsche-carrera-4s-2",
+					name: "Porsche Carrera 4S",
+					mileage: 300,
+					price: 300000,
+					views: 310,
+					location: "Victoria Falls",
+					date: new Date(),
+					owner: { username: "KB Motors", slug: "kb-motors" },
+					coverImage: "/static/porsche.JPG",
+					imageCount: 7,
+				},
+				{
+					id: 3,
+					name: "Toyota Corrola Quest",
+					mileage: 5000,
+					price: 20000,
+					views: 1007,
+					location: "Bulawayo",
+					date: new Date(),
+					owner: { username: "KB Motors", slug: "kb-motors" },
+					coverImage: "/static/corrola1.jpg",
+					imageCount: 11,
+				},
+			],
+		};
+		setUser(userData);
+		navigate(`/account/${userData.slug}`);
 	}
 
 	return (
@@ -62,7 +117,7 @@ const Login = () => {
 								m: { xs: 2, sm: 3 },
 							}}
 						>
-							<ReplyAll />
+							<Home />
 						</IconButton>
 
 						<PersonPinCircle sx={{ fontSize: "3rem", mb: 2 }} />

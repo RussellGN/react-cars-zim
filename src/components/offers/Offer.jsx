@@ -1,26 +1,31 @@
 import {
 	Link as AnchorTag,
 	Stack,
-	Paper,
 	Box,
 	Grid,
 	useTheme,
 	Typography,
 	Button,
+	IconButton,
 } from "@mui/material";
 import {
-	LocationOn,
-	AccessTime,
-	AttachMoney,
-	CalendarMonth,
-	MonetizationOn,
-	Speed,
+	LocationOnOutlined,
+	AccessTimeOutlined,
+	AttachMoneyOutlined,
+	SpeedOutlined,
 	KeyboardDoubleArrowRight,
-	Filter,
+	FilterOutlined,
+	DeleteOutline,
+	EditOutlined,
 } from "@mui/icons-material";
 import { Link, useLocation } from "react-router-dom";
+import { humanizeDate } from "../utils/humanizeDate";
+import { useContext } from "react";
+import { UserContext } from "../../App";
+import ShareButton from "../general/ShareButton";
 
 const Offer = ({ listing }) => {
+	const { user } = useContext(UserContext);
 	const theme = useTheme();
 	const { pathname } = useLocation();
 	return (
@@ -49,7 +54,7 @@ const Offer = ({ listing }) => {
 						borderRadius: "0 0 10px 0",
 					}}
 				>
-					<Filter fontSize="small" sx={{ mr: 0.5 }} />
+					<FilterOutlined fontSize="small" sx={{ mr: 0.5 }} />
 					{listing.imageCount}
 				</Typography>
 				<img
@@ -72,9 +77,10 @@ const Offer = ({ listing }) => {
 					<Grid item xs="auto">
 						<small style={{ display: "flex", alignItems: "center" }}>
 							<Typography fontSize="inherit" noWrap>
-								{listing.date.toLocaleDateString()}
+								{/* {listing.date.toLocaleDateString()} */}
+								{humanizeDate(listing?.date)}
 							</Typography>
-							<AccessTime fontSize="small" sx={{ ml: 1 }} />
+							<AccessTimeOutlined fontSize="small" sx={{ ml: 1 }} />
 						</small>
 					</Grid>
 				</Grid>
@@ -84,7 +90,7 @@ const Offer = ({ listing }) => {
 						variant="body2"
 						sx={{ display: "flex", alignItems: "center", mb: 2 }}
 					>
-						<AttachMoney fontSize="small" sx={{ mr: 1 }} />
+						<AttachMoneyOutlined fontSize="small" sx={{ mr: 1 }} />
 						USD {listing.price}
 					</Typography>
 
@@ -92,7 +98,7 @@ const Offer = ({ listing }) => {
 						variant="body2"
 						sx={{ display: "flex", alignItems: "center", mb: 2 }}
 					>
-						<Speed fontSize="small" sx={{ mr: 1 }} />
+						<SpeedOutlined fontSize="small" sx={{ mr: 1 }} />
 						{listing.mileage} km
 					</Typography>
 
@@ -100,7 +106,7 @@ const Offer = ({ listing }) => {
 						variant="body2"
 						sx={{ display: "flex", alignItems: "center", mb: 2 }}
 					>
-						<LocationOn fontSize="small" sx={{ mr: 1 }} />
+						<LocationOnOutlined fontSize="small" sx={{ mr: 1 }} />
 						{listing.location}
 					</Typography>
 
@@ -123,8 +129,17 @@ const Offer = ({ listing }) => {
 					>
 						View
 					</Button>
-					{pathname?.includes("/account") ? (
-						""
+					{pathname?.includes(`/account/${user.slug}`) ? (
+						<span>
+							<IconButton>
+								<DeleteOutline />
+							</IconButton>
+							<IconButton>
+								<EditOutlined />
+							</IconButton>
+						</span>
+					) : pathname.includes("/account") ? (
+						<ShareButton />
 					) : (
 						<AnchorTag
 							variant="body2"

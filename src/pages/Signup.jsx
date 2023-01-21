@@ -1,4 +1,4 @@
-import { ReplyAll, Google, PersonAdd, Apple } from "@mui/icons-material";
+import { Home, Google, PersonAdd, Apple } from "@mui/icons-material";
 import {
 	Link as MaterialLink,
 	Container,
@@ -66,7 +66,7 @@ const Signup = () => {
 								m: { xs: 2, sm: 3 },
 							}}
 						>
-							<ReplyAll />
+							<Home />
 						</IconButton>
 
 						<PersonAdd sx={{ fontSize: "3rem", mb: 2 }} />

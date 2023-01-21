@@ -13,6 +13,8 @@ import {
 	Button,
 	IconButton,
 	useMediaQuery,
+	Tooltip,
+	Zoom,
 } from "@mui/material";
 import {
 	LocationOn,
@@ -27,10 +29,13 @@ import {
 	List,
 	Share,
 	DeleteOutlined,
+	EditOutlined,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import { UserContext } from "../App";
+import { humanizeDate } from "../components/utils/humanizeDate";
+import ShareButton from "../components/general/ShareButton";
 
 const ViewOffer = () => {
 	const { user } = useContext(UserContext);
@@ -46,7 +51,7 @@ const ViewOffer = () => {
 		price: 67000,
 		views: 321,
 		location: "Harare",
-		date: new Date(),
+		date: "2022-12-29T12:02:00",
 		owner: {
 			username: "generalMotorsHarare",
 			slug: "generalmotorsharare",
@@ -187,7 +192,7 @@ const ViewOffer = () => {
 							<Grid item xs="auto">
 								<small style={{ display: "flex", alignItems: "center" }}>
 									<Typography fontSize="inherit" noWrap>
-										{listing.date.toLocaleDateString()}
+										{humanizeDate(listing.date)}
 									</Typography>
 									<AccessTime fontSize="small" sx={{ ml: 1 }} />
 								</small>
@@ -269,14 +274,14 @@ const ViewOffer = () => {
 						>
 							{user?.username === listing.owner.username ? (
 								<>
+									<IconButton>
+										<DeleteOutlined />
+									</IconButton>
 									<IconButton
 										component={Link}
 										to={`/edit-listing/${listing.slug}`}
 									>
-										<Edit />
-									</IconButton>
-									<IconButton>
-										<DeleteOutlined />
+										<EditOutlined />
 									</IconButton>
 								</>
 							) : (
@@ -294,6 +299,7 @@ const ViewOffer = () => {
 									>
 										Enquire
 									</Button>
+
 									<Button
 										variant="outlined"
 										color="success"
@@ -307,9 +313,10 @@ const ViewOffer = () => {
 									</Button>
 								</>
 							)}
-							<IconButton sx={{ ml: "auto" }}>
-								<Share />
-							</IconButton>
+							<ShareButton
+								placement={isMobile ? "top" : "left"}
+								sx={{ ml: "auto" }}
+							/>
 						</Stack>
 					</Box>
 				</Box>

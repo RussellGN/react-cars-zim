@@ -15,7 +15,7 @@ const Offers = () => {
 			price: 67000,
 			views: 321,
 			location: "Harare",
-			date: new Date(),
+			date: "2023-01-17T22:30:02",
 			owner: {
 				username: "generalMotorsHarare",
 				slug: "generalmotorsharare",
@@ -31,7 +31,7 @@ const Offers = () => {
 			price: 300000,
 			views: 310,
 			location: "Victoria Falls",
-			date: new Date(),
+			date: "2023-01-07T12:23:02",
 			owner: {
 				username: "KB Motors",
 				slug: "kb-motors",
@@ -46,7 +46,7 @@ const Offers = () => {
 			price: 20000,
 			views: 1007,
 			location: "Bulawayo",
-			date: new Date(),
+			date: "2022-09-14T04:10:22",
 			owner: {
 				username: "ZIMOCO Ltd",
 				slug: "zimoco-ltd",

@@ -1,4 +1,4 @@
-import { ReplyAll, PersonAdd, ManageAccounts, InfoOutlined } from "@mui/icons-material";
+import { Home, PersonAdd, ManageAccounts, InfoOutlined } from "@mui/icons-material";
 import {
 	Link as MaterialLink,
 	Container,
@@ -76,7 +76,7 @@ const AccountDetails = ({ authenticated }) => {
 								m: { xs: 2, sm: 3 },
 							}}
 						>
-							<ReplyAll />
+							<Home />
 						</IconButton>
 						{isAuthenticated ? (
 							<ManageAccounts sx={{ fontSize: "3rem", mb: 2 }} />

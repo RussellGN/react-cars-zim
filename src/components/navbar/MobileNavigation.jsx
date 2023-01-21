@@ -12,12 +12,12 @@ import {
 } from "@mui/material";
 import {
 	Add,
-	LightMode,
-	DarkMode,
+	LightModeOutlined,
+	DarkModeOutlined,
 	Close,
 	Menu as MenuIcon,
 	Search,
-	Notifications,
+	NotificationsOutlined,
 	ExpandMore as ExpandMoreIcon,
 } from "@mui/icons-material";
 import Logo from "./Logo";
@@ -141,14 +141,14 @@ const MobileNavigation = ({ mode, setMode }) => {
 										horizontal: "left",
 									}}
 								>
-									<Notifications sx={{ color: "light.main" }} />
+									<NotificationsOutlined sx={{ color: "light.main" }} />
 								</Badge>
 							) : (
 								""
 							)}
 
 							<IconButton color="light" onClick={changeMode} sx={{ ml: 1 }}>
-								{mode === "dark" ? <LightMode /> : <DarkMode />}
+								{mode === "dark" ? <LightModeOutlined /> : <DarkModeOutlined />}
 							</IconButton>
 
 							<Button

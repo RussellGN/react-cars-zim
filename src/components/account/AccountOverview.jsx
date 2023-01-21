@@ -1,16 +1,16 @@
 import { Box, Grid, IconButton, Typography, useMediaQuery, useTheme } from "@mui/material";
 import {
-	Group,
-	Person,
-	LocalPhone,
-	LocationOn,
-	CameraAlt,
-	Email,
-	Share,
+	GroupOutlined,
+	PersonOutline,
+	LocalPhoneOutlined,
+	LocationOnOutlined,
+	CameraAltOutlined,
+	EmailOutlined,
 } from "@mui/icons-material";
 import { UserContext } from "../../App";
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
+import ShareButton from "../general/ShareButton";
 
 const AccountOverview = ({ account }) => {
 	const { user } = useContext(UserContext);
@@ -68,10 +68,11 @@ const AccountOverview = ({ account }) => {
 							m: 1,
 						}}
 					>
-						<CameraAlt />
+						<CameraAltOutlined />
 					</IconButton>
 				) : (
-					<IconButton
+					<ShareButton
+						placement="left"
 						sx={{
 							backgroundColor: "dark.main",
 							color: "light.main",
@@ -85,9 +86,7 @@ const AccountOverview = ({ account }) => {
 							right: 0,
 							m: 1,
 						}}
-					>
-						<Share />
-					</IconButton>
+					/>
 				)}
 			</Box>
 
@@ -97,31 +96,31 @@ const AccountOverview = ({ account }) => {
 				</Typography>
 
 				<Typography variant="body1" sx={{ display: "flex", alignItems: "center", mb: 2 }}>
-					<Email fontSize="small" sx={{ mr: 1 }} />
+					<EmailOutlined fontSize="small" sx={{ mr: 1 }} />
 					{account.email}
 				</Typography>
 
 				<Typography variant="body1" sx={{ display: "flex", alignItems: "center", mb: 2 }}>
-					<LocationOn fontSize="small" sx={{ mr: 1 }} />
+					<LocationOnOutlined fontSize="small" sx={{ mr: 1 }} />
 					{account.location}
 				</Typography>
 
 				<Typography variant="body1" sx={{ display: "flex", alignItems: "center", mb: 2 }}>
 					{account.category === "d" ? (
 						<>
-							<Group fontSize="small" sx={{ mr: 1 }} />
+							<GroupOutlined fontSize="small" sx={{ mr: 1 }} />
 							Dealerhip
 						</>
 					) : (
 						<>
-							<Person fontSize="small" sx={{ mr: 1 }} />
+							<PersonOutline fontSize="small" sx={{ mr: 1 }} />
 							Individual
 						</>
 					)}
 				</Typography>
 
 				<Typography variant="body1" sx={{ display: "flex", alignItems: "center", mb: 2 }}>
-					<LocalPhone fontSize="small" sx={{ mr: 1 }} />
+					<LocalPhoneOutlined fontSize="small" sx={{ mr: 1 }} />
 					{account.phoneNumber}
 				</Typography>
 
