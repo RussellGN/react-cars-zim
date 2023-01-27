@@ -1,4 +1,4 @@
-import { Apple, Home, Google, PersonPinCircle } from "@mui/icons-material";
+import { Apple, Google, PersonPinCircle } from "@mui/icons-material";
 import {
 	Link as MaterialLink,
 	Container,
@@ -7,18 +7,17 @@ import {
 	Typography,
 	TextField,
 	Button,
-	IconButton,
 } from "@mui/material";
 import AnimatedRoute from "../components/routes/AnimatedRoute";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../App";
+import BackButton from "../components/general/BackButton";
 
 const Login = () => {
 	const theme = useTheme();
 	const navigate = useNavigate();
-
-	const { user, setUser } = useContext(UserContext);
+	const { setUser } = useContext(UserContext);
 
 	function handleSubmit(e) {
 		e.preventDefault();
@@ -97,7 +96,7 @@ const Login = () => {
 						sx={{
 							position: "relative",
 							boxShadow: theme.shadows[5],
-							p: { xs: 3, sm: 8 },
+							p: { xs: 2, sm: 8 },
 							display: "flex",
 							flexDirection: "column",
 							justifyContent: "center",
@@ -106,19 +105,14 @@ const Login = () => {
 							background: theme.palette.background.paper,
 						}}
 					>
-						<IconButton
-							component={Link}
-							to="/"
+						<Box
 							sx={{
-								position: "absolute",
-								top: 0,
-								left: 0,
-								border: "solid thin",
-								m: { xs: 2, sm: 3 },
+								p: 2,
+								width: "100%",
 							}}
 						>
-							<Home />
-						</IconButton>
+							<BackButton />
+						</Box>
 
 						<PersonPinCircle sx={{ fontSize: "3rem", mb: 2 }} />
 						<Typography variant="h5" sx={{ mb: 4 }}>

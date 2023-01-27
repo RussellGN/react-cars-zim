@@ -1,62 +1,42 @@
-import { Email, LocationOn, LocalPhone, InfoOutlined, LocalOffer } from "@mui/icons-material";
-import {
-	useMediaQuery,
-	Box,
-	Button,
-	Stepper,
-	Step,
-	StepButton,
-	Typography,
-	Container,
-	Input,
-	TextField,
-	useTheme,
-} from "@mui/material";
-import { useEffect, useState } from "react";
+import { Email, LocalOffer, LocalPhone, LocationOn } from "@mui/icons-material";
+import { useTheme, Box, Container, Typography, Button, TextField } from "@mui/material";
 import AnimatedRoute from "../components/routes/AnimatedRoute";
+import CustomStepper from "../components/general/CustomStepper";
+import { useState } from "react";
+import BackButton from "../components/general/BackButton";
 
 const Contents = ({ activeStep, setActiveStep, listing }) => {
 	if (activeStep === 0) {
 		return (
 			<Box>
-				<Typography
-					variant="h5"
-					sx={{ display: "flex", alignItems: "center", mb: 3, justifyContent: "center" }}
-				>
-					<InfoOutlined fontSize="inherit" color="success" sx={{ mr: 1 }} />
+				<Typography variant="h6" sx={{ mb: 3, textAlign: "center" }}>
 					How It Works
 				</Typography>
 
-				<Typography variant="body1" textAlign="center" sx={{ mb: 2 }}>
+				<Typography variant="body1" textAlign="center" sx={{ mb: 3 }}>
 					Sum dolor sit amet consectetur adipisicing elit. Dolorum fugiat nam, impedit
 					eum, quisquam facere odit distinctio optio rem vitae similique consequuntur ab
 					magnam, repudiandae hic odio eligendi dolores? Tempora ex magnam.
 				</Typography>
 
-				<Box sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+				<Box sx={{ textAlign: "center" }}>
 					<Button
+						size="small"
 						onClick={() => setActiveStep(1)}
 						variant="contained"
 						color="success"
 						endIcon={<LocalOffer />}
 						sx={{ m: 1, borderRadius: "3rem", textTransform: "capitalize" }}
 					>
-						<Box component="span" sx={{ display: { sm: "none" } }}>
-							Bid
-						</Box>
-						<Box component="span" sx={{ display: { xs: "none", sm: "inline" } }}>
-							Make Formal Bid
-						</Box>
+						Bid
 					</Button>
 					<Button
+						size="small"
 						onClick={() => setActiveStep(2)}
 						variant="outlined"
 						sx={{ m: 1, borderRadius: "3rem", textTransform: "capitalize" }}
 					>
 						Contact
-						<Box component="span" sx={{ display: { xs: "none", sm: "inline" } }}>
-							Directly
-						</Box>
 					</Button>
 				</Box>
 			</Box>
@@ -64,50 +44,46 @@ const Contents = ({ activeStep, setActiveStep, listing }) => {
 	} else if (activeStep === 1) {
 		return (
 			<Box>
-				<Typography
-					variant="h5"
-					sx={{ display: "flex", alignItems: "center", mb: 3, justifyContent: "center" }}
-				>
+				<Typography variant="h6" sx={{ mb: 3, textAlign: "center" }}>
 					Make a Formal Bid
 				</Typography>
 
-				<Box
+				<TextField
+					type="number"
+					size="small"
+					variant="outlined"
 					sx={{
-						mb: 2,
-						alignItems: "flex-start",
-						justifyContent: "center",
-						display: "flex",
-						texAlign: "center",
+						mb: 3,
+						width: "100%",
+						"& .MuiInputBase-root": {
+							borderRadius: "10px",
+						},
 					}}
-				>
-					<InfoOutlined fontSize="small" color="success" sx={{ mr: 0.5 }} />
-					<Typography variant="body2">
-						Lorem ipsum dolor sit, amet consectetur adipisicing
-					</Typography>
-				</Box>
+					label="Your Offer - $"
+				/>
+				<TextField
+					size="small"
+					variant="outlined"
+					label="Queries"
+					sx={{
+						mb: 3,
+						width: "100%",
+						"& .MuiInputBase-root": {
+							borderRadius: "10px",
+						},
+					}}
+					multiline
+					rows={3}
+				/>
 
-				<Box sx={{ mb: 2 }}>
-					<TextField
-						variant="outlined"
-						sx={{ mb: 2, width: "100%" }}
-						label="Your Offer"
-					/>
-					<TextField
-						variant="outlined"
-						label="Queries"
-						sx={{ width: "100%" }}
-						multiline
-						rows={3}
-					/>
-				</Box>
-
-				<Box sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+				<Box sx={{ textAlign: "center" }}>
 					<Button
+						type="button"
 						variant="contained"
 						color="success"
-						sx={{ m: 1, borderRadius: "3rem", textTransform: "capitalize" }}
+						sx={{ borderRadius: "3rem", textTransform: "capitalize" }}
 					>
-						Finish{" "}
+						Finish
 					</Button>
 				</Box>
 			</Box>
@@ -115,10 +91,7 @@ const Contents = ({ activeStep, setActiveStep, listing }) => {
 	} else {
 		return (
 			<Box>
-				<Typography
-					variant="h5"
-					sx={{ display: "flex", alignItems: "center", mb: 3, justifyContent: "center" }}
-				>
+				<Typography variant="h6" sx={{ mb: 3, textAlign: "center" }}>
 					Contact {listing?.owner?.username}
 				</Typography>
 
@@ -176,6 +149,9 @@ const Contents = ({ activeStep, setActiveStep, listing }) => {
 const Enquire = () => {
 	const [activeStep, setActiveStep] = useState(0);
 
+	const theme = useTheme();
+	const steps = ["Info", "Bid", "Contact"];
+
 	const listing = {
 		id: 1,
 		slug: "toyota-hillux-legend-45-1",
@@ -199,45 +175,74 @@ const Enquire = () => {
 		imageCount: 6,
 		images: ["/static/hillux1.jpeg", "/static/hillux2.jpg", "/static/hillux3.jpeg"],
 	};
-	const theme = useTheme();
-
-	const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.values.md}px)`);
-
-	const steps = ["How it works", "Make a formal bid (recommended)", "Contact directly"];
-	const mobileSteps = ["Info", "Bid", "Contact"];
-
-	const handleStep = (step) => () => setActiveStep(step);
+	function handleSubmit(e) {
+		e.preventDefault();
+		console.log("hello");
+	}
 
 	return (
 		<AnimatedRoute>
-			<Container>
-				<Stepper nonLinear activeStep={activeStep}>
-					{steps?.map((label, index) => (
-						<Step key={label}>
-							<StepButton color="inherit" onClick={handleStep(index)}>
-								{isMobile === true ? mobileSteps[index] : label}
-							</StepButton>
-						</Step>
-					))}
-				</Stepper>
-
+			<Box
+				sx={{
+					py: 5,
+					minHeight: "101vh",
+					height: "100%",
+					display: "flex",
+					alignItems: "center",
+					justifyContent: "center",
+					background: `linear-gradient(to bottom right, ${theme.palette.primary.main},${theme.palette.success.main}) !important`,
+				}}
+			>
 				<Container maxWidth="sm">
 					<Box
+						component="form"
+						onSubmit={handleSubmit}
 						sx={{
-							mt: { xs: 5, md: 10 },
+							minHeight: "90vh",
+							boxShadow: theme.shadows[5],
+							borderRadius: "20px",
+							background: theme.palette.background.paper,
 							display: "flex",
-							justifyContent: "center",
-							alignItems: "center",
+							flexDirection: "column",
 						}}
 					>
-						<Contents
-							activeStep={activeStep}
-							setActiveStep={setActiveStep}
-							listing={listing}
-						/>
+						<Box
+							sx={{
+								p: 2,
+								width: "100%",
+							}}
+						>
+							<BackButton />
+						</Box>
+
+						<Box
+							sx={{
+								p: { xs: 2, sm: 8 },
+								pt: "0 !important",
+								width: "100%",
+								flexGrow: "1",
+								display: "flex",
+								flexDirection: "column",
+								justifyContent: "center",
+								alignItems: "center",
+							}}
+						>
+							<CustomStepper
+								steps={steps}
+								activeStep={activeStep}
+								setActiveStep={setActiveStep}
+								contents={
+									<Contents
+										activeStep={activeStep}
+										setActiveStep={setActiveStep}
+										listing={listing}
+									/>
+								}
+							/>
+						</Box>
 					</Box>
 				</Container>
-			</Container>
+			</Box>
 		</AnimatedRoute>
 	);
 };

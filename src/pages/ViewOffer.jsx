@@ -13,8 +13,6 @@ import {
 	Button,
 	IconButton,
 	useMediaQuery,
-	Tooltip,
-	Zoom,
 } from "@mui/material";
 import {
 	LocationOn,
@@ -25,26 +23,29 @@ import {
 	KeyboardDoubleArrowRight,
 	Filter,
 	KeyboardDoubleArrowLeft,
-	Edit,
 	List,
-	Share,
 	DeleteOutlined,
 	EditOutlined,
+	ReplyAllOutlined,
 } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { UserContext } from "../App";
 import { humanizeDate } from "../components/utils/humanizeDate";
 import ShareButton from "../components/general/ShareButton";
+import BackButton from "../components/general/BackButton";
 
 const ViewOffer = () => {
 	const { user } = useContext(UserContext);
 	const [imageOnview, setImageOnview] = useState(0);
 	const theme = useTheme();
+	const navigate = useNavigate();
+	const location = useLocation();
+
 	const listing = {
 		id: 1,
-		slug: "toyota-hillux-legend-45-1",
-		name: "Toyota Hillux legend 45",
+		slug: "toyota-hillux-gd6",
+		name: "Toyota Hillux GD6",
 		details:
 			"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Numquam totam, ea alias voluptatibus quia aliquid soluta odit magnam unde consequuntur?",
 		mileage: 43000,
@@ -79,8 +80,13 @@ const ViewOffer = () => {
 	return (
 		<AnimatedRoute>
 			<Container>
-				<Typography variant="h5" textAlign="center" sx={{ my: 4 }}>
-					{listing.name}
+				<Typography
+					variant="h5"
+					textAlign="center"
+					sx={{ my: 4, display: "flex", alignItems: "center", justifyContent: "center" }}
+				>
+					<BackButton />
+					<span style={{ marginLeft: "1rem" }}>{listing.name}</span>
 				</Typography>
 
 				<Box

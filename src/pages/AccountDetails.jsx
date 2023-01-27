@@ -1,4 +1,4 @@
-import { Home, PersonAdd, ManageAccounts, InfoOutlined } from "@mui/icons-material";
+import { PersonAdd, ManageAccounts, InfoOutlined } from "@mui/icons-material";
 import {
 	Link as MaterialLink,
 	Container,
@@ -7,7 +7,6 @@ import {
 	Typography,
 	TextField,
 	Button,
-	IconButton,
 	Radio,
 	RadioGroup,
 	FormControlLabel,
@@ -16,23 +15,57 @@ import {
 } from "@mui/material";
 import AnimatedRoute from "../components/routes/AnimatedRoute";
 import { Link, useNavigate } from "react-router-dom";
+import BackButton from "../components/general/BackButton";
+import { UserContext } from "../App";
+import { useContext } from "react";
+import { useState } from "react";
 
-const AccountDetails = ({ authenticated }) => {
+const AccountDetails = () => {
+	const { user, setUser } = useContext(UserContext);
+
+	const [formValues, setFormValues] = useState(
+		user.username
+			? {
+					...user,
+			  }
+			: {
+					username: "no special symbols",
+					email: "email@example.com",
+					category: "i",
+					location: "",
+					phoneNumber: "+263- ",
+			  }
+	);
+
+	const changeFormValues = (e) => {
+		setFormValues((prev) => {
+			return {
+				...prev,
+				[e.target.name]: e.target.value,
+			};
+		});
+	};
+
 	const theme = useTheme();
 	const navigate = useNavigate();
-	const isAuthenticated = authenticated ? true : false;
 
 	function handleSubmit(e) {
 		e.preventDefault();
-		console.log({
-			username: e.target.username.value,
-			location: e.target.location.value,
-			accountType: e.target.accountType.value,
-			phoneNumber: e.target.phoneNumber.value,
-			about: e.target.about.value,
-		});
+		console.log(formValues);
 
-		navigate("/account");
+		const newUser = {
+			...user,
+			username: user?.username || formValues.username,
+			location: user?.location || formValues.location,
+			category: formValues.category,
+			phoneNumber: user?.phoneNumber || formValues.phoneNumber,
+			about: user?.about || formValues.about,
+		};
+		newUser.slug = newUser.username.replace(" ", "-").toLowerCase();
+
+		setUser(newUser);
+
+		navigate(`/account/${user?.slug}`);
 	}
 
 	return (
@@ -40,7 +73,6 @@ const AccountDetails = ({ authenticated }) => {
 			<Box
 				sx={{
 					py: 5,
-
 					minHeight: "101vh",
 					height: "100%",
 					display: "flex",
@@ -56,7 +88,7 @@ const AccountDetails = ({ authenticated }) => {
 						sx={{
 							position: "relative",
 							boxShadow: theme.shadows[5],
-							p: { xs: 3, sm: 8 },
+							p: { xs: 2, sm: 8 },
 							display: "flex",
 							flexDirection: "column",
 							justifyContent: "center",
@@ -65,29 +97,28 @@ const AccountDetails = ({ authenticated }) => {
 							background: theme.palette.background.paper,
 						}}
 					>
-						<IconButton
-							component={Link}
-							to={isAuthenticated ? "/account" : "/"}
+						<Box
 							sx={{
-								position: "absolute",
-								top: 0,
-								left: 0,
-								border: "solid thin",
-								m: { xs: 2, sm: 3 },
+								p: 2,
+								width: "100%",
 							}}
 						>
-							<Home />
-						</IconButton>
-						{isAuthenticated ? (
+							<BackButton
+								onlyRoute={user?.username ? `/account/${user.slug}` : "/signup"}
+							/>
+						</Box>
+
+						{user?.username ? (
 							<ManageAccounts sx={{ fontSize: "3rem", mb: 2 }} />
 						) : (
 							<PersonAdd sx={{ fontSize: "3rem", mb: 2 }} />
 						)}
+
 						<Typography variant="h5" sx={{ mb: 4 }}>
-							{isAuthenticated ? "Edit Details" : "Account Details"}
+							{user?.username ? "Edit Details" : "Account Details"}
 						</Typography>
 
-						{isAuthenticated ? (
+						{user?.username ? (
 							<Typography
 								variant="body2"
 								sx={{
@@ -109,12 +140,16 @@ const AccountDetails = ({ authenticated }) => {
 									settings
 								</MaterialLink>
 							</Typography>
-						) : null}
+						) : (
+							""
+						)}
 
 						<TextField
 							size="small"
 							label="Username"
 							name="username"
+							value={formValues.username}
+							onChange={changeFormValues}
 							sx={{ mb: 2, width: "100%" }}
 						/>
 
@@ -122,6 +157,8 @@ const AccountDetails = ({ authenticated }) => {
 							size="small"
 							label="Location"
 							name="location"
+							value={formValues.location}
+							onChange={changeFormValues}
 							sx={{ mb: 2, width: "100%" }}
 						/>
 
@@ -129,6 +166,8 @@ const AccountDetails = ({ authenticated }) => {
 							size="small"
 							label="Phone number +263"
 							name="phoneNumber"
+							value={formValues.phoneNumber}
+							onChange={changeFormValues}
 							sx={{ mb: 2, width: "100%" }}
 						/>
 
@@ -137,17 +176,18 @@ const AccountDetails = ({ authenticated }) => {
 
 							<RadioGroup
 								aria-labelledby="account-type-radios-label"
-								defaultValue="individual"
-								name="accountType"
+								name="category"
+								onChange={changeFormValues}
+								defaultValue={formValues.category}
 								sx={{ display: "flex", flexDirection: "row" }}
 							>
 								<FormControlLabel
-									value="individual"
+									value="i"
 									control={<Radio size="small" />}
 									label="Individual"
 								/>
 								<FormControlLabel
-									value="dealership"
+									value="d"
 									control={<Radio size="small" />}
 									label="Dealership"
 								/>
@@ -160,6 +200,8 @@ const AccountDetails = ({ authenticated }) => {
 							rows={3}
 							label="About"
 							name="about"
+							value={formValues.about}
+							onChange={changeFormValues}
 							sx={{ mb: 5, width: "100%" }}
 						/>
 
@@ -169,12 +211,14 @@ const AccountDetails = ({ authenticated }) => {
 								mb: 2,
 								display: "flex",
 								alignItems: "center",
-								justifyContent: isAuthenticated ? "flex-end" : "space-between",
+								justifyContent: user?.username ? "flex-end" : "space-between",
 							}}
 						>
-							{isAuthenticated ? null : (
+							{user?.username ? (
+								""
+							) : (
 								<Typography>
-									Already have an account?{" "}
+									Already have an account?
 									<MaterialLink component={Link} to="/login" underline="hover">
 										Login.
 									</MaterialLink>
@@ -185,7 +229,7 @@ const AccountDetails = ({ authenticated }) => {
 								variant="contained"
 								sx={{ borderRadius: "30px", textTransform: "capitalize" }}
 							>
-								{isAuthenticated ? "Update" : "Finish"}
+								{user?.username ? "Update" : "Finish"}
 							</Button>
 						</Box>
 					</Box>

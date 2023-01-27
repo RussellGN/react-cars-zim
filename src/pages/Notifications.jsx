@@ -1,17 +1,10 @@
 import {
-	Button,
-	Link as MaterialLink,
 	Accordion,
 	AccordionDetails,
 	AccordionSummary,
 	Container,
 	Typography,
 	Box,
-	FormControl,
-	FormControlLabel,
-	FormHelperText,
-	FormGroup,
-	Checkbox,
 	useTheme,
 } from "@mui/material";
 import {
@@ -23,9 +16,9 @@ import {
 	LocalOffer,
 	Email,
 } from "@mui/icons-material";
-import { Link } from "react-router-dom";
 import { useState } from "react";
 import AnimatedRoute from "../components/routes/AnimatedRoute";
+import BackButton from "../components/general/BackButton";
 
 const NotificationTemplate = ({ notification }) => {
 	return <div>{notification.body}</div>;
@@ -89,7 +82,10 @@ const Notifications = () => {
 					variant="h5"
 					sx={{ mb: 3, display: "flex", justifyContent: "center", alignItems: "center" }}
 				>
-					Notifications <NotificationsIcon fontSize="inherit" sx={{ ml: 1 }} />
+					<BackButton />
+					<span style={{ marginLeft: "1rem" }}>
+						Notifications <NotificationsIcon fontSize="inherit" sx={{ ml: 1 }} />
+					</span>
 				</Typography>
 
 				<div>

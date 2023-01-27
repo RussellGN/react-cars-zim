@@ -7,6 +7,7 @@ import Footer from "../components/general/Footer";
 import OffersContent from "../components/offers/OffersContent";
 import { UserContext } from "../App";
 import { useParams } from "react-router-dom";
+import BackButton from "../components/general/BackButton";
 
 const Account = () => {
 	const { user } = useContext(UserContext);
@@ -78,6 +79,8 @@ const Account = () => {
 
 					<Grid item md>
 						<Box sx={{ p: { xs: 0, md: 4 } }}>
+							<BackButton floating />
+
 							{slug === user?.slug ? <AccountControls account={account} /> : ""}
 
 							<Box>

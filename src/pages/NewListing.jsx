@@ -1,34 +1,26 @@
+import { Add, DeleteOutlined } from "@mui/icons-material";
 import {
+	useTheme,
 	Box,
-	Grid,
+	Container,
 	Typography,
 	Button,
-	Container,
-	Stepper,
-	Step,
-	StepButton,
-	useTheme,
-	useMediaQuery,
 	TextField,
-	InputLabel,
-	MenuItem,
-	Select,
-	FormControl,
+	Grid,
 	IconButton,
+	FormControl,
+	InputLabel,
+	Select,
+	MenuItem,
 } from "@mui/material";
-import {
-	Delete,
-	Add,
-	Email,
-	LocationOn,
-	LocalPhone,
-	InfoOutlined,
-	LocalOffer,
-} from "@mui/icons-material";
+
+import CustomStepper from "../components/general/CustomStepper";
 import { useRef, useState } from "react";
+import BackButton from "../components/general/BackButton";
 import AnimatedRoute from "../components/routes/AnimatedRoute";
 
 const ImageInput = (props) => {
+	const theme = useTheme();
 	const [source, setSource] = useState("");
 	const inputRef = useRef();
 	const imageRef = useRef();
@@ -65,11 +57,11 @@ const ImageInput = (props) => {
 						borderRadius: "10px",
 					}}
 				>
-					{source === "" ? <Add /> : <Delete />}
+					{source === "" ? <Add /> : <DeleteOutlined />}
 				</IconButton>
 				<img
 					ref={imageRef}
-					src={source}
+					src={source ? source : ""}
 					style={{
 						display: source === "" ? "none" : "block",
 						borderRadius: "10px",
@@ -80,6 +72,7 @@ const ImageInput = (props) => {
 					}}
 				/>
 				<input
+					multiple={false}
 					onChange={showImage}
 					ref={inputRef}
 					type="file"
@@ -99,31 +92,99 @@ const Contents = ({ activeStep, setActiveStep }) => {
 	switch (activeStep) {
 		case 0:
 			return (
-				<Box sx={{ width: "100%", mb: 2 }}>
-					<TextField
-						name="name"
-						label="Name Of Vehicle"
-						variant="outlined"
-						sx={{ mb: 2, width: "100%" }}
-					/>
-					<TextField
-						name="price"
-						type="number"
-						label="Price In USD"
-						variant="outlined"
-						sx={{ mb: 2, width: "100%" }}
-					/>
-					<TextField
-						name="location"
-						label="Location"
-						variant="outlined"
-						sx={{ mb: 2, width: "100%" }}
-					/>
+				<Box>
+					<Typography variant="h6" sx={{ mb: 3, textAlign: "center" }}>
+						How It Works
+					</Typography>
+
+					<Typography variant="body1" textAlign="center" sx={{ mb: 3 }}>
+						Sum dolor sit amet consectetur adipisicing elit. Dolorum fugiat nam, impedit
+						eum, quisquam facere odit distinctio optio rem vitae similique consequuntur
+						ab magnam, repudiandae hic odio eligendi dolores? Tempora ex magnam.
+					</Typography>
+
+					<Box sx={{ textAlign: "center" }}>
+						<Button
+							type="button"
+							size="small"
+							onClick={() => setActiveStep((prev) => prev + 1)}
+							variant="contained"
+							color="success"
+							sx={{ m: 1, borderRadius: "3rem", textTransform: "capitalize" }}
+						>
+							Proceed
+						</Button>
+					</Box>
 				</Box>
 			);
 		case 1:
 			return (
-				<Box sx={{ width: "100%", mb: 2 }}>
+				<Box>
+					<Typography variant="h6" sx={{ mb: 3, textAlign: "center" }}>
+						Details
+					</Typography>
+
+					<TextField
+						size="small"
+						variant="outlined"
+						name="name"
+						label="Name Of Vehicle"
+						sx={{
+							mb: 3,
+							width: "100%",
+							"& .MuiInputBase-root": {
+								borderRadius: "10px",
+							},
+						}}
+					/>
+					<TextField
+						size="small"
+						variant="outlined"
+						type="number"
+						name="price"
+						label="Price - $"
+						sx={{
+							mb: 3,
+							width: "100%",
+							"& .MuiInputBase-root": {
+								borderRadius: "10px",
+							},
+						}}
+					/>
+					<TextField
+						size="small"
+						variant="outlined"
+						name="location"
+						label="Location"
+						sx={{
+							mb: 3,
+							width: "100%",
+							"& .MuiInputBase-root": {
+								borderRadius: "10px",
+							},
+						}}
+					/>
+					<Box sx={{ textAlign: "center" }}>
+						<Button
+							size="small"
+							type="button"
+							onClick={() => setActiveStep((prev) => prev + 1)}
+							variant="contained"
+							color="success"
+							sx={{ m: 1, borderRadius: "3rem", textTransform: "capitalize" }}
+						>
+							Proceed
+						</Button>
+					</Box>
+				</Box>
+			);
+		case 2:
+			return (
+				<Box>
+					<Typography variant="h6" sx={{ mb: 3, textAlign: "center" }}>
+						Details
+					</Typography>
+
 					<Box
 						sx={{
 							display: "flex",
@@ -138,6 +199,7 @@ const Contents = ({ activeStep, setActiveStep }) => {
 							<Select
 								labelId="demo-simple-select-label"
 								id="demo-simple-select"
+								name="category"
 								value={category}
 								label="Category"
 								onChange={handleCategoryChange}
@@ -151,144 +213,176 @@ const Contents = ({ activeStep, setActiveStep }) => {
 					</Box>
 
 					<TextField
+						size="small"
+						variant="outlined"
 						name="mileage"
 						type="number"
-						label="Mileage In Kilometres"
-						variant="outlined"
-						sx={{ mb: 2, width: "100%" }}
+						label="Mileage - km"
+						sx={{
+							mb: 3,
+							width: "100%",
+							"& .MuiInputBase-root": {
+								borderRadius: "10px",
+							},
+						}}
 					/>
-
 					<TextField
-						name="details"
-						label="Other Details"
+						size="small"
 						variant="outlined"
+						name="details"
+						label="Details"
 						multiline
 						rows={3}
-						sx={{ mb: 2, width: "100%" }}
+						sx={{
+							mb: 3,
+							width: "100%",
+							"& .MuiInputBase-root": {
+								borderRadius: "10px",
+							},
+						}}
 					/>
+					<Box sx={{ textAlign: "center" }}>
+						<Button
+							size="small"
+							type="button"
+							onClick={() => setActiveStep((prev) => prev + 1)}
+							variant="contained"
+							color="success"
+							sx={{ m: 1, borderRadius: "3rem", textTransform: "capitalize" }}
+						>
+							Proceed
+						</Button>
+					</Box>
 				</Box>
 			);
-		case 2:
+		case 3:
 			return (
-				<Box sx={{ width: "100%", mb: 2 }}>
+				<Box>
+					<Typography variant="h6" sx={{ mb: 3, textAlign: "center" }}>
+						Upload Images
+					</Typography>
+
 					<Grid container>
 						{[1, 2, 3, 4, 5, 6].map((elem) => (
 							<ImageInput key={elem} />
 						))}
 					</Grid>
+					<Box sx={{ textAlign: "center" }}>
+						<Button
+							size="small"
+							type="button"
+							onClick={() => setActiveStep((prev) => prev + 1)}
+							variant="contained"
+							color="success"
+							sx={{ m: 1, borderRadius: "3rem", textTransform: "capitalize" }}
+						>
+							Proceed
+						</Button>
+					</Box>
 				</Box>
 			);
-		case 3:
-			return;
+		case 4:
+			return (
+				<Box>
+					<Typography variant="h6" sx={{ mb: 3, textAlign: "center" }}>
+						Confirmation
+					</Typography>
+
+					<Typography variant="body1" textAlign="center" sx={{ mb: 3 }}>
+						Sum dolor sit amet consectetur adipisicing elit. Dolorum fugiat nam, impedit
+						eum, quisquam facere odit distinctio optio rem vitae similique consequuntur
+						ab magnam, repudiandae hic odio eligendi dolores? Tempora ex magnam.
+					</Typography>
+
+					<Box sx={{ textAlign: "center" }}>
+						<Button
+							size="small"
+							onClick={() => setActiveStep(1)}
+							variant="contained"
+							color="success"
+							sx={{ m: 1, borderRadius: "3rem", textTransform: "capitalize" }}
+						>
+							Finish
+						</Button>
+					</Box>
+				</Box>
+			);
 	}
 };
 
 const NewListing = () => {
-	const steps = ["Answer some questions", "Give more detail", "Upload images", "Confirmation"];
 	const [activeStep, setActiveStep] = useState(0);
-	const [completed, setCompleted] = useState({});
-
-	const totalSteps = () => steps.length;
-
-	const completedSteps = () => Object.keys(completed).length;
-
-	const isLastStep = () => activeStep === totalSteps() - 1;
-
-	const allStepsCompleted = () => completedSteps() === totalSteps();
-
-	const handleNext = () => {
-		const newActiveStep =
-			isLastStep() && !allStepsCompleted()
-				? // It's the last step, but not all steps have been completed,
-				  // find the first step that has been completed
-				  steps.findIndex((step, i) => !(i in completed))
-				: activeStep + 1;
-		setActiveStep(newActiveStep);
-	};
-
-	const handleBack = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
-
-	const handleStep = (step) => () => setActiveStep(step);
-
-	const handleComplete = () => {
-		const newCompleted = completed;
-		newCompleted[activeStep] = true;
-		setCompleted(newCompleted);
-		handleNext();
-	};
 
 	const theme = useTheme();
-	const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.values.md}px)`);
+	const steps = [" Info  ", "Details", "Details", "Images", "Confirm"];
+
+	function handleSubmit(e) {
+		e.preventDefault();
+		console.log("hello");
+	}
 
 	return (
 		<AnimatedRoute>
-			<Container>
-				<Stepper nonLinear activeStep={activeStep} sx={{ mb: 5 }}>
-					{steps.map((step, index) => (
-						<Step key={step} completed={completed[index]}>
-							<StepButton color="inherit" onClick={handleStep(index)}>
-								{isMobile === true ? null : step}
-							</StepButton>
-						</Step>
-					))}
-				</Stepper>
-
+			<Box
+				sx={{
+					py: 5,
+					minHeight: "101vh",
+					height: "100%",
+					display: "flex",
+					alignItems: "center",
+					justifyContent: "center",
+					background: `linear-gradient(to bottom right, ${theme.palette.primary.main},${theme.palette.success.main}) !important`,
+				}}
+			>
 				<Container maxWidth="sm">
 					<Box
+						component="form"
+						onSubmit={handleSubmit}
 						sx={{
-							minHeight: "65vh",
-							p: { md: 3 },
+							minHeight: "90vh",
+							boxShadow: theme.shadows[5],
+							borderRadius: "20px",
+							background: theme.palette.background.paper,
 							display: "flex",
 							flexDirection: "column",
 						}}
 					>
 						<Box
 							sx={{
-								flexGrow: 1,
+								p: 2,
+								width: "100%",
+							}}
+						>
+							<BackButton />
+						</Box>
+
+						<Box
+							sx={{
+								p: { xs: 2, sm: 8 },
+								pt: "0 !important",
+								width: "100%",
+								flexGrow: "1",
 								display: "flex",
 								flexDirection: "column",
 								justifyContent: "center",
 								alignItems: "center",
 							}}
 						>
-							<Typography variant="h5" sx={{ mb: 5, textAlign: "center" }}>
-								{`${activeStep + 1}. ${steps[activeStep]}`}
-							</Typography>
-							<Contents activeStep={activeStep} setActiveStep={setActiveStep} />
-						</Box>
-
-						<Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-							<Button
-								color="inherit"
-								disabled={activeStep === 0}
-								onClick={handleBack}
-								sx={{ mr: 1 }}
-							>
-								Back
-							</Button>
-
-							<Box sx={{ flex: "1 1 auto" }} />
-
-							{/* <Button onClick={handleNext} sx={{ mr: 1 }}>
-								Next
-							</Button> */}
-
-							{activeStep !== steps.length &&
-								(completed[activeStep] ? (
-									<Typography variant="caption" sx={{ display: "inline-block" }}>
-										Step {activeStep + 1} already completed
-									</Typography>
-								) : (
-									<Button onClick={handleComplete}>
-										{completedSteps() === totalSteps() - 1
-											? "Finish"
-											: "Proceed"}
-									</Button>
-								))}
+							<CustomStepper
+								steps={steps}
+								activeStep={activeStep}
+								setActiveStep={setActiveStep}
+								contents={
+									<Contents
+										activeStep={activeStep}
+										setActiveStep={setActiveStep}
+									/>
+								}
+							/>
 						</Box>
 					</Box>
 				</Container>
-			</Container>
+			</Box>
 		</AnimatedRoute>
 	);
 };

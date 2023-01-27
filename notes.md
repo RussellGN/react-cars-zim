@@ -1,9 +1,5 @@
 # rethink
 
-31. maybe show details and about owner in two boes with small text and highlighted backgrounds in a row in view-offer page
-32. better page transition
-33. little fake counting effect for views on listings
-
 # delayed
 
 6. work on the vehicle categories (listings and switching between them)
@@ -12,6 +8,7 @@
 9. create a sort of guide through the site to better showcase the site and what its like when logged in/out and so forth
 10. popup helpers for some componennts (double pa to activate on mobile)
 11. create account modal for certain features, if user is not logged in
+12. research input pattern prop and makeit work
 
 # internet needed
 
@@ -27,8 +24,6 @@
 14. try adding advertising sections, and maybe even get real adverts on there.
 
 # todo
-
-42. back buttons were sensible
 
 43. take placeholder images out of public folder
 44. design an actual logo

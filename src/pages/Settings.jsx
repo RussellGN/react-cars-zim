@@ -24,6 +24,7 @@ import {
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import AnimatedRoute from "../components/routes/AnimatedRoute";
+import BackButton from "../components/general/BackButton";
 
 const NotificationSettings = () => {
 	const [state, setState] = useState({
@@ -133,7 +134,10 @@ const Settings = () => {
 					variant="h5"
 					sx={{ mb: 3, display: "flex", justifyContent: "center", alignItems: "center" }}
 				>
-					Settings <SettingsIcon fontSize="inherit" sx={{ ml: 1 }} />
+					<BackButton />
+					<span style={{ marginLeft: "1rem" }}>
+						Settings <SettingsIcon fontSize="inherit" sx={{ ml: 1 }} />
+					</span>
 				</Typography>
 
 				<div>

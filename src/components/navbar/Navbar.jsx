@@ -9,8 +9,15 @@ import Alerts from "./Alerts";
 const Navbar = ({ mode, setMode }) => {
 	const { pathname } = useLocation();
 
-	for (let route of ["/login", "/signup", "/account-details", "/edit-account-details"]) {
-		if (pathname === route) {
+	for (let route of [
+		"/login",
+		"/signup",
+		"/enquire",
+		"/new-listing",
+		"/account-details",
+		"/edit-account-details",
+	]) {
+		if (pathname.includes(route)) {
 			return;
 		}
 	}

@@ -1,4 +1,4 @@
-import { Home, Google, PersonAdd, Apple } from "@mui/icons-material";
+import { Google, PersonAdd, Apple } from "@mui/icons-material";
 import {
 	Link as MaterialLink,
 	Container,
@@ -7,10 +7,10 @@ import {
 	Typography,
 	TextField,
 	Button,
-	IconButton,
 } from "@mui/material";
 import AnimatedRoute from "../components/routes/AnimatedRoute";
 import { Link, useNavigate } from "react-router-dom";
+import BackButton from "../components/general/BackButton";
 
 const Signup = () => {
 	const theme = useTheme();
@@ -46,7 +46,7 @@ const Signup = () => {
 						sx={{
 							position: "relative",
 							boxShadow: theme.shadows[5],
-							p: { xs: 3, sm: 8 },
+							p: { xs: 2, sm: 8 },
 							display: "flex",
 							flexDirection: "column",
 							justifyContent: "center",
@@ -55,19 +55,14 @@ const Signup = () => {
 							background: theme.palette.background.paper,
 						}}
 					>
-						<IconButton
-							component={Link}
-							to="/"
+						<Box
 							sx={{
-								position: "absolute",
-								top: 0,
-								left: 0,
-								border: "solid thin",
-								m: { xs: 2, sm: 3 },
+								p: 2,
+								width: "100%",
 							}}
 						>
-							<Home />
-						</IconButton>
+							<BackButton onlyRoute="/" />
+						</Box>
 
 						<PersonAdd sx={{ fontSize: "3rem", mb: 2 }} />
 						<Typography variant="h5" sx={{ mb: 4 }}>
