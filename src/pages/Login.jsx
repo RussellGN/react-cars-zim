@@ -13,7 +13,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../components/static-backend/UserContext";
 import BackButton from "../components/general/BackButton";
-import listings from "../components/static-backend/listings";
+import accounts from "../components/static-backend/accounts";
 
 const Login = () => {
 	const theme = useTheme();
@@ -23,19 +23,8 @@ const Login = () => {
 	function handleSubmit(e) {
 		e.preventDefault();
 		console.log({ handle: e.target.handle.value, password: e.target.password.value });
-		const userData = {
-			username: "KB Motors",
-			slug: "kb-motors",
-			email: "info@kbmotors.com",
-			category: "d",
-			location: "Harare",
-			phoneNumber: "+263 775438940",
-			about: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magnam suscipit quae magni corrupti dignissimos esse dolorum tempora voluptatem dolores inventore!",
-			coverImage: "/static/image3.jpg",
-			listings: listings,
-		};
-		setUser(userData);
-		navigate(`/account/${userData.slug}`);
+		setUser(accounts[0]);
+		navigate(`/account/${accounts[0].slug}`);
 	}
 
 	return (

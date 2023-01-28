@@ -7,7 +7,8 @@ import ScrollToTop from "./components/routes/ScrollToTop";
 import { UserContextProvider } from "./components/static-backend/UserContext";
 
 const App = () => {
-	const [mode, setMode] = useState("light");
+	const { matches: prefersDark } = window.matchMedia("(prefers-color-scheme: dark)");
+	const [mode, setMode] = useState(prefersDark === true ? "dark" : "light");
 
 	let theme = createTheme({
 		palette: {

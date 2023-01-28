@@ -26,24 +26,19 @@
 
 # todo
 
-46. make all icons rounded
-47. work on footer links (build the actual pages or remove them)
 48. work on the theme object, clean it up, and clean css on all components
-49. auto detectuser's theme
-50. make evything curvy
-51. review all components
-52. shortlist component
-53. more orthodox notifications page
-54. more orthodox settings page
-55. maybe more settings options
+49. make evything curvy
+50. review all components
+51. create saved section in account page
+52. more orthodox notifications page
+53. more orthodox settings page
+54. maybe more settings options
 
-56. work on the stepper components
-57. refine account creation
-58. make it clearer to the user taht cars.zim is for advertising only and does not take pasrt in transacting
-59. give guidelines on how to proceed after contatcing owner of a listing
-60. refine image upload fields
-61. refine listing creation
-62. write tests
+55. make it clearer to the user taht cars.zim is for advertising only and does not take pasrt in transacting
+56. give guidelines on how to proceed after contatcing owner of a listing
+57. refine image upload fields
+58. refine listing creation
+59. write tests
 
 # bonus...search for animated components library
 

@@ -13,6 +13,8 @@ import {
 	Button,
 	IconButton,
 	useMediaQuery,
+	Zoom,
+	Tooltip,
 } from "@mui/material";
 import {
 	LocationOnOutlined,
@@ -23,9 +25,9 @@ import {
 	KeyboardDoubleArrowRightOutlined,
 	FilterOutlined,
 	KeyboardDoubleArrowLeftOutlined,
-	ListOutlined,
 	DeleteOutlined,
 	EditOutlined,
+	BookmarkAddOutlined,
 } from "@mui/icons-material";
 import { Link, useParams } from "react-router-dom";
 import { useContext, useState } from "react";
@@ -34,6 +36,40 @@ import { humanizeDate } from "../components/utils/humanizeDate";
 import ShareButton from "../components/general/ShareButton";
 import BackButton from "../components/general/BackButton";
 import listings from "../components/static-backend/listings";
+
+const SaveButton = ({ placement }) => {
+	const [openTooltip, setOpenTooltip] = useState(false);
+
+	const handleShareTooltipClose = () => {
+		setOpenTooltip(false);
+	};
+
+	const handleTooltipOpen = () => {
+		window.navigator.clipboard.writeText(window.location.href);
+		setOpenTooltip(true);
+		setTimeout(handleShareTooltipClose, 1500);
+	};
+
+	return (
+		<Tooltip
+			PopperProps={{
+				disablePortal: true,
+			}}
+			onClose={handleShareTooltipClose}
+			open={openTooltip}
+			disableFocusListener
+			disableHoverListener
+			disableTouchListener
+			TransitionComponent={Zoom}
+			placement={placement}
+			title="Saved!"
+		>
+			<IconButton sx={{ ml: "auto" }} onClick={handleTooltipOpen}>
+				<BookmarkAddOutlined />
+			</IconButton>
+		</Tooltip>
+	);
+};
 
 const ViewOffer = () => {
 	const { user } = useContext(UserContext);
@@ -115,44 +151,46 @@ const ViewOffer = () => {
 								objectFit: "cover",
 							}}
 						/>
-						<Box
-							sx={{
-								position: "absolute",
-								top: 0,
-								left: 0,
-								width: "100%",
-								height: "100%",
-								display: "flex",
-								justifyContent: "space-between",
-								alignItems: "center",
-							}}
-						>
-							<IconButton
-								size="small"
+						{listing?.images?.length > 1 && (
+							<Box
 								sx={{
-									backgroundColor: "dark.main",
-									color: "white",
-									m: 1,
-									"&:hover": { backgroundColor: "dark.main" },
+									position: "absolute",
+									top: 0,
+									left: 0,
+									width: "100%",
+									height: "100%",
+									display: "flex",
+									justifyContent: "space-between",
+									alignItems: "center",
 								}}
-								onClick={() => handleCarousel("prev")}
 							>
-								<KeyboardDoubleArrowLeftOutlined />
-							</IconButton>
+								<IconButton
+									size="small"
+									sx={{
+										backgroundColor: "dark.main",
+										color: "white",
+										m: 1,
+										"&:hover": { backgroundColor: "dark.main" },
+									}}
+									onClick={() => handleCarousel("prev")}
+								>
+									<KeyboardDoubleArrowLeftOutlined />
+								</IconButton>
 
-							<IconButton
-								size="small"
-								sx={{
-									backgroundColor: "dark.main",
-									color: "white",
-									m: 1,
-									"&:hover": { backgroundColor: "dark.main" },
-								}}
-								onClick={() => handleCarousel("next")}
-							>
-								<KeyboardDoubleArrowRightOutlined />
-							</IconButton>
-						</Box>
+								<IconButton
+									size="small"
+									sx={{
+										backgroundColor: "dark.main",
+										color: "white",
+										m: 1,
+										"&:hover": { backgroundColor: "dark.main" },
+									}}
+									onClick={() => handleCarousel("next")}
+								>
+									<KeyboardDoubleArrowRightOutlined />
+								</IconButton>
+							</Box>
+						)}
 					</Box>
 
 					<Box
@@ -286,22 +324,12 @@ const ViewOffer = () => {
 										Enquire
 									</Button>
 
-									<Button
-										variant="outlined"
-										color="success"
-										endIcon={<ListOutlined />}
-										sx={{
-											borderRadius: "20px",
-											textTransform: "capitalize",
-										}}
-									>
-										Shortlist
-									</Button>
+									<SaveButton placement={isMobile ? "top" : "left"} />
 								</>
 							)}
 							<ShareButton
 								placement={isMobile ? "top" : "left"}
-								sx={{ ml: "auto" }}
+								sx={{ ml: user?.username === listing.owner.username ? "auto" : "" }}
 							/>
 						</Stack>
 					</Box>

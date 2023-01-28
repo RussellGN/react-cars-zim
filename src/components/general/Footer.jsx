@@ -15,132 +15,56 @@ const Footer = ({ marginTop }) => {
 	const theme = useTheme();
 
 	return (
-		<Box sx={{ backgroundColor: "dark.main", marginTop: marginTop }}>
-			<Container sx={{ px: { md: 5 }, py: { xs: 3, md: 7 } }}>
-				<Grid container spacing={2} justifyContent="space-between">
-					<Grid item xs={6} md="auto">
+		<Box
+			sx={{
+				backgroundColor: theme.palette.mode === "dark" ? "background.paper" : "dark.main",
+				color: theme.palette.mode === "dark" ? "inherit" : "rgb(180,180,180)",
+				marginTop: marginTop,
+			}}
+		>
+			<Container sx={{ px: { md: 5 }, py: { xs: 3, md: 7 }, color: "inherit" }}>
+				<Grid container spacing={2} justifyContent="space-around" sx={{ color: "inherit" }}>
+					<Grid item xs={12} md="auto" sx={{ color: "inherit" }}>
 						<Box
 							sx={{
 								display: "flex",
-								flexDirection: "column",
+								gap: 1.2,
+								flexDirection: { md: "column" },
+								flexWrap: "wrap",
+								color: "inherit",
 							}}
 						>
-							<Typography variant="h6" sx={{ mb: 2, color: "rgb(150,150,150)" }}>
+							<Typography variant="h6" sx={{ width: "100%", mb: 2 }} colo="inherit">
 								Usefull Links
 							</Typography>
 
-							<MaterialLink
-								component={Link}
-								to="/about"
-								sx={{ color: "light.main", mb: 1.2 }}
-							>
+							<MaterialLink component={Link} to="/about" color="inherit">
 								About
 							</MaterialLink>
 
-							<MaterialLink
-								component={Link}
-								to="/signup"
-								sx={{ color: "light.main", mb: 1.2 }}
-							>
-								Signup
-							</MaterialLink>
-
-							<MaterialLink
-								component={Link}
-								to="/faq"
-								sx={{ color: "light.main", mb: 1.2 }}
-							>
-								FAQ
-							</MaterialLink>
-						</Box>
-					</Grid>
-
-					<Grid item xs={6} md="auto">
-						<Box
-							sx={{
-								display: "flex",
-								flexDirection: "column",
-							}}
-						>
-							<Typography variant="h6" sx={{ mb: 2, color: "rgb(150,150,150)" }}>
-								Get In Touch
-							</Typography>
-
-							<MaterialLink
-								component={Link}
-								to="/contact"
-								sx={{ color: "light.main", mb: 1.2 }}
-							>
+							<MaterialLink component={Link} to="/contact" color="inherit">
 								Contact
 							</MaterialLink>
 
-							<MaterialLink
-								component={Link}
-								to="/report"
-								sx={{ color: "light.main", mb: 1.2 }}
-							>
-								Report
-							</MaterialLink>
-
-							<MaterialLink
-								component={Link}
-								to="/suggestions"
-								sx={{ color: "light.main", mb: 1.2 }}
-							>
-								Suggestions
+							<MaterialLink component={Link} to="/contact" color="inherit">
+								Suggest
 							</MaterialLink>
 						</Box>
 					</Grid>
 
-					<Grid item xs={6} md="auto">
+					<Grid item xs={12} md={4} sx={{ color: "inherit" }}>
 						<Box
 							sx={{
 								display: "flex",
 								flexDirection: "column",
+								color: "inherit",
 							}}
 						>
-							<Typography variant="h6" sx={{ mb: 2, color: "rgb(150,150,150)" }}>
-								Other Services
-							</Typography>
-
-							<MaterialLink
-								component={Link}
-								to="/advertise"
-								sx={{ color: "light.main", mb: 1.2 }}
-							>
-								Advertise
-							</MaterialLink>
-
-							<MaterialLink
-								component={Link}
-								to="/car-hire"
-								sx={{ color: "light.main", mb: 1.2 }}
-							>
-								Car Hire
-							</MaterialLink>
-
-							<MaterialLink
-								component={Link}
-								to="/parts-and-accessories"
-								sx={{ color: "light.main", mb: 1.2 }}
-							>
-								Parts &amp; Accessories
-							</MaterialLink>
-						</Box>
-					</Grid>
-
-					<Grid item xs={12} md={4}>
-						<Box
-							sx={{
-								display: "flex",
-								flexDirection: "column",
-							}}
-						>
-							<Typography variant="h6" sx={{ mb: 2, color: "rgb(150,150,150)" }}>
+							<Typography variant="h6" sx={{ mb: 2 }} color="inherit">
 								Dont Have An Account?
 							</Typography>
 
-							<Typography variant="body1" sx={{ color: "rgb(150,150,150)", mb: 2 }}>
+							<Typography variant="body1" sx={{ mb: 2 }} color="inherit">
 								Create an account to start advertising offers, free of charge. No
 								hidden costs.
 							</Typography>
@@ -161,8 +85,10 @@ const Footer = ({ marginTop }) => {
 									}}
 								></input>
 								<Button
+									size="small"
 									variant="contained"
 									sx={{
+										px: 3,
 										ml: 2,
 										textTransform: "capitalize",
 										borderRadius: "10rem",
@@ -180,21 +106,23 @@ const Footer = ({ marginTop }) => {
 						display: "flex",
 						justifyContent: "space-between",
 						borderTop: "solid thin",
-						borderColor: "rgb(150,150,150)",
+						borderColor: "black",
 						pt: 3,
 						alignItems: "center",
 						mt: 5,
+						color: "inherit",
 					}}
 				>
-					<Typography sx={{ color: "rgb(150,150,150)" }}>
+					<Typography color="inherit">
 						&copy; {new Date().getFullYear()} Cars.zim. All Rights Reserved.
 					</Typography>
 
-					<Box sx={{ display: "flex" }}>
+					<Box sx={{ display: "flex", color: "inherit" }}>
 						<IconButton
+							color="inherit"
 							component={Link}
 							to="https://www.github/RussellGN/react-cars-zim"
-							sx={{ mx: 0.5, color: "rgb(150,150,150)" }}
+							sx={{ mx: 0.5 }}
 						>
 							<GitHub />
 						</IconButton>
