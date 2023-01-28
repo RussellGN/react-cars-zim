@@ -15,10 +15,10 @@ import {
 	useTheme,
 } from "@mui/material";
 import {
-	Settings as SettingsIcon,
-	KeyboardArrowDown,
-	Person,
-	Notifications,
+	SettingsOutlined,
+	KeyboardArrowDownOutlined,
+	PersonOutlined,
+	NotificationsOutlined,
 	InfoOutlined,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
@@ -136,7 +136,7 @@ const Settings = () => {
 				>
 					<BackButton />
 					<span style={{ marginLeft: "1rem" }}>
-						Settings <SettingsIcon fontSize="inherit" sx={{ ml: 1 }} />
+						Settings <SettingsOutlined fontSize="inherit" sx={{ ml: 1 }} />
 					</span>
 				</Typography>
 
@@ -148,13 +148,13 @@ const Settings = () => {
 						sx={{ p: 0 }}
 					>
 						<AccordionSummary
-							expandIcon={<KeyboardArrowDown />}
+							expandIcon={<KeyboardArrowDownOutlined />}
 							aria-controls="panel1a-content"
 							id="panel1a-header"
 							sx={{ p: 0, backgroundColor: "background.default" }}
 						>
 							<Typography sx={{ display: "flex", alignItems: "center" }}>
-								<Notifications sx={{ mr: 1 }} />
+								<NotificationsOutlined sx={{ mr: 1 }} />
 								Notifications
 							</Typography>
 						</AccordionSummary>
@@ -182,13 +182,13 @@ const Settings = () => {
 						sx={{ p: 0 }}
 					>
 						<AccordionSummary
-							expandIcon={<KeyboardArrowDown />}
+							expandIcon={<KeyboardArrowDownOutlined />}
 							aria-controls="panel2a-content"
 							id="panel2a-header"
 							sx={{ p: 0, backgroundColor: "background.default" }}
 						>
 							<Typography sx={{ display: "flex", alignItems: "center" }}>
-								<Person sx={{ mr: 1 }} />
+								<PersonOutlined sx={{ mr: 1 }} />
 								Account
 							</Typography>
 						</AccordionSummary>

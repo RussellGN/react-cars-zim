@@ -1,4 +1,4 @@
-import { Apple, Google, PersonPinCircle } from "@mui/icons-material";
+import { Apple, Google, PersonPinCircleOutlined } from "@mui/icons-material";
 import {
 	Link as MaterialLink,
 	Container,
@@ -9,10 +9,11 @@ import {
 	Button,
 } from "@mui/material";
 import AnimatedRoute from "../components/routes/AnimatedRoute";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
-import { UserContext } from "../App";
+import { UserContext } from "../components/static-backend/UserContext";
 import BackButton from "../components/general/BackButton";
+import listings from "../components/static-backend/listings";
 
 const Login = () => {
 	const theme = useTheme();
@@ -31,46 +32,7 @@ const Login = () => {
 			phoneNumber: "+263 775438940",
 			about: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magnam suscipit quae magni corrupti dignissimos esse dolorum tempora voluptatem dolores inventore!",
 			coverImage: "/static/image3.jpg",
-			listings: [
-				{
-					id: 1,
-					slug: "toyota-hillux-legend-45-1",
-					name: "Toyota Hillux legend 45",
-					mileage: 43000,
-					price: 67000,
-					views: 321,
-					location: "Harare",
-					date: new Date(),
-					owner: { username: "KB Motors", slug: "kb-motors" },
-					coverImage: "/static/hillux1.jpeg",
-					imageCount: 6,
-				},
-				{
-					id: 2,
-					slug: "porsche-carrera-4s-2",
-					name: "Porsche Carrera 4S",
-					mileage: 300,
-					price: 300000,
-					views: 310,
-					location: "Victoria Falls",
-					date: new Date(),
-					owner: { username: "KB Motors", slug: "kb-motors" },
-					coverImage: "/static/porsche.JPG",
-					imageCount: 7,
-				},
-				{
-					id: 3,
-					name: "Toyota Corrola Quest",
-					mileage: 5000,
-					price: 20000,
-					views: 1007,
-					location: "Bulawayo",
-					date: new Date(),
-					owner: { username: "KB Motors", slug: "kb-motors" },
-					coverImage: "/static/corrola1.jpg",
-					imageCount: 11,
-				},
-			],
+			listings: listings,
 		};
 		setUser(userData);
 		navigate(`/account/${userData.slug}`);
@@ -114,7 +76,7 @@ const Login = () => {
 							<BackButton />
 						</Box>
 
-						<PersonPinCircle sx={{ fontSize: "3rem", mb: 2 }} />
+						<PersonPinCircleOutlined sx={{ fontSize: "3rem", mb: 2 }} />
 						<Typography variant="h5" sx={{ mb: 4 }}>
 							Login
 						</Typography>

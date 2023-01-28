@@ -8,13 +8,13 @@ import {
 	useTheme,
 } from "@mui/material";
 import {
-	Notifications as NotificationsIcon,
-	KeyboardArrowDown,
-	Person,
+	NotificationsOutlined,
+	KeyboardArrowDownOutlined,
+	PersonOutlined,
 	InfoOutlined,
-	Warning,
-	LocalOffer,
-	Email,
+	WarningOutlined,
+	LocalOfferOutlined,
+	EmailOutlined,
 } from "@mui/icons-material";
 import { useState } from "react";
 import AnimatedRoute from "../components/routes/AnimatedRoute";
@@ -27,15 +27,15 @@ const NotificationTemplate = ({ notification }) => {
 const NotificationIcon = ({ category, sx }) => {
 	switch (category) {
 		case "account":
-			return <Person sx={sx} />;
-		case "info":
-			return <InfoOutlined sx={sx} />;
+			return <PersonOutlined sx={sx} />;
 		case "message":
-			return <Email sx={sx} />;
+			return <EmailOutlined sx={sx} />;
 		case "offer":
-			return <LocalOffer sx={sx} />;
+			return <LocalOfferOutlined sx={sx} />;
 		case "warning":
-			return <Warning sx={sx} />;
+			return <WarningOutlined sx={sx} />;
+		default:
+			return <InfoOutlined sx={sx} />;
 	}
 };
 
@@ -84,7 +84,7 @@ const Notifications = () => {
 				>
 					<BackButton />
 					<span style={{ marginLeft: "1rem" }}>
-						Notifications <NotificationsIcon fontSize="inherit" sx={{ ml: 1 }} />
+						Notifications <NotificationsOutlined fontSize="inherit" sx={{ ml: 1 }} />
 					</span>
 				</Typography>
 
@@ -99,7 +99,7 @@ const Notifications = () => {
 								sx={{ p: 0.5, backgroundColor: "background.default" }}
 							>
 								<AccordionSummary
-									expandIcon={<KeyboardArrowDown />}
+									expandIcon={<KeyboardArrowDownOutlined />}
 									aria-controls="panel1a-content"
 									id="panel1a-header"
 									sx={{ p: 0, backgroundColor: "background.default" }}

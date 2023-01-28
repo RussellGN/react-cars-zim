@@ -1,6 +1,5 @@
 import {
 	ListItemIcon,
-	useTheme,
 	Menu,
 	MenuItem,
 	Badge,
@@ -22,11 +21,11 @@ import {
 	InfoOutlined,
 	LocalOfferOutlined,
 	EmailOutlined,
-	Add,
+	AddOutlined,
 } from "@mui/icons-material";
 import { Link, useLocation } from "react-router-dom";
 import { useContext, useState } from "react";
-import { UserContext } from "../../App";
+import { UserContext } from "../static-backend/UserContext";
 import LogoutModal from "../general/LogoutModal";
 
 const CustomNotificationIcon = ({ category, sx }) => {
@@ -37,12 +36,7 @@ const CustomNotificationIcon = ({ category, sx }) => {
 					<PersonOutlined fontSize="inherit" />
 				</ListItemIcon>
 			);
-		case "info":
-			return (
-				<ListItemIcon sx={sx}>
-					<InfoOutlined fontSize="inherit" />
-				</ListItemIcon>
-			);
+
 		case "message":
 			return (
 				<ListItemIcon sx={sx}>
@@ -61,26 +55,27 @@ const CustomNotificationIcon = ({ category, sx }) => {
 					<WarningOutlined fontSize="inherit" />
 				</ListItemIcon>
 			);
+		default:
+			return (
+				<ListItemIcon sx={sx}>
+					<InfoOutlined fontSize="inherit" />
+				</ListItemIcon>
+			);
 	}
 };
 
-const AccountSection = ({ show, mode, setMode }) => {
-	const theme = useTheme();
-	const { user, setUser } = useContext(UserContext);
-	const location = useLocation();
-	const [anchorEl, setAnchorEl] = useState(null);
-	const open = Boolean(anchorEl);
-	const handleClick = (e) => setAnchorEl(e.currentTarget);
-	const handleClose = () => setAnchorEl(null);
-
+const NotificationsDropdown = () => {
+	const { user } = useContext(UserContext);
+	const { pathname } = useLocation();
 	const [anchorNotifsEl, setAnchorNotifsEl] = useState(null);
+
 	const openNotifs = Boolean(anchorNotifsEl);
 	const handleNotifsClick = (e) => setAnchorNotifsEl(e.currentTarget);
 	const handleNotifsClose = () => setAnchorNotifsEl(null);
 
-	const [openLogout, setOpenLogout] = useState(false);
-	const handleLogoutOpen = () => setOpenLogout(true);
-	const handleLogoutClose = () => setOpenLogout(false);
+	if (!user?.username) return; // If there is no user logged in, return nothing
+
+	if (pathname?.includes("/notifications")) return; // on the notifictions page, return nothing
 
 	const notifications = [
 		{
@@ -113,10 +108,284 @@ const AccountSection = ({ show, mode, setMode }) => {
 		},
 	];
 
+	return (
+		<>
+			<Badge
+				badgeContent={41}
+				max={9}
+				onClick={handleNotifsClick}
+				color="success"
+				sx={{ cursor: "pointer", "&:hover": { opacity: 0.9 } }}
+				anchorOrigin={{
+					vertical: "top",
+					horizontal: "left",
+				}}
+			>
+				<NotificationsOutlined color="inherit" />
+			</Badge>
+
+			<Menu
+				open={openNotifs}
+				anchorEl={anchorNotifsEl}
+				id="Notifs-menu"
+				onClose={handleNotifsClose}
+				onClick={handleNotifsClose}
+				MenuListProps={{
+					sx: {
+						py: "0 !important",
+					},
+				}}
+				PaperProps={{
+					elevation: 10,
+					sx: {
+						borderRadius: "15px !important",
+						overflow: "hidden",
+						mt: 1.5,
+						"& .MuiAvatar-root": {
+							width: 32,
+							height: 32,
+							ml: -0.5,
+							mr: 1,
+						},
+					},
+				}}
+				transformOrigin={{ horizontal: "right", vertical: "top" }}
+				anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+			>
+				{notifications?.map((notification) => {
+					return (
+						<MenuItem
+							key={notification.id}
+							component={Link}
+							to={`/notifications/${notification.id}`}
+							sx={{
+								borderBottom: "solid 1px",
+								borderColor: "divider",
+								maxWidth: "20rem",
+								px: 2.5,
+								py: 1,
+							}}
+						>
+							<CustomNotificationIcon
+								sx={{
+									mr: 2,
+									minWidth: "0 !important",
+								}}
+								category={notification.category}
+							/>
+
+							<Typography variant="body2" noWrap>
+								{notification.title}
+							</Typography>
+						</MenuItem>
+					);
+				})}
+				<MenuItem component={Link} to="/notifications" sx={{ p: 0 }}>
+					<Typography
+						variant="caption"
+						sx={{
+							backgroundColor: "divider",
+							py: 0.2,
+							textAlign: "center",
+							width: "100%",
+						}}
+					>
+						view all
+					</Typography>
+				</MenuItem>
+			</Menu>
+		</>
+	);
+};
+
+const AccountDropdown = ({ handleLogoutOpen }) => {
+	const { user } = useContext(UserContext);
+	const { pathname } = useLocation();
+	const [anchorEl, setAnchorEl] = useState(null);
+
+	const open = Boolean(anchorEl);
+	const handleClick = (e) => setAnchorEl(e.currentTarget);
+	const handleClose = () => setAnchorEl(null);
+
+	if (!user?.username) return; // If there is no user logged in, return nothing
+
+	if (pathname.includes(`/account/${user.slug}`)) return; // If we're viewing a logged user's account, return nothing
+
+	return (
+		<>
+			<Avatar
+				onClick={handleClick}
+				alt={user?.username}
+				src={user?.displayPhoto}
+				sx={{
+					ml: 2,
+					cursor: "pointer",
+					transition: "border-color 0.2s",
+					border: "solid medium",
+					borderColor: "success.dark",
+					"&:hover": { borderColor: "success.light" },
+				}}
+			/>
+
+			<Menu
+				open={open}
+				anchorEl={anchorEl}
+				id="account-menu"
+				onClose={handleClose}
+				onClick={handleClose}
+				MenuListProps={{
+					sx: {
+						py: "0 !important",
+					},
+				}}
+				PaperProps={{
+					elevation: 10,
+					sx: {
+						borderRadius: "15px !important",
+						overflow: "hidden",
+						mt: 1.5,
+						"& .MuiAvatar-root": {
+							width: 32,
+							height: 32,
+							ml: -0.5,
+							mr: 1,
+						},
+					},
+				}}
+				transformOrigin={{ horizontal: "right", vertical: "top" }}
+				anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+			>
+				<MenuItem
+					component={Link}
+					to={`/account/${user.slug}`}
+					sx={{
+						borderBottom: "solid 1px",
+						borderColor: "divider",
+						px: 2.5,
+						py: 1,
+					}}
+				>
+					<ListItemIcon
+						sx={{
+							mr: 2,
+							minWidth: "0 !important",
+						}}
+					>
+						<PersonOutlined fontSize="small" />
+					</ListItemIcon>
+
+					<Typography variant="body2" noWrap>
+						My account
+					</Typography>
+				</MenuItem>
+
+				<MenuItem
+					component={Link}
+					to="/new-listing"
+					sx={{
+						borderBottom: "solid 1px",
+						borderColor: "divider",
+						px: 2.5,
+						py: 1,
+					}}
+				>
+					<ListItemIcon
+						sx={{
+							mr: 2,
+							minWidth: "0 !important",
+						}}
+					>
+						<AddOutlined fontSize="small" />
+					</ListItemIcon>
+					<Typography variant="body2" noWrap>
+						New listing
+					</Typography>
+				</MenuItem>
+
+				<MenuItem
+					component={Link}
+					to="/signup"
+					sx={{
+						borderBottom: "solid 1px",
+						borderColor: "divider",
+						px: 2.5,
+						py: 1,
+					}}
+				>
+					<ListItemIcon
+						sx={{
+							mr: 2,
+							minWidth: "0 !important",
+						}}
+					>
+						<PersonAddOutlined fontSize="small" />
+					</ListItemIcon>
+					<Typography variant="body2" noWrap>
+						Add another account
+					</Typography>
+				</MenuItem>
+
+				<MenuItem
+					component={Link}
+					to="/settings"
+					sx={{
+						borderBottom: "solid 1px",
+						borderColor: "divider",
+						px: 2.5,
+						py: 1,
+					}}
+				>
+					<ListItemIcon
+						sx={{
+							mr: 2,
+							minWidth: "0 !important",
+						}}
+					>
+						<SettingsOutlined fontSize="small" />
+					</ListItemIcon>
+					<Typography variant="body2" noWrap>
+						Settings
+					</Typography>
+				</MenuItem>
+
+				<MenuItem
+					onClick={handleLogoutOpen}
+					sx={{
+						borderBottom: "solid 1px",
+						borderColor: "divider",
+						px: 2.5,
+						py: 1,
+					}}
+				>
+					<ListItemIcon
+						sx={{
+							mr: 2,
+							minWidth: "0 !important",
+						}}
+					>
+						<LogoutOutlined fontSize="small" />
+					</ListItemIcon>
+					<Typography variant="body2" noWrap>
+						Logout
+					</Typography>
+				</MenuItem>
+			</Menu>
+		</>
+	);
+};
+
+const AccountSection = ({ show, mode, setMode }) => {
+	const { user } = useContext(UserContext);
+
+	const [openLogout, setOpenLogout] = useState(false);
+	const handleLogoutOpen = () => setOpenLogout(true);
+	const handleLogoutClose = () => setOpenLogout(false);
+
 	const changeMode = () => {
 		if (mode === "dark") setMode("light");
 		else setMode("dark");
 	};
+
 	return (
 		<>
 			<LogoutModal
@@ -125,283 +394,16 @@ const AccountSection = ({ show, mode, setMode }) => {
 				handleLogoutOpen={handleLogoutOpen}
 			/>
 
-			<Box
-				sx={{
-					display: { xs: show ? "flex" : "none", md: "flex" },
-					alignItems: "center",
-				}}
-			>
-				{location?.pathname?.includes("/notifications") ? (
-					""
-				) : (
-					<>
-						{user?.username ? (
-							<Badge
-								badgeContent={41}
-								max={9}
-								onClick={handleNotifsClick}
-								color="success"
-								sx={{ cursor: "pointer", "&:hover": { opacity: 0.9 } }}
-								anchorOrigin={{
-									vertical: "top",
-									horizontal: "left",
-								}}
-							>
-								<NotificationsOutlined color="inherit" />
-							</Badge>
-						) : (
-							""
-						)}
-
-						<Menu
-							open={openNotifs}
-							anchorEl={anchorNotifsEl}
-							id="Notifs-menu"
-							onClose={handleNotifsClose}
-							onClick={handleNotifsClose}
-							MenuListProps={{
-								sx: {
-									py: "0 !important",
-								},
-							}}
-							PaperProps={{
-								elevation: 10,
-								sx: {
-									borderRadius: "15px !important",
-									overflow: "hidden",
-									mt: 1.5,
-									"& .MuiAvatar-root": {
-										width: 32,
-										height: 32,
-										ml: -0.5,
-										mr: 1,
-									},
-								},
-							}}
-							transformOrigin={{ horizontal: "right", vertical: "top" }}
-							anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-						>
-							{notifications?.map((notification) => {
-								return (
-									<MenuItem
-										key={notification.id}
-										component={Link}
-										to={`/notifications/${notification.id}`}
-										sx={{
-											borderBottom: "solid 1px",
-											borderColor: "divider",
-											maxWidth: "20rem",
-											px: 2.5,
-											py: 1,
-										}}
-									>
-										<CustomNotificationIcon
-											sx={{
-												mr: 2,
-												minWidth: "0 !important",
-											}}
-											category={notification.category}
-										/>
-
-										<Typography variant="body2" noWrap>
-											{notification.title}
-										</Typography>
-									</MenuItem>
-								);
-							})}
-							<MenuItem component={Link} to="/notifications" sx={{ p: 0 }}>
-								<Typography
-									variant="caption"
-									sx={{
-										backgroundColor: "divider",
-										py: 0.2,
-										textAlign: "center",
-										width: "100%",
-									}}
-								>
-									view all
-								</Typography>
-							</MenuItem>
-						</Menu>
-					</>
-				)}
+			<Box sx={{ display: { xs: show ? "flex" : "none", md: "flex" }, alignItems: "center" }}>
+				<NotificationsDropdown />
 
 				<IconButton color="inherit" onClick={changeMode} sx={{ ml: 2 }}>
 					{mode === "dark" ? <LightModeOutlined /> : <DarkModeOutlined />}
 				</IconButton>
 
-				{user?.username ? (
-					!location?.pathname?.includes("/account") ||
-					(location?.pathname?.includes("/account") &&
-						!location.pathname.includes(user.slug)) ? (
-						<>
-							<Avatar
-								onClick={handleClick}
-								alt={user?.username}
-								src={`/${process.env.REACT_APP_BASENAME}${user?.coverImage}`}
-								sx={{
-									ml: 2,
-									cursor: "pointer",
-									transition: "border-color 0.2s",
-									border: "solid medium",
-									borderColor: "success.dark",
-									"&:hover": { borderColor: "success.light" },
-								}}
-							/>
+				<AccountDropdown handleLogoutOpen={handleLogoutOpen} />
 
-							<Menu
-								open={open}
-								anchorEl={anchorEl}
-								id="account-menu"
-								onClose={handleClose}
-								onClick={handleClose}
-								MenuListProps={{
-									sx: {
-										py: "0 !important",
-									},
-								}}
-								PaperProps={{
-									elevation: 10,
-									sx: {
-										borderRadius: "15px !important",
-										overflow: "hidden",
-										mt: 1.5,
-										"& .MuiAvatar-root": {
-											width: 32,
-											height: 32,
-											ml: -0.5,
-											mr: 1,
-										},
-									},
-								}}
-								transformOrigin={{ horizontal: "right", vertical: "top" }}
-								anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-							>
-								<MenuItem
-									component={Link}
-									to={`/account/${user.slug}`}
-									sx={{
-										borderBottom: "solid 1px",
-										borderColor: "divider",
-										px: 2.5,
-										py: 1,
-									}}
-								>
-									<ListItemIcon
-										sx={{
-											mr: 2,
-											minWidth: "0 !important",
-										}}
-									>
-										<PersonOutlined fontSize="small" />
-									</ListItemIcon>
-									<Typography variant="body2" noWrap>
-										My account
-									</Typography>
-								</MenuItem>
-
-								<MenuItem
-									component={Link}
-									to="/new-listing"
-									sx={{
-										borderBottom: "solid 1px",
-										borderColor: "divider",
-										px: 2.5,
-										py: 1,
-									}}
-								>
-									<ListItemIcon
-										sx={{
-											mr: 2,
-											minWidth: "0 !important",
-										}}
-									>
-										<Add fontSize="small" />
-									</ListItemIcon>
-									<Typography variant="body2" noWrap>
-										New listing
-									</Typography>
-								</MenuItem>
-
-								<MenuItem
-									component={Link}
-									to="/signup"
-									sx={{
-										borderBottom: "solid 1px",
-										borderColor: "divider",
-										px: 2.5,
-										py: 1,
-									}}
-								>
-									<ListItemIcon
-										sx={{
-											mr: 2,
-											minWidth: "0 !important",
-										}}
-									>
-										<PersonAddOutlined fontSize="small" />
-									</ListItemIcon>
-									<Typography variant="body2" noWrap>
-										Add another account
-									</Typography>
-								</MenuItem>
-
-								<MenuItem
-									component={Link}
-									to="/settings"
-									sx={{
-										borderBottom: "solid 1px",
-										borderColor: "divider",
-										px: 2.5,
-										py: 1,
-									}}
-								>
-									<ListItemIcon
-										sx={{
-											mr: 2,
-											minWidth: "0 !important",
-										}}
-									>
-										<SettingsOutlined fontSize="small" />
-									</ListItemIcon>
-									<Typography variant="body2" noWrap>
-										Settings
-									</Typography>
-								</MenuItem>
-
-								<MenuItem
-									onClick={handleLogoutOpen}
-									sx={{
-										borderBottom: "solid 1px",
-										borderColor: "divider",
-										px: 2.5,
-										py: 1,
-									}}
-								>
-									<ListItemIcon
-										sx={{
-											mr: 2,
-											minWidth: "0 !important",
-										}}
-									>
-										<LogoutOutlined fontSize="small" />
-									</ListItemIcon>
-									<Typography variant="body2" noWrap>
-										Logout
-									</Typography>
-								</MenuItem>
-							</Menu>
-						</>
-					) : (
-						""
-					)
-				) : (
-					""
-				)}
-
-				{user?.username ? (
-					""
-				) : (
+				{!user?.username && (
 					<Button
 						component={Link}
 						to="/login"

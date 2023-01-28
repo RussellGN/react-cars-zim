@@ -1,9 +1,16 @@
-import { Email, LocalOffer, LocalPhone, LocationOn } from "@mui/icons-material";
+import {
+	EmailOutlined,
+	LocalOfferOutlined,
+	LocalPhoneOutlined,
+	LocationOnOutlined,
+} from "@mui/icons-material";
 import { useTheme, Box, Container, Typography, Button, TextField } from "@mui/material";
 import AnimatedRoute from "../components/routes/AnimatedRoute";
 import CustomStepper from "../components/general/CustomStepper";
 import { useState } from "react";
 import BackButton from "../components/general/BackButton";
+import { useParams } from "react-router-dom";
+import listings from "../components/static-backend/listings";
 
 const Contents = ({ activeStep, setActiveStep, listing }) => {
 	if (activeStep === 0) {
@@ -25,7 +32,7 @@ const Contents = ({ activeStep, setActiveStep, listing }) => {
 						onClick={() => setActiveStep(1)}
 						variant="contained"
 						color="success"
-						endIcon={<LocalOffer />}
+						endIcon={<LocalOfferOutlined />}
 						sx={{ m: 1, borderRadius: "3rem", textTransform: "capitalize" }}
 					>
 						Bid
@@ -97,7 +104,7 @@ const Contents = ({ activeStep, setActiveStep, listing }) => {
 
 				<div>
 					<Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
-						<LocalPhone fontSize="medium" />
+						<LocalPhoneOutlined fontSize="medium" />
 						<Box
 							sx={{
 								ml: 1.5,
@@ -112,7 +119,7 @@ const Contents = ({ activeStep, setActiveStep, listing }) => {
 					</Box>
 
 					<Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
-						<Email fontSize="medium" />
+						<EmailOutlined fontSize="medium" />
 						<Box
 							sx={{
 								ml: 1.5,
@@ -127,7 +134,7 @@ const Contents = ({ activeStep, setActiveStep, listing }) => {
 					</Box>
 
 					<Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
-						<LocationOn fontSize="medium" />
+						<LocationOnOutlined fontSize="medium" />
 						<Box
 							sx={{
 								ml: 1.5,
@@ -152,29 +159,10 @@ const Enquire = () => {
 	const theme = useTheme();
 	const steps = ["Info", "Bid", "Contact"];
 
-	const listing = {
-		id: 1,
-		slug: "toyota-hillux-legend-45-1",
-		name: "Toyota Hillux legend 45",
-		details:
-			"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Numquam totam, ea alias voluptatibus quia aliquid soluta odit magnam unde consequuntur?",
-		mileage: 43000,
-		price: 67000,
-		views: 321,
-		location: "Harare",
-		date: new Date(),
-		owner: {
-			username: "KB Motors",
-			about: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, dolore!",
-			email: "gmharare@hotmail.com",
-			category: "d",
-			location: "Harare",
-			phoneNumber: "+263 775668441",
-		},
-		coverImage: "/static/hillux1.jpeg",
-		imageCount: 6,
-		images: ["/static/hillux1.jpeg", "/static/hillux2.jpg", "/static/hillux3.jpeg"],
-	};
+	const { slug } = useParams();
+
+	const listing = listings.find((listing) => listing.slug === slug);
+
 	function handleSubmit(e) {
 		e.preventDefault();
 		console.log("hello");

@@ -11,6 +11,7 @@ const Logo = () => {
 				color: "inherit",
 				textDecoration: "none",
 				fontFamily: "kalam, cursive, roboto, serif",
+				mb: -1,
 			}}
 		>
 			Cars

@@ -1,5 +1,6 @@
 import { Typography, Box, Button, Container } from "@mui/material";
 import { Link } from "react-router-dom";
+import ctaImage from "./images/cta-image.jpg";
 
 const CTA = () => {
 	return (
@@ -14,7 +15,7 @@ const CTA = () => {
 				py: 5,
 				color: "light.main",
 				background: `linear-gradient(to bottom right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0,0.7)),
-               url("/${process.env.REACT_APP_BASENAME}/static/cta.jpg") center center`,
+               url(${ctaImage}) center center`,
 				backgroundSize: "cover",
 			}}
 		>

@@ -1,4 +1,4 @@
-import { PersonAdd, ManageAccounts, InfoOutlined } from "@mui/icons-material";
+import { PersonAddOutlined, ManageAccountsOutlined, InfoOutlined } from "@mui/icons-material";
 import {
 	Link as MaterialLink,
 	Container,
@@ -16,7 +16,7 @@ import {
 import AnimatedRoute from "../components/routes/AnimatedRoute";
 import { Link, useNavigate } from "react-router-dom";
 import BackButton from "../components/general/BackButton";
-import { UserContext } from "../App";
+import { UserContext } from "../components/static-backend/UserContext";
 import { useContext } from "react";
 import { useState } from "react";
 
@@ -109,9 +109,9 @@ const AccountDetails = () => {
 						</Box>
 
 						{user?.username ? (
-							<ManageAccounts sx={{ fontSize: "3rem", mb: 2 }} />
+							<ManageAccountsOutlined sx={{ fontSize: "3rem", mb: 2 }} />
 						) : (
-							<PersonAdd sx={{ fontSize: "3rem", mb: 2 }} />
+							<PersonAddOutlined sx={{ fontSize: "3rem", mb: 2 }} />
 						)}
 
 						<Typography variant="h5" sx={{ mb: 4 }}>

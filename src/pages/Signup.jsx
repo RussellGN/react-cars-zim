@@ -1,4 +1,4 @@
-import { Google, PersonAdd, Apple } from "@mui/icons-material";
+import { Google, PersonAddOutlined, Apple } from "@mui/icons-material";
 import {
 	Link as MaterialLink,
 	Container,
@@ -64,7 +64,7 @@ const Signup = () => {
 							<BackButton onlyRoute="/" />
 						</Box>
 
-						<PersonAdd sx={{ fontSize: "3rem", mb: 2 }} />
+						<PersonAddOutlined sx={{ fontSize: "3rem", mb: 2 }} />
 						<Typography variant="h5" sx={{ mb: 4 }}>
 							Signup
 						</Typography>

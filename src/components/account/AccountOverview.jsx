@@ -1,13 +1,13 @@
 import { Box, Grid, IconButton, Typography, useMediaQuery, useTheme } from "@mui/material";
 import {
 	GroupOutlined,
-	PersonOutline,
+	PersonOutlined,
 	LocalPhoneOutlined,
 	LocationOnOutlined,
 	CameraAltOutlined,
 	EmailOutlined,
 } from "@mui/icons-material";
-import { UserContext } from "../../App";
+import { UserContext } from "../static-backend/UserContext";
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import ShareButton from "../general/ShareButton";
@@ -44,7 +44,8 @@ const AccountOverview = ({ account }) => {
 				}}
 			>
 				<img
-					src={`/${process.env.REACT_APP_BASENAME}${account.coverImage}`}
+					src={account.displayPhoto}
+					alt={account.username}
 					style={{
 						width: "100%",
 						height: "100%",
@@ -113,7 +114,7 @@ const AccountOverview = ({ account }) => {
 						</>
 					) : (
 						<>
-							<PersonOutline fontSize="small" sx={{ mr: 1 }} />
+							<PersonOutlined fontSize="small" sx={{ mr: 1 }} />
 							Individual
 						</>
 					)}

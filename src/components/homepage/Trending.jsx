@@ -1,50 +1,16 @@
 import { Box, Container, Typography, Button, useTheme, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
-import { AttachMoney, Speed, LocationOn, Whatshot, ArrowForward } from "@mui/icons-material";
+import {
+	AttachMoneyOutlined,
+	SpeedOutlined,
+	LocationOnOutlined,
+	WhatshotOutlined,
+	ArrowForwardOutlined,
+} from "@mui/icons-material";
+import trendingOffers from "../static-backend/listings";
 
 const Trending = () => {
 	const theme = useTheme();
-
-	const trendingOffers = [
-		{
-			id: 1,
-			slug: "toyota-hillux-gd6",
-			name: "Toyota Hillux GD6",
-			mileage: 43000,
-			price: 67000,
-			views: 321,
-			location: "Harare",
-			date: new Date(),
-			owner: { username: "generalMotorsHarare" },
-			coverImage: "/static/hillux1.jpeg",
-			imageCount: 6,
-		},
-		{
-			id: 2,
-			slug: "porsche-carrera-4s-2",
-			name: "Porsche Carrera 4S",
-			mileage: 300,
-			price: 300000,
-			views: 310,
-			location: "Victoria Falls",
-			date: new Date(),
-			owner: { username: "KB Motors" },
-			coverImage: "/static/porsche.JPG",
-			imageCount: 7,
-		},
-		{
-			id: 3,
-			name: "Toyota Corrola Quest",
-			mileage: 5000,
-			price: 20000,
-			views: 1007,
-			location: "Bulawayo",
-			date: new Date(),
-			owner: { username: "ZIMOCO Ltd" },
-			coverImage: "/static/corrola1.jpg",
-			imageCount: 11,
-		},
-	];
 
 	return (
 		<Container maxWidth="md" sx={{ my: 8 }}>
@@ -57,7 +23,7 @@ const Trending = () => {
 				}}
 			>
 				<Typography variant="h4" sx={{ display: "flex", alignItems: "center" }}>
-					<Whatshot color="primary" fontSize="inherit" sx={{ mr: 1 }} />
+					<WhatshotOutlined color="primary" fontSize="inherit" sx={{ mr: 1 }} />
 					Trending
 					<Box component="span" sx={{ display: { xs: "none", sm: "inline" }, ml: 0.7 }}>
 						offers
@@ -66,7 +32,7 @@ const Trending = () => {
 
 				<Button
 					size="small"
-					endIcon={<ArrowForward />}
+					endIcon={<ArrowForwardOutlined />}
 					variant="outlined"
 					component={Link}
 					to="/offers"
@@ -80,7 +46,8 @@ const Trending = () => {
 				</Button>
 			</Box>
 			<Grid container spacing={5} justifyContent="center">
-				{trendingOffers?.map((offer) => {
+				{trendingOffers?.map((offer, index) => {
+					if (index >= 3) return "";
 					return (
 						<Grid key={offer.id} item xs={12} sm={6} md={4}>
 							<Box
@@ -95,7 +62,7 @@ const Trending = () => {
 								}}
 							>
 								<img
-									src={`/${process.env.REACT_APP_BASENAME}${offer.coverImage}`}
+									src={offer.images[0]}
 									style={{
 										width: "100%",
 										height: "100%",
@@ -127,7 +94,7 @@ const Trending = () => {
 											color="inherit"
 											sx={{ display: "flex", alignItems: "center", mb: 2 }}
 										>
-											<AttachMoney fontSize="small" sx={{ mr: 1 }} />
+											<AttachMoneyOutlined fontSize="small" sx={{ mr: 1 }} />
 											USD {offer.price}
 										</Typography>
 
@@ -136,7 +103,7 @@ const Trending = () => {
 											color="inherit"
 											sx={{ display: "flex", alignItems: "center", mb: 2 }}
 										>
-											<Speed fontSize="small" sx={{ mr: 1 }} />
+											<SpeedOutlined fontSize="small" sx={{ mr: 1 }} />
 											{offer.mileage} km
 										</Typography>
 
@@ -145,7 +112,7 @@ const Trending = () => {
 											color="inherit"
 											sx={{ display: "flex", alignItems: "center", mb: 2 }}
 										>
-											<LocationOn fontSize="small" sx={{ mr: 1 }} />
+											<LocationOnOutlined fontSize="small" sx={{ mr: 1 }} />
 											{offer.location}
 										</Typography>
 

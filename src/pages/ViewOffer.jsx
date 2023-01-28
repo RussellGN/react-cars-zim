@@ -15,53 +15,33 @@ import {
 	useMediaQuery,
 } from "@mui/material";
 import {
-	LocationOn,
-	KeyboardArrowDown,
-	AccessTime,
-	AttachMoney,
-	Speed,
-	KeyboardDoubleArrowRight,
-	Filter,
-	KeyboardDoubleArrowLeft,
-	List,
+	LocationOnOutlined,
+	KeyboardArrowDownOutlined,
+	AccessTimeOutlined,
+	AttachMoneyOutlined,
+	SpeedOutlined,
+	KeyboardDoubleArrowRightOutlined,
+	FilterOutlined,
+	KeyboardDoubleArrowLeftOutlined,
+	ListOutlined,
 	DeleteOutlined,
 	EditOutlined,
-	ReplyAllOutlined,
 } from "@mui/icons-material";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useContext, useState } from "react";
-import { UserContext } from "../App";
+import { UserContext } from "../components/static-backend/UserContext";
 import { humanizeDate } from "../components/utils/humanizeDate";
 import ShareButton from "../components/general/ShareButton";
 import BackButton from "../components/general/BackButton";
+import listings from "../components/static-backend/listings";
 
 const ViewOffer = () => {
 	const { user } = useContext(UserContext);
 	const [imageOnview, setImageOnview] = useState(0);
 	const theme = useTheme();
-	const navigate = useNavigate();
-	const location = useLocation();
+	const { slug } = useParams();
 
-	const listing = {
-		id: 1,
-		slug: "toyota-hillux-gd6",
-		name: "Toyota Hillux GD6",
-		details:
-			"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Numquam totam, ea alias voluptatibus quia aliquid soluta odit magnam unde consequuntur?",
-		mileage: 43000,
-		price: 67000,
-		views: 321,
-		location: "Harare",
-		date: "2022-12-29T12:02:00",
-		owner: {
-			username: "generalMotorsHarare",
-			slug: "generalmotorsharare",
-			about: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, dolore!",
-		},
-		coverImage: "/static/hillux1.jpeg",
-		imageCount: 6,
-		images: ["/static/hillux1.jpeg", "/static/hillux2.jpg", "/static/hillux3.jpeg"],
-	};
+	const listing = listings.find((listing) => listing.slug === slug);
 
 	let isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.values.sm}px)`);
 
@@ -122,11 +102,11 @@ const ViewOffer = () => {
 								borderRadius: "0 0 10px 0",
 							}}
 						>
-							<Filter fontSize="small" sx={{ mr: 0.5 }} />
+							<FilterOutlined fontSize="small" sx={{ mr: 0.5 }} />
 							{`${imageOnview + 1}/${listing.images.length}`}
 						</Typography>
 						<img
-							src={`/${process.env.REACT_APP_BASENAME}${listing.images[imageOnview]}`}
+							src={listing.images[imageOnview]}
 							alt={listing.name}
 							style={{
 								width: "100%",
@@ -157,7 +137,7 @@ const ViewOffer = () => {
 								}}
 								onClick={() => handleCarousel("prev")}
 							>
-								<KeyboardDoubleArrowLeft />
+								<KeyboardDoubleArrowLeftOutlined />
 							</IconButton>
 
 							<IconButton
@@ -170,7 +150,7 @@ const ViewOffer = () => {
 								}}
 								onClick={() => handleCarousel("next")}
 							>
-								<KeyboardDoubleArrowRight />
+								<KeyboardDoubleArrowRightOutlined />
 							</IconButton>
 						</Box>
 					</Box>
@@ -200,7 +180,7 @@ const ViewOffer = () => {
 									<Typography fontSize="inherit" noWrap>
 										{humanizeDate(listing.date)}
 									</Typography>
-									<AccessTime fontSize="small" sx={{ ml: 1 }} />
+									<AccessTimeOutlined fontSize="small" sx={{ ml: 1 }} />
 								</small>
 							</Grid>
 						</Grid>
@@ -210,7 +190,7 @@ const ViewOffer = () => {
 								variant="body2"
 								sx={{ display: "flex", alignItems: "center", mb: 2 }}
 							>
-								<AttachMoney fontSize="small" sx={{ mr: 1 }} />
+								<AttachMoneyOutlined fontSize="small" sx={{ mr: 1 }} />
 								USD {listing.price}
 							</Typography>
 
@@ -218,7 +198,7 @@ const ViewOffer = () => {
 								variant="body2"
 								sx={{ display: "flex", alignItems: "center", mb: 2 }}
 							>
-								<Speed fontSize="small" sx={{ mr: 1 }} />
+								<SpeedOutlined fontSize="small" sx={{ mr: 1 }} />
 								{listing.mileage} km
 							</Typography>
 
@@ -226,7 +206,7 @@ const ViewOffer = () => {
 								variant="body2"
 								sx={{ display: "flex", alignItems: "center", mb: 2 }}
 							>
-								<LocationOn fontSize="small" sx={{ mr: 1 }} />
+								<LocationOnOutlined fontSize="small" sx={{ mr: 1 }} />
 								{listing.location}
 							</Typography>
 
@@ -238,7 +218,7 @@ const ViewOffer = () => {
 						<div>
 							<Accordion elevation={0} sx={{ p: 0 }}>
 								<AccordionSummary
-									expandIcon={<KeyboardArrowDown />}
+									expandIcon={<KeyboardArrowDownOutlined />}
 									aria-controls="panel1a-content"
 									id="panel1a-header"
 									sx={{ p: 0 }}
@@ -257,7 +237,7 @@ const ViewOffer = () => {
 
 							<Accordion elevation={0} sx={{ p: 0 }}>
 								<AccordionSummary
-									expandIcon={<KeyboardArrowDown />}
+									expandIcon={<KeyboardArrowDownOutlined />}
 									aria-controls="panel2a-content"
 									id="panel2a-header"
 									sx={{ p: 0 }}
@@ -301,7 +281,7 @@ const ViewOffer = () => {
 											borderRadius: "20px",
 											textTransform: "capitalize",
 										}}
-										endIcon={<KeyboardDoubleArrowRight />}
+										endIcon={<KeyboardDoubleArrowRightOutlined />}
 									>
 										Enquire
 									</Button>
@@ -309,7 +289,7 @@ const ViewOffer = () => {
 									<Button
 										variant="outlined"
 										color="success"
-										endIcon={<List />}
+										endIcon={<ListOutlined />}
 										sx={{
 											borderRadius: "20px",
 											textTransform: "capitalize",

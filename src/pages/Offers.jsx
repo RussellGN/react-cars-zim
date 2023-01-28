@@ -4,58 +4,9 @@ import { Grid, Container, Box } from "@mui/material";
 import Controls from "../components/offers/Controls";
 import Footer from "../components/general/Footer";
 import OffersContent from "../components/offers/OffersContent";
+import listings from "../components/static-backend/listings";
 
 const Offers = () => {
-	const listings = [
-		{
-			id: 1,
-			slug: "toyota-hillux-legend-45-1",
-			name: "Toyota Hillux legend 45",
-			mileage: 43000,
-			price: 67000,
-			views: 321,
-			location: "Harare",
-			date: "2023-01-17T22:30:02",
-			owner: {
-				username: "generalMotorsHarare",
-				slug: "generalmotorsharare",
-			},
-			coverImage: "/static/hillux1.jpeg",
-			imageCount: 6,
-		},
-		{
-			id: 2,
-			slug: "porsche-carrera-4s-2",
-			name: "Porsche Carrera 4S",
-			mileage: 300,
-			price: 300000,
-			views: 310,
-			location: "Victoria Falls",
-			date: "2023-01-07T12:23:02",
-			owner: {
-				username: "KB Motors",
-				slug: "kb-motors",
-			},
-			coverImage: "/static/porsche.JPG",
-			imageCount: 7,
-		},
-		{
-			id: 3,
-			name: "Toyota Corrola Quest",
-			mileage: 5000,
-			price: 20000,
-			views: 1007,
-			location: "Bulawayo",
-			date: "2022-09-14T04:10:22",
-			owner: {
-				username: "ZIMOCO Ltd",
-				slug: "zimoco-ltd",
-			},
-			coverImage: "/static/corrola1.jpg",
-			imageCount: 11,
-		},
-	];
-
 	return (
 		<AnimatedRoute>
 			<Container>

@@ -1,13 +1,13 @@
 import {
-	DirectionsCar,
-	AirportShuttle,
-	ArrowForward,
-	LocalShipping,
-	TwoWheeler,
+	DirectionsCarOutlined,
+	AirportShuttleOutlined,
+	ArrowForwardOutlined,
+	LocalShippingOutlined,
+	TwoWheelerOutlined,
 } from "@mui/icons-material";
-import { Button, Box, Container, Grid, Typography, useTheme, Stack } from "@mui/material";
-import { useState } from "react";
+import { Button, Box, Container, Grid, Typography, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
+import aboutImage1 from "./images/about-image-1.svg";
 
 const MiniAbout = () => {
 	return (
@@ -29,7 +29,7 @@ const MiniAbout = () => {
 					}}
 				>
 					<img
-						src={`/${process.env.REACT_APP_BASENAME}/static/billboard.svg`}
+						src={aboutImage1}
 						alt="cars.zim"
 						style={{
 							maxWidth: "300px",
@@ -77,7 +77,7 @@ const MiniAbout = () => {
 
 					<Button
 						component={Link}
-						endIcon={<ArrowForward />}
+						endIcon={<ArrowForwardOutlined />}
 						to="/signup"
 						variant="outlined"
 						color="success"
@@ -89,7 +89,7 @@ const MiniAbout = () => {
 
 				<Grid item xs={12} md={4} sx={{ display: { xs: "none", md: "block" } }}>
 					<img
-						src={`/${process.env.REACT_APP_BASENAME}/static/billboard.svg`}
+						src={aboutImage1}
 						alt="cars.zim"
 						style={{
 							maxWidth: "300px",
@@ -110,13 +110,13 @@ const MiniAbout = () => {
 				}}
 			>
 				<Stack direction="row" justifyContent="center" gap={4} sx={{ mb: 3 }}>
-					<DirectionsCar />
+					<DirectionsCarOutlined />
 
-					<TwoWheeler />
+					<TwoWheelerOutlined />
 
-					<AirportShuttle />
+					<AirportShuttleOutlined />
 
-					<LocalShipping />
+					<LocalShippingOutlined />
 				</Stack>
 
 				<Typography

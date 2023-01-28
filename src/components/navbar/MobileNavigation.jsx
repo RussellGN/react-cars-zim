@@ -11,14 +11,14 @@ import {
 	IconButton,
 } from "@mui/material";
 import {
-	Add,
+	AddOutlined,
 	LightModeOutlined,
 	DarkModeOutlined,
-	Close,
-	Menu as MenuIcon,
-	Search,
+	CloseOutlined,
+	MenuOutlined,
+	SearchOutlined,
 	NotificationsOutlined,
-	ExpandMore as ExpandMoreIcon,
+	ExpandMoreOutlined,
 } from "@mui/icons-material";
 import Logo from "./Logo";
 import { useState, useContext } from "react";
@@ -26,7 +26,7 @@ import SearchForm from "./SearchForm";
 import { Link, NavLink } from "react-router-dom";
 
 import * as React from "react";
-import { UserContext } from "../../App";
+import { UserContext } from "../static-backend/UserContext";
 
 const MobileLink = styled(NavLink)(({ theme }) => ({
 	color: "inherit",
@@ -63,7 +63,7 @@ const MobileNavigation = ({ mode, setMode }) => {
 			}}
 		>
 			<IconButton color="inherit" onClick={() => setOpenDrawer(true)}>
-				<Search />
+				<SearchOutlined />
 			</IconButton>
 
 			<Drawer anchor="left" open={openDrawer} onClose={() => setOpenDrawer(false)}>
@@ -82,7 +82,7 @@ const MobileNavigation = ({ mode, setMode }) => {
 						onClick={() => setOpenDrawer(false)}
 						sx={{ position: "absolute", top: "1rem", right: "1rem" }}
 					>
-						<Close />
+						<CloseOutlined />
 					</IconButton>
 
 					<SearchForm show={true} setOpenDrawer={setOpenDrawer} />
@@ -92,7 +92,7 @@ const MobileNavigation = ({ mode, setMode }) => {
 			<Logo />
 
 			<IconButton color="inherit" onClick={() => setOpenBackdrop(true)}>
-				<MenuIcon />
+				<MenuOutlined />
 			</IconButton>
 
 			<Backdrop
@@ -165,7 +165,7 @@ const MobileNavigation = ({ mode, setMode }) => {
 									borderRadius: "30px",
 									textTransform: "capitalize",
 								}}
-								endIcon={<Add />}
+								endIcon={<AddOutlined />}
 							>
 								New
 								<Box
@@ -184,7 +184,7 @@ const MobileNavigation = ({ mode, setMode }) => {
 							}}
 							color="light"
 						>
-							<Close />
+							<CloseOutlined />
 						</IconButton>
 					</Box>
 
@@ -206,7 +206,7 @@ const MobileNavigation = ({ mode, setMode }) => {
 									setExpanded(false);
 								}}
 								alt={user?.username}
-								src={`/${process.env.REACT_APP_BASENAME}${user.coverImage}`}
+								src={user.displayPhoto}
 								sx={{
 									width: "5rem",
 									height: "5rem",
@@ -276,7 +276,7 @@ const MobileNavigation = ({ mode, setMode }) => {
 						}}
 					>
 						{expanded === true ? "less" : "more"}{" "}
-						<ExpandMoreIcon
+						<ExpandMoreOutlined
 							sx={{
 								ml: 0.3,
 								transform: expanded === true ? "rotate(180deg)" : "",

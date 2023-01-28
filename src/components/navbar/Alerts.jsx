@@ -1,4 +1,4 @@
-import { Close } from "@mui/icons-material";
+import { CloseOutlined } from "@mui/icons-material";
 import { useTheme, Box, Typography, Container, IconButton } from "@mui/material";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
@@ -41,7 +41,7 @@ const Alerts = () => {
 						fontSize="small"
 						sx={{ color: "inherit", ml: 0.5 }}
 					>
-						<Close />
+						<CloseOutlined />
 					</IconButton>
 				</Typography>
 			</Container>

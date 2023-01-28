@@ -11,22 +11,18 @@ import {
 	useMediaQuery,
 	Button,
 	Dialog,
-	ListItemText,
-	ListItem,
-	List,
-	Divider,
 	AppBar,
 	Toolbar,
 	Typography,
 	Slide,
 } from "@mui/material";
 import {
-	Close,
-	DirectionsCar,
-	LocalShipping,
-	AirportShuttle,
-	TwoWheeler,
-	Tune,
+	CloseOutlined,
+	DirectionsCarOutlined,
+	LocalShippingOutlined,
+	AirportShuttleOutlined,
+	TwoWheelerOutlined,
+	TuneOutlined,
 } from "@mui/icons-material";
 import { useState } from "react";
 
@@ -73,7 +69,7 @@ const Controls = () => {
 							onClick={handleClose}
 							aria-label="close"
 						>
-							<Close />
+							<CloseOutlined />
 						</IconButton>
 						<Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
 							Filters
@@ -101,7 +97,7 @@ const Controls = () => {
 					onClick={handleClickOpen}
 					sx={{ borderRadius: 0, display: { md: "none" } }}
 				>
-					<Tune />
+					<TuneOutlined />
 				</IconButton>
 				<TextField
 					variant="outlined"
@@ -139,7 +135,7 @@ const Controls = () => {
 						borderColor: category === "cars" ? "divider" : "",
 					}}
 				>
-					<DirectionsCar />
+					<DirectionsCarOutlined />
 				</IconButton>
 				<IconButton
 					onClick={() => setCategory("bikes")}
@@ -148,7 +144,7 @@ const Controls = () => {
 						borderColor: category === "bikes" ? "divider" : "",
 					}}
 				>
-					<TwoWheeler />
+					<TwoWheelerOutlined />
 				</IconButton>
 				<IconButton
 					onClick={() => setCategory("shuttles")}
@@ -157,7 +153,7 @@ const Controls = () => {
 						borderColor: category === "shuttles" ? "divider" : "",
 					}}
 				>
-					<AirportShuttle />
+					<AirportShuttleOutlined />
 				</IconButton>
 				<IconButton
 					onClick={() => setCategory("freighters")}
@@ -166,7 +162,7 @@ const Controls = () => {
 						borderColor: category === "freighters" ? "divider" : "",
 					}}
 				>
-					<LocalShipping />
+					<LocalShippingOutlined />
 				</IconButton>
 			</Stack>
 		</>

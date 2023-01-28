@@ -1,7 +1,7 @@
 import { Backdrop, Box, Modal, Fade, Button, Typography } from "@mui/material";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../../App";
+import { UserContext } from "../static-backend/UserContext";
 
 const LogoutModal = ({ openLogout, handleLogoutClose, handleLogoutOpen }) => {
 	const { setUser } = useContext(UserContext);

@@ -1,5 +1,5 @@
 import { Box, styled } from "@mui/material";
-import { Search } from "@mui/icons-material";
+import { SearchOutlined } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
 
@@ -41,7 +41,7 @@ const SearchForm = ({ show, setOpenDrawer }) => {
 				alignItems: "center",
 			}}
 		>
-			<Search color="inherit" />
+			<SearchOutlined color="inherit" />
 
 			<SearchInput
 				ref={inputRef}

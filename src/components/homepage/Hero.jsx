@@ -1,6 +1,7 @@
-import { Sell } from "@mui/icons-material";
+import { SellOutlined } from "@mui/icons-material";
 import { Box, Button, Container, Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
+import heroImage from "./images/hero-image.png";
 
 const Hero = () => {
 	const theme = useTheme();
@@ -48,7 +49,7 @@ const Hero = () => {
 							to="/new-listing"
 							variant="contained"
 							color="success"
-							endIcon={<Sell />}
+							endIcon={<SellOutlined />}
 							sx={{ m: 1, borderRadius: "3rem", textTransform: "capitalize" }}
 						>
 							Sell
@@ -71,11 +72,7 @@ const Hero = () => {
 				</Grid>
 
 				<Grid item xs={12} md={6}>
-					<img
-						src={`/${process.env.REACT_APP_BASENAME}/static/image2.png`}
-						alt="cars"
-						style={{ width: "100%" }}
-					/>
+					<img src={heroImage} alt="cars" style={{ width: "100%" }} />
 				</Grid>
 			</Grid>
 		</Container>

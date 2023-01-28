@@ -1,4 +1,4 @@
-import { Add, DeleteOutlined } from "@mui/icons-material";
+import { AddOutlined, DeleteOutlined } from "@mui/icons-material";
 import {
 	useTheme,
 	Box,
@@ -19,8 +19,7 @@ import { useRef, useState } from "react";
 import BackButton from "../components/general/BackButton";
 import AnimatedRoute from "../components/routes/AnimatedRoute";
 
-const ImageInput = (props) => {
-	const theme = useTheme();
+const ImageInput = () => {
 	const [source, setSource] = useState("");
 	const inputRef = useRef();
 	const imageRef = useRef();
@@ -57,11 +56,12 @@ const ImageInput = (props) => {
 						borderRadius: "10px",
 					}}
 				>
-					{source === "" ? <Add /> : <DeleteOutlined />}
+					{source === "" ? <AddOutlined /> : <DeleteOutlined />}
 				</IconButton>
 				<img
 					ref={imageRef}
 					src={source ? source : ""}
+					alt="preview"
 					style={{
 						display: source === "" ? "none" : "block",
 						borderRadius: "10px",
@@ -307,6 +307,8 @@ const Contents = ({ activeStep, setActiveStep }) => {
 					</Box>
 				</Box>
 			);
+		default:
+			return activeStep;
 	}
 };
 

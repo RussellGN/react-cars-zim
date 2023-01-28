@@ -21,13 +21,11 @@
 11. work on the homepage features page (research them)
 12. get proper placeholder data and images for listings
 13. get proper images for homepage
-14. try adding advertising sections, and maybe even get real adverts on there.
+14. try adding advertising sections, and maybe even get real adverts on there..
+15. get picture editing software thats perfomant and free to use. Use it to edit homepage images
 
 # todo
 
-43. take placeholder images out of public folder
-44. design an actual logo
-45. get picture editing software thats perfomant and free to use. Use it to edit homepage images
 46. make all icons rounded
 47. work on footer links (build the actual pages or remove them)
 48. work on the theme object, clean it up, and clean css on all components

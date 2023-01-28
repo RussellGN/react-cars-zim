@@ -21,7 +21,7 @@ import {
 import { Link, useLocation } from "react-router-dom";
 import { humanizeDate } from "../utils/humanizeDate";
 import { useContext } from "react";
-import { UserContext } from "../../App";
+import { UserContext } from "../static-backend/UserContext";
 import ShareButton from "../general/ShareButton";
 
 const Offer = ({ listing }) => {
@@ -55,10 +55,10 @@ const Offer = ({ listing }) => {
 					}}
 				>
 					<FilterOutlined fontSize="small" sx={{ mr: 0.5 }} />
-					{listing.imageCount}
+					{listing.images.length}
 				</Typography>
 				<img
-					src={`/${process.env.REACT_APP_BASENAME}${listing.coverImage}`}
+					src={listing?.images[0]}
 					alt={listing.name}
 					style={{ width: "100%", height: "100%", objectFit: "cover" }}
 				/>

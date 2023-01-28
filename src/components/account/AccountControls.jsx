@@ -1,17 +1,20 @@
-import { PersonAdd, Add, Edit, Logout, Settings } from "@mui/icons-material";
+import {
+	PersonAddOutlined,
+	AddOutlined,
+	EditOutlined,
+	LogoutOutlined,
+	SettingsOutlined,
+} from "@mui/icons-material";
 import { Box, IconButton, useTheme, Button } from "@mui/material";
 import { Link } from "react-router-dom";
-import { UserContext } from "../../App";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import LogoutModal from "../general/LogoutModal";
 
-const AccountControls = ({ account }) => {
+const AccountControls = () => {
 	const [openLogout, setOpenLogout] = useState(false);
+	const theme = useTheme();
 	const handleLogoutOpen = () => setOpenLogout(true);
 	const handleLogoutClose = () => setOpenLogout(false);
-
-	const theme = useTheme();
-	const { setUser } = useContext(UserContext);
 
 	return (
 		<>
@@ -36,16 +39,16 @@ const AccountControls = ({ account }) => {
 				}}
 			>
 				<IconButton component={Link} to="/edit-account-details">
-					<Edit />
+					<EditOutlined />
 				</IconButton>
 				<IconButton component={Link} to="/signup">
-					<PersonAdd />
+					<PersonAddOutlined />
 				</IconButton>
 				<IconButton component={Link} to="/settings">
-					<Settings />
+					<SettingsOutlined />
 				</IconButton>
 				<IconButton onClick={handleLogoutOpen}>
-					<Logout />
+					<LogoutOutlined />
 				</IconButton>
 
 				<Button
@@ -54,7 +57,7 @@ const AccountControls = ({ account }) => {
 					component={Link}
 					to="/new-listing"
 					sx={{ ml: "auto", mr: 1, borderRadius: "30px", textTransform: "capitalize" }}
-					endIcon={<Add />}
+					endIcon={<AddOutlined />}
 				>
 					New
 					<Box component="span" sx={{ display: { xs: "none", sm: "inline" }, ml: 0.7 }}>

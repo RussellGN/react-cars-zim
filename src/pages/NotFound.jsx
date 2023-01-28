@@ -1,4 +1,4 @@
-import { Home } from "@mui/icons-material";
+import { HomeOutlined } from "@mui/icons-material";
 import { Button, Container, Typography } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
 
@@ -9,7 +9,7 @@ const NotFound = () => {
 			<Typography textAlign="center" sx={{ my: 3 }}>
 				This page {`(${location?.pathname?.substring(1)})`} was not found. <br />
 				<Button
-					startIcon={<Home />}
+					startIcon={<HomeOutlined />}
 					component={Link}
 					to="/"
 					variant="contained"
