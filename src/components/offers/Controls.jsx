@@ -74,14 +74,7 @@ const Controls = () => {
 						<Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
 							Filters
 						</Typography>
-						<Button
-							variant="contained"
-							size="small"
-							autoFocus
-							color="success"
-							sx={{ borderRadius: theme.radii.border3, textTransform: "capitalize" }}
-							onClick={handleClose}
-						>
+						<Button size="small" autoFocus color="success" onClick={handleClose}>
 							Apply
 						</Button>
 					</Toolbar>
@@ -102,11 +95,27 @@ const Controls = () => {
 				<TextField
 					variant="outlined"
 					label="Search... "
+					name="q"
+					type="search"
 					size={isMobile === true ? "small" : "medium"}
-					sx={{ flexGrow: 1, borderRadius: theme.radii.border1 }}
+					sx={{
+						flexGrow: 1,
+						"& .MuiInputBase-root": {
+							borderRadius: "30px 0 0 30px",
+						},
+					}}
 				/>
 
-				<FormControl sx={{ minWidth: 80 }} size={isMobile === true ? "small" : "medium"}>
+				<FormControl
+					sx={{
+						minWidth: 80,
+						"& .MuiInputBase-root": {
+							borderRadius: "0 30px 30px 0",
+							borderColor: "red !important",
+						},
+					}}
+					size={isMobile === true ? "small" : "medium"}
+				>
 					<InputLabel id="demo-simple-select-autowidth-label">Sort</InputLabel>
 					<Select
 						labelId="demo-simple-select-autowidth-label"
@@ -115,7 +124,9 @@ const Controls = () => {
 						onChange={handleSelect}
 						label="Sort"
 						autoWidth
-						sx={{ width: "fitContent" }}
+						sx={{
+							width: "fitContent",
+						}}
 					>
 						<MenuItem value="Latest">Latest</MenuItem>
 						<MenuItem value="Oldest">Oldest</MenuItem>

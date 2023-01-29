@@ -131,15 +131,7 @@ const Sidebar = () => {
 				}}
 			>
 				<span>Filters</span>
-				<Button
-					variant="contained"
-					size="small"
-					color="success"
-					sx={{
-						borderRadius: theme.radii.border3,
-						textTransform: "capitalize",
-					}}
-				>
+				<Button size="small" color="success">
 					Apply
 				</Button>
 			</Typography>

@@ -107,7 +107,7 @@ const ViewOffer = () => {
 
 				<Box
 					sx={{
-						borderRadius: theme.radii.border1,
+						borderRadius: "10px",
 						overflow: "hidden",
 						border: `solid 1px ${theme.palette.divider}`,
 						display: { md: "flex" },
@@ -118,9 +118,10 @@ const ViewOffer = () => {
 						sx={{
 							display: "flex",
 							alignItems: "center",
-							backgroundColor: "divider",
+							backgroundColor: "background.paper",
 							width: { xs: "100%", md: "50%" },
 							position: "relative",
+							p: 1,
 						}}
 					>
 						<Typography
@@ -149,6 +150,7 @@ const ViewOffer = () => {
 								height: isMobile ? "13rem" : "60vh",
 								maxHeight: "25rem",
 								objectFit: "cover",
+								borderRadius: isMobile ? "10px" : "20px",
 							}}
 						/>
 						{listing?.images?.length > 1 && (
@@ -157,6 +159,7 @@ const ViewOffer = () => {
 									position: "absolute",
 									top: 0,
 									left: 0,
+									px: 2,
 									width: "100%",
 									height: "100%",
 									display: "flex",
@@ -169,7 +172,8 @@ const ViewOffer = () => {
 									sx={{
 										backgroundColor: "dark.main",
 										color: "white",
-										m: 1,
+										border: "solid",
+										borderColor: "divider",
 										"&:hover": { backgroundColor: "dark.main" },
 									}}
 									onClick={() => handleCarousel("prev")}
@@ -182,7 +186,8 @@ const ViewOffer = () => {
 									sx={{
 										backgroundColor: "dark.main",
 										color: "white",
-										m: 1,
+										border: "solid",
+										borderColor: "divider",
 										"&:hover": { backgroundColor: "dark.main" },
 									}}
 									onClick={() => handleCarousel("next")}
@@ -265,7 +270,16 @@ const ViewOffer = () => {
 								</AccordionSummary>
 
 								<AccordionDetails sx={{ p: 0 }}>
-									<Typography>
+									<Typography
+										sx={{
+											backgroundColor:
+												theme.palette.mode === "light"
+													? "white"
+													: "divider",
+											borderRadius: "8px",
+											p: 1,
+										}}
+									>
 										Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 										Suspendisse malesuada lacus ex, sit amet blandit leo
 										lobortis eget.
@@ -284,7 +298,18 @@ const ViewOffer = () => {
 								</AccordionSummary>
 
 								<AccordionDetails sx={{ p: 0 }}>
-									<Typography>{listing.owner.about} </Typography>
+									<Typography
+										sx={{
+											backgroundColor:
+												theme.palette.mode === "light"
+													? "white"
+													: "divider",
+											borderRadius: "8px",
+											p: 1,
+										}}
+									>
+										{listing.owner.about}{" "}
+									</Typography>
 								</AccordionDetails>
 							</Accordion>
 						</div>
@@ -314,11 +339,6 @@ const ViewOffer = () => {
 										component={Link}
 										to={`/enquire-offer/${listing.slug}`}
 										color="success"
-										variant="contained"
-										sx={{
-											borderRadius: "20px",
-											textTransform: "capitalize",
-										}}
 										endIcon={<KeyboardDoubleArrowRightOutlined />}
 									>
 										Enquire

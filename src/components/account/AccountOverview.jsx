@@ -40,7 +40,7 @@ const AccountOverview = ({ account }) => {
 					height: isMobile === true ? "7rem" : "10rem",
 					background: "divider",
 					border: `solid thin ${theme.palette.divider}`,
-					borderRadius: theme.radii.border1,
+					borderRadius: "10px",
 				}}
 			>
 				<img
@@ -50,7 +50,7 @@ const AccountOverview = ({ account }) => {
 						width: "100%",
 						height: "100%",
 						objectFit: "cover",
-						borderRadius: theme.radii.border1,
+						borderRadius: "10px",
 					}}
 				/>
 				{slug === user?.slug ? (
@@ -127,7 +127,7 @@ const AccountOverview = ({ account }) => {
 
 				<Typography
 					variant="body2"
-					sx={{ p: 2, backgroundColor: "divider", borderRadius: theme.radii.border1 }}
+					sx={{ p: 2, backgroundColor: "divider", borderRadius: "10px" }}
 				>
 					{account.about}
 				</Typography>

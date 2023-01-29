@@ -36,11 +36,6 @@ const Trending = () => {
 					variant="outlined"
 					component={Link}
 					to="/offers"
-					sx={{
-						borderRadius: "20px",
-						px: 2,
-						textTransform: "capitalize",
-					}}
 				>
 					More
 				</Button>
@@ -116,15 +111,7 @@ const Trending = () => {
 											{offer.location}
 										</Typography>
 
-										<Button
-											component={Link}
-											to={`/view-offer/${offer.slug}`}
-											variant="contained"
-											sx={{
-												borderRadius: "20px",
-												textTransform: "capitalize",
-											}}
-										>
+										<Button component={Link} to={`/view-offer/${offer.slug}`}>
 											View
 										</Button>
 									</div>

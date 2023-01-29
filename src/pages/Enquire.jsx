@@ -30,10 +30,9 @@ const Contents = ({ activeStep, setActiveStep, listing }) => {
 					<Button
 						size="small"
 						onClick={() => setActiveStep(1)}
-						variant="contained"
 						color="success"
 						endIcon={<LocalOfferOutlined />}
-						sx={{ m: 1, borderRadius: "3rem", textTransform: "capitalize" }}
+						sx={{ m: 1 }}
 					>
 						Bid
 					</Button>
@@ -41,7 +40,7 @@ const Contents = ({ activeStep, setActiveStep, listing }) => {
 						size="small"
 						onClick={() => setActiveStep(2)}
 						variant="outlined"
-						sx={{ m: 1, borderRadius: "3rem", textTransform: "capitalize" }}
+						sx={{ m: 1 }}
 					>
 						Contact
 					</Button>
@@ -84,14 +83,7 @@ const Contents = ({ activeStep, setActiveStep, listing }) => {
 				/>
 
 				<Box sx={{ textAlign: "center" }}>
-					<Button
-						type="button"
-						variant="contained"
-						color="success"
-						sx={{ borderRadius: "3rem", textTransform: "capitalize" }}
-					>
-						Finish
-					</Button>
+					<Button color="success">Finish</Button>
 				</Box>
 			</Box>
 		);

@@ -49,13 +49,8 @@ const LogoutModal = ({ openLogout, handleLogoutClose, handleLogoutOpen }) => {
 
 						<Box sx={{ mt: 3 }}>
 							<Button
-								color="primary"
-								variant="contained"
 								onClick={handleLogoutClose}
 								sx={{
-									borderRadius: "20px",
-									textTransform: "capitalize",
-									px: 2,
 									mx: 0.5,
 								}}
 							>
@@ -63,12 +58,9 @@ const LogoutModal = ({ openLogout, handleLogoutClose, handleLogoutOpen }) => {
 							</Button>
 
 							<Button
-								color="primary"
+variant="text"
 								onClick={handleLogout}
 								sx={{
-									borderRadius: "20px",
-									textTransform: "capitalize",
-									px: 2,
 									mx: 0.5,
 								}}
 							>

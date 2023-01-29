@@ -1,30 +1,28 @@
 import {
-	Button,
-	Link as MaterialLink,
-	Accordion,
-	AccordionDetails,
-	AccordionSummary,
-	Container,
-	Typography,
+	InfoOutlined,
+	NotificationsOutlined,
+	PersonOutlined,
+	ReplyAllOutlined,
+} from "@mui/icons-material";
+import {
 	Box,
 	FormControl,
+	FormGroup,
+	Button,
+	Checkbox,
+	Container,
+	Link as MaterialLink,
 	FormControlLabel,
 	FormHelperText,
-	FormGroup,
-	Checkbox,
+	Grid,
+	Typography,
 	useTheme,
+	useMediaQuery,
+	IconButton,
 } from "@mui/material";
-import {
-	SettingsOutlined,
-	KeyboardArrowDownOutlined,
-	PersonOutlined,
-	NotificationsOutlined,
-	InfoOutlined,
-} from "@mui/icons-material";
-import { Link } from "react-router-dom";
-import { useState } from "react";
-import AnimatedRoute from "../components/routes/AnimatedRoute";
+import React, { useState } from "react";
 import BackButton from "../components/general/BackButton";
+import { Link } from "react-router-dom";
 
 const NotificationSettings = () => {
 	const [state, setState] = useState({
@@ -40,6 +38,8 @@ const NotificationSettings = () => {
 
 	return (
 		<>
+			<Typography>Select how you receive notifications.</Typography>
+
 			<FormControl sx={{ my: 3 }} component="fieldset" variant="standard">
 				<FormGroup>
 					<FormControlLabel
@@ -78,13 +78,7 @@ const NotificationSettings = () => {
 				</FormGroup>
 			</FormControl>
 			<div>
-				<Button
-					size="small"
-					variant="contained"
-					sx={{ borderRadius: "30px", textTransform: "capitalize" }}
-				>
-					Save changes
-				</Button>
+				<Button size="small">Save changes</Button>
 			</div>
 		</>
 	);
@@ -93,6 +87,7 @@ const NotificationSettings = () => {
 const AccountSettings = () => {
 	return (
 		<>
+			<Typography>Deactivate or delete your account.</Typography>
 			<Box sx={{ display: "flex", my: 3 }}>
 				<InfoOutlined sx={{ mr: 2 }} />
 				<Typography variant="body2" sx={{ display: "flex" }}>
@@ -102,18 +97,10 @@ const AccountSettings = () => {
 				</Typography>
 			</Box>
 			<div>
-				<Button
-					size="small"
-					variant="outlined"
-					sx={{ borderRadius: "30px", textTransform: "capitalize", mr: 2 }}
-				>
+				<Button size="small" variant="outlined" sx={{ mr: 2 }}>
 					Deactivate
 				</Button>
-				<Button
-					size="small"
-					variant="text"
-					sx={{ borderRadius: "30px", textTransform: "capitalize" }}
-				>
+				<Button size="small" variant="text">
 					Delete
 				</Button>
 			</div>
@@ -122,95 +109,120 @@ const AccountSettings = () => {
 };
 
 const Settings = () => {
+	const [activeSettings, setActiveSettings] = useState("notifications");
+	const [viewMenu, setViewMenu] = useState(true);
 	const theme = useTheme();
-	const [expanded, setExpanded] = useState(false);
+	const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.values.md}px)`);
 
-	const handleChange = (panel) => (e, isExpanded) => setExpanded(isExpanded ? panel : false);
+	const openSettings = (settings) => {
+		console.log(settings, viewMenu);
+		setActiveSettings(settings);
+		setViewMenu(false);
+	};
 
 	return (
-		<AnimatedRoute>
-			<Container maxWidth="sm">
-				<Typography
-					variant="h5"
-					sx={{ mb: 3, display: "flex", justifyContent: "center", alignItems: "center" }}
-				>
+		<Container>
+			<Box
+				sx={{
+					display: "flex",
+					alignItems: "center",
+					m: 3,
+					mt: 0,
+				}}
+			>
+				{viewMenu === true ? (
 					<BackButton />
-					<span style={{ marginLeft: "1rem" }}>
-						Settings <SettingsOutlined fontSize="inherit" sx={{ ml: 1 }} />
-					</span>
+				) : (
+					<IconButton
+						size="small"
+						onClick={setViewMenu(true)}
+						icon={<ReplyAllOutlined />}
+					/>
+				)}
+				<Typography variant="h5" sx={{ mx: isMobile === true ? 1 : "auto" }}>
+					Settings
 				</Typography>
+			</Box>
 
-				<div>
-					<Accordion
-						expanded={expanded === "panel1"}
-						onChange={handleChange("panel1")}
-						elevation={0}
-						sx={{ p: 0 }}
+			<Grid container spacing={4}>
+				<Grid item xs={12} md={3} sx={{ display: viewMenu === true ? "" : "none" }}>
+					<Box
+						sx={{
+							minHeight: "65vh",
+							width: "100%",
+							display: "flex",
+							gap: 1,
+							flexDirection: "column",
+						}}
 					>
-						<AccordionSummary
-							expandIcon={<KeyboardArrowDownOutlined />}
-							aria-controls="panel1a-content"
-							id="panel1a-header"
-							sx={{ p: 0, backgroundColor: "background.default" }}
-						>
-							<Typography sx={{ display: "flex", alignItems: "center" }}>
-								<NotificationsOutlined sx={{ mr: 1 }} />
-								Notifications
-							</Typography>
-						</AccordionSummary>
-
-						<AccordionDetails
+						<Button
+							startIcon={<NotificationsOutlined />}
+							onClick={() => openSettings("notifications")}
+							variant="outlined"
 							sx={{
-								p: 2,
-								backgroundColor:
-									theme.palette.mode === "light"
-										? "rgb(250,250,250)"
-										: "background.paper",
+								justifyContent: "flex-start",
+								color: "inherit !important",
+								px: 4,
+								py: 2,
+								width: "100%",
+								gap: 2,
 								borderRadius: "10px",
+								border: "solid 1px",
+								borderColor:
+									activeSettings === "notifications" ? "primary.main" : "divider",
+								backgroundColor:
+									theme.palette.mode === "dark" ? "background.paper" : "white",
 							}}
 						>
-							<Typography>Select how you receive notifications.</Typography>
+							Notifications
+						</Button>
 
+						<Button
+							startIcon={<PersonOutlined />}
+							onClick={() => openSettings("account")}
+							variant="outlined"
+							sx={{
+								justifyContent: "flex-start",
+								color: "inherit !important",
+								px: 4,
+								py: 2,
+								width: "100%",
+								gap: 2,
+								borderRadius: "10px",
+								border: "solid 1px",
+								borderColor:
+									activeSettings === "account" ? "primary.main" : "divider",
+								backgroundColor:
+									theme.palette.mode === "dark" ? "background.paper" : "white",
+							}}
+						>
+							Account
+						</Button>
+					</Box>
+				</Grid>
+
+				<Grid item xs sx={{ display: viewMenu === true ? "" : "none" }}>
+					<Box
+						sx={{
+							borderRadius: "20px",
+							backgroundColor:
+								theme.palette.mode === "dark" ? "background.paper" : "white",
+							border: "solid 1px",
+							borderColor: "divider",
+							p: 3,
+							minHeight: "65vh",
+							width: "100%",
+						}}
+					>
+						{activeSettings === "notifications" ? (
 							<NotificationSettings />
-						</AccordionDetails>
-					</Accordion>
-
-					<Accordion
-						expanded={expanded === "panel2"}
-						onChange={handleChange("panel2")}
-						elevation={0}
-						sx={{ p: 0 }}
-					>
-						<AccordionSummary
-							expandIcon={<KeyboardArrowDownOutlined />}
-							aria-controls="panel2a-content"
-							id="panel2a-header"
-							sx={{ p: 0, backgroundColor: "background.default" }}
-						>
-							<Typography sx={{ display: "flex", alignItems: "center" }}>
-								<PersonOutlined sx={{ mr: 1 }} />
-								Account
-							</Typography>
-						</AccordionSummary>
-
-						<AccordionDetails
-							sx={{
-								p: 2,
-								backgroundColor:
-									theme.palette.mode === "light"
-										? "rgb(250,250,250)"
-										: "background.paper",
-								borderRadius: "10px",
-							}}
-						>
-							<Typography>Deactivate or delete your account.</Typography>
-
+						) : (
 							<AccountSettings />
-						</AccordionDetails>
-					</Accordion>
-				</div>
-			</Container>
-		</AnimatedRoute>
+						)}
+					</Box>
+				</Grid>
+			</Grid>
+		</Container>
 	);
 };
 

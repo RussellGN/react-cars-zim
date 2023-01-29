@@ -5,20 +5,17 @@ import {
 	Container,
 	Grid,
 	Typography,
-	useTheme,
 	IconButton,
 } from "@mui/material";
 import { GitHub } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
 const Footer = ({ marginTop }) => {
-	const theme = useTheme();
-
 	return (
 		<Box
 			sx={{
-				backgroundColor: theme.palette.mode === "dark" ? "background.paper" : "dark.main",
-				color: theme.palette.mode === "dark" ? "inherit" : "rgb(180,180,180)",
+				backgroundColor: "rgb(50,50,50)",
+				color: "rgb(180,180,180)",
 				marginTop: marginTop,
 			}}
 		>
@@ -86,12 +83,9 @@ const Footer = ({ marginTop }) => {
 								></input>
 								<Button
 									size="small"
-									variant="contained"
 									sx={{
 										px: 3,
 										ml: 2,
-										textTransform: "capitalize",
-										borderRadius: "10rem",
 									}}
 								>
 									Proceed

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import {
 	Typography,
-	useTheme,
 	Link as MaterialLink,
 	Paper,
 	FormControlLabel,
@@ -14,7 +13,6 @@ import humanizeNumber from "../utils/humanizeNumber";
 const CheckboxFilter = ({ filterItems, filterLabel, activeFilterItems, setActiveFilterItems }) => {
 	const [showMore, setShowMore] = useState(false);
 	const [items, setItems] = useState(filterItems);
-	const theme = useTheme();
 
 	const handleChange = (e) => {
 		setItems((prevItems) => {
@@ -26,7 +24,7 @@ const CheckboxFilter = ({ filterItems, filterLabel, activeFilterItems, setActive
 
 		if (activeFilterItems.includes(e.target.name.split("_").join(" "))) {
 			setActiveFilterItems((prevItems) => {
-				return prevItems.filter((item) => item != e.target.name.split("_").join(" "));
+				return prevItems.filter((item) => item !== e.target.name.split("_").join(" "));
 			});
 		} else
 			setActiveFilterItems((prevItems) => {
@@ -35,7 +33,7 @@ const CheckboxFilter = ({ filterItems, filterLabel, activeFilterItems, setActive
 	};
 
 	return (
-		<Paper variant="outlined" sx={{ p: 3, mb: 3, borderRadius: theme.radii.border1 }}>
+		<Paper variant="outlined" sx={{ p: 3, mb: 3, borderRadius: "10px" }}>
 			<FormControl variant="standard" sx={{ width: "100%" }}>
 				<Typography
 					variant="h6"
@@ -63,7 +61,7 @@ const CheckboxFilter = ({ filterItems, filterLabel, activeFilterItems, setActive
 				<FormGroup>
 					{Object.keys(items)?.map((filterItemName, index) => {
 						if (!showMore) {
-							if (index >= 4) return;
+							if (index >= 4) return "";
 						}
 						return (
 							<FormControlLabel

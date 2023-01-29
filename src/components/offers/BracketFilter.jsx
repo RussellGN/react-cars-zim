@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { Typography, Slider, Paper, useTheme } from "@mui/material";
+import { Typography, Slider, Paper } from "@mui/material";
 
 const BracketFilter = ({ filterLabel, marks, activeFilterItems, setActiveFilterItems }) => {
-	const theme = useTheme();
 	const [value, setValue] = useState([1, 4]);
 
 	const handleChange = (e, newValue, activeThumb) => {
@@ -43,7 +42,7 @@ const BracketFilter = ({ filterLabel, marks, activeFilterItems, setActiveFilterI
 						if (index === 0) firstNum = "50k";
 						else secondNum = "50k";
 						return;
-					case 4:
+					default:
 						if (index === 0) firstNum = "+";
 						else secondNum = "+";
 						return;
@@ -73,7 +72,7 @@ const BracketFilter = ({ filterLabel, marks, activeFilterItems, setActiveFilterI
 						if (index === 0) firstNum = "50k";
 						else secondNum = "50k";
 						return;
-					case 4:
+					default:
 						if (index === 0) firstNum = "+";
 						else secondNum = "+";
 						return;
@@ -94,7 +93,7 @@ const BracketFilter = ({ filterLabel, marks, activeFilterItems, setActiveFilterI
 	const minDistance = 1;
 
 	return (
-		<Paper variant="outlined" sx={{ p: 4, mb: 3, borderRadius: theme.radii.border1 }}>
+		<Paper variant="outlined" sx={{ p: 4, mb: 3, borderRadius: "10px" }}>
 			<Typography
 				variant="h6"
 				sx={{

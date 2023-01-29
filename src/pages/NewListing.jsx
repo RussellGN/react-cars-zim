@@ -105,12 +105,10 @@ const Contents = ({ activeStep, setActiveStep }) => {
 
 					<Box sx={{ textAlign: "center" }}>
 						<Button
-							type="button"
 							size="small"
 							onClick={() => setActiveStep((prev) => prev + 1)}
-							variant="contained"
 							color="success"
-							sx={{ m: 1, borderRadius: "3rem", textTransform: "capitalize" }}
+							sx={{ m: 1 }}
 						>
 							Proceed
 						</Button>
@@ -167,11 +165,9 @@ const Contents = ({ activeStep, setActiveStep }) => {
 					<Box sx={{ textAlign: "center" }}>
 						<Button
 							size="small"
-							type="button"
 							onClick={() => setActiveStep((prev) => prev + 1)}
-							variant="contained"
 							color="success"
-							sx={{ m: 1, borderRadius: "3rem", textTransform: "capitalize" }}
+							sx={{ m: 1 }}
 						>
 							Proceed
 						</Button>
@@ -244,11 +240,9 @@ const Contents = ({ activeStep, setActiveStep }) => {
 					<Box sx={{ textAlign: "center" }}>
 						<Button
 							size="small"
-							type="button"
 							onClick={() => setActiveStep((prev) => prev + 1)}
-							variant="contained"
 							color="success"
-							sx={{ m: 1, borderRadius: "3rem", textTransform: "capitalize" }}
+							sx={{ m: 1 }}
 						>
 							Proceed
 						</Button>
@@ -270,11 +264,9 @@ const Contents = ({ activeStep, setActiveStep }) => {
 					<Box sx={{ textAlign: "center" }}>
 						<Button
 							size="small"
-							type="button"
 							onClick={() => setActiveStep((prev) => prev + 1)}
-							variant="contained"
 							color="success"
-							sx={{ m: 1, borderRadius: "3rem", textTransform: "capitalize" }}
+							sx={{ m: 1 }}
 						>
 							Proceed
 						</Button>
@@ -298,9 +290,8 @@ const Contents = ({ activeStep, setActiveStep }) => {
 						<Button
 							size="small"
 							onClick={() => setActiveStep(1)}
-							variant="contained"
 							color="success"
-							sx={{ m: 1, borderRadius: "3rem", textTransform: "capitalize" }}
+							sx={{ m: 1 }}
 						>
 							Finish
 						</Button>

@@ -224,13 +224,7 @@ const AccountDetails = () => {
 									</MaterialLink>
 								</Typography>
 							)}
-							<Button
-								type="submit"
-								variant="contained"
-								sx={{ borderRadius: "30px", textTransform: "capitalize" }}
-							>
-								{user?.username ? "Update" : "Finish"}
-							</Button>
+							<Button type="submit">{user?.username ? "Update" : "Finish"}</Button>
 						</Box>
 					</Box>
 				</Container>

@@ -1,6 +1,6 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import AnimatedRoute from "../components/routes/AnimatedRoute";
-import { Typography, Grid, Container, Box, useTheme } from "@mui/material";
+import { Grid, Container, Box, useTheme, Button } from "@mui/material";
 import AccountOverview from "../components/account/AccountOverview";
 import AccountControls from "../components/account/AccountControls";
 import Footer from "../components/general/Footer";
@@ -12,12 +12,16 @@ import listings from "../components/static-backend/listings";
 import accounts from "../components/static-backend/accounts";
 
 const Account = () => {
+	const [offersOnshow, setOffersOnshow] = useState("mine");
 	const { user } = useContext(UserContext);
 	const { slug } = useParams();
 	const theme = useTheme();
 
 	const account = accounts.find((account) => account.slug === slug);
 	const accountListings = listings.filter((listing) => listing.owner.slug === slug);
+	const savedListings = listings.filter((listing) =>
+		account.savedListings.find((id) => id === listing.id)
+	);
 
 	return (
 		<AnimatedRoute>
@@ -32,11 +36,73 @@ const Account = () => {
 							{slug === user?.slug ? <AccountControls account={account} /> : ""}
 
 							<Box>
-								<Typography variant="h5" textAlign="center" sx={{ mb: 3 }}>
-									Offers - {account?.listings?.length}
-								</Typography>
+								<Box
+									sx={{
+										display: "flex",
+										justifyContent: "center",
+										my: 4,
+									}}
+								>
+									<Button
+										size="small"
+										onClick={() => setOffersOnshow("mine")}
+										sx={{
+											borderRadius: "8px ",
+											background:
+												offersOnshow === "mine"
+													? theme.palette.divider
+													: "transparent",
+											color: theme.palette.text.primary,
+											margin: "0 5px",
+											border: "solid 1px",
+											boxShadow: 0,
+											borderColor: "transparent",
+											"&:hover": {
+												background:
+													offersOnshow === "mine"
+														? theme.palette.divider
+														: "transparent",
+												borderColor: theme.palette.divider,
+												boxShadow: 0,
+											},
+										}}
+									>
+										My Offers - 32
+									</Button>
 
-								<OffersContent listings={accountListings} />
+									<Button
+										size="small"
+										onClick={() => setOffersOnshow("saved")}
+										sx={{
+											borderRadius: "8px ",
+											background:
+												offersOnshow === "saved"
+													? theme.palette.divider
+													: "transparent",
+											color: theme.palette.text.primary,
+											margin: "0 5px",
+											border: "solid 1px",
+											boxShadow: 0,
+											borderColor: "transparent",
+											"&:hover": {
+												background:
+													offersOnshow === "saved"
+														? theme.palette.divider
+														: "transparent",
+												borderColor: theme.palette.divider,
+												boxShadow: 0,
+											},
+										}}
+									>
+										Saved - 14
+									</Button>
+								</Box>
+
+								<OffersContent
+									listings={
+										offersOnshow === "mine" ? accountListings : savedListings
+									}
+								/>
 							</Box>
 						</Box>
 					</Grid>

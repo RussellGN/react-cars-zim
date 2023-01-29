@@ -1,4 +1,4 @@
-import { Typography, Box, Button, Container } from "@mui/material";
+import { Typography, Box, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import ctaImage from "./images/cta-image.jpg";
 
@@ -25,15 +25,7 @@ const CTA = () => {
 			<Typography color="inherit" variant="body1" sx={{ my: 2 }}>
 				Start browsing offers right now!
 			</Typography>
-			<Button
-				component={Link}
-				to="/offers"
-				variant="contained"
-				sx={{
-					borderRadius: "20px",
-					textTransform: "capitalize",
-				}}
-			>
+			<Button component={Link} to="/offers">
 				Lets Go!
 			</Button>
 		</Box>

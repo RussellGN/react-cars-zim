@@ -31,7 +31,7 @@ const Offer = ({ listing }) => {
 	return (
 		<Box
 			sx={{
-				borderRadius: theme.radii.border1,
+				borderRadius: "10px",
 				overflow: "hidden",
 				border: `solid 1px ${theme.palette.divider}`,
 				display: { md: "flex" },
@@ -120,36 +120,37 @@ const Offer = ({ listing }) => {
 						component={Link}
 						to={`/view-offer/${listing.slug}`}
 						color="success"
-						variant="contained"
-						sx={{
-							borderRadius: theme.radii.defaultRadius,
-							textTransform: "capitalize",
-						}}
 						endIcon={<KeyboardDoubleArrowRight />}
 					>
 						View
 					</Button>
-					{pathname?.includes(`/account/${user.slug}`) ? (
-						<span>
-							<IconButton>
-								<DeleteOutline />
-							</IconButton>
-							<IconButton>
-								<EditOutlined />
-							</IconButton>
-						</span>
-					) : pathname.includes("/account") ? (
-						<ShareButton />
-					) : (
-						<AnchorTag
-							variant="body2"
-							component={Link}
-							to={`/account/${listing.owner.slug}`}
-							underline="none"
-						>
-							{listing.owner.username}
-						</AnchorTag>
-					)}{" "}
+
+					<span>
+						{pathname.includes("/account") ? (
+							<ShareButton />
+						) : (
+							<AnchorTag
+								variant="body2"
+								component={Link}
+								to={`/account/${listing.owner.slug}`}
+								underline="none"
+							>
+								{listing.owner.username}
+							</AnchorTag>
+						)}
+						{pathname.includes("/account") && listing.owner.slug === user.slug ? (
+							<>
+								<IconButton>
+									<DeleteOutline />
+								</IconButton>
+								<IconButton>
+									<EditOutlined />
+								</IconButton>
+							</>
+						) : (
+							""
+						)}
+					</span>
 				</Stack>
 			</Box>
 		</Box>

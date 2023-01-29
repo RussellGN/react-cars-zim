@@ -47,10 +47,9 @@ const Hero = () => {
 						<Button
 							component={Link}
 							to="/new-listing"
-							variant="contained"
 							color="success"
 							endIcon={<SellOutlined />}
-							sx={{ m: 1, borderRadius: "3rem", textTransform: "capitalize" }}
+							sx={{ m: 1 }}
 						>
 							Sell
 							<Box
@@ -60,12 +59,7 @@ const Hero = () => {
 								Your Vehicle
 							</Box>
 						</Button>
-						<Button
-							component={Link}
-							to="/offers"
-							variant="outlined"
-							sx={{ m: 1, borderRadius: "3rem", textTransform: "capitalize" }}
-						>
+						<Button component={Link} to="/offers" sx={{ m: 1 }}>
 							Browse Offers
 						</Button>
 					</Box>

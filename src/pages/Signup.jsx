@@ -75,10 +75,6 @@ const Signup = () => {
 								fullWidth
 								variant="outlined"
 								color={theme?.palette?.mode === "dark" ? "light" : "dark"}
-								sx={{
-									textTransform: "capitalize",
-									borderRadius: "30px",
-								}}
 							>
 								Google
 							</Button>
@@ -88,10 +84,6 @@ const Signup = () => {
 								fullWidth
 								variant="outlined"
 								color={theme?.palette?.mode === "dark" ? "light" : "dark"}
-								sx={{
-									textTransform: "capitalize",
-									borderRadius: "30px",
-								}}
 							>
 								Apple
 							</Button>
@@ -134,13 +126,7 @@ const Signup = () => {
 								</MaterialLink>
 							</Typography>
 
-							<Button
-								type="submit"
-								variant="contained"
-								sx={{ borderRadius: "30px", textTransform: "capitalize" }}
-							>
-								Signup
-							</Button>
+							<Button type="submit">Signup</Button>
 						</Box>
 					</Box>
 				</Container>

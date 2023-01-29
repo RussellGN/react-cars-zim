@@ -76,10 +76,6 @@ const Login = () => {
 								fullWidth
 								variant="outlined"
 								color={theme?.palette?.mode === "dark" ? "light" : "dark"}
-								sx={{
-									textTransform: "capitalize",
-									borderRadius: "30px",
-								}}
 							>
 								Google
 							</Button>
@@ -89,10 +85,6 @@ const Login = () => {
 								fullWidth
 								variant="outlined"
 								color={theme?.palette?.mode === "dark" ? "light" : "dark"}
-								sx={{
-									textTransform: "capitalize",
-									borderRadius: "30px",
-								}}
 							>
 								Apple
 							</Button>
@@ -121,13 +113,7 @@ const Login = () => {
 							}}
 						>
 							<MaterialLink underline="hover"> Forgot password</MaterialLink>
-							<Button
-								type="submit"
-								variant="contained"
-								sx={{ borderRadius: "30px", textTransform: "capitalize" }}
-							>
-								Login
-							</Button>
+							<Button type="submit">Login</Button>
 						</Box>
 
 						<Typography sx={{ width: "100%", mb: 2 }}>

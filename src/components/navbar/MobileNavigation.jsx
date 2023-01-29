@@ -152,7 +152,6 @@ const MobileNavigation = ({ mode, setMode }) => {
 							</IconButton>
 
 							<Button
-								variant="contained"
 								onClick={() => {
 									setOpenBackdrop(false);
 									setExpanded(false);
@@ -162,8 +161,6 @@ const MobileNavigation = ({ mode, setMode }) => {
 								to="/new-listing"
 								sx={{
 									ml: 1,
-									borderRadius: "30px",
-									textTransform: "capitalize",
 								}}
 								endIcon={<AddOutlined />}
 							>

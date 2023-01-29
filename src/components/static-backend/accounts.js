@@ -13,6 +13,7 @@ const accounts = [
 		about: "The best car dealership in Bulawayo. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, dolore!",
 		displayPhoto: displayPhoto1,
 		dateAdded: "2022-11-17T22:30:02",
+		savedListings: [2, 4],
 	},
 	{
 		id: 2,
@@ -25,6 +26,7 @@ const accounts = [
 		about: "The best car dealership in Harare. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, dolore!",
 		displayPhoto: displayPhoto2,
 		dateAdded: "2023-01-03T22:30:02",
+		savedListings: [1, 3],
 	},
 ];
 

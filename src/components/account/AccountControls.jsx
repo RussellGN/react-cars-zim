@@ -5,14 +5,13 @@ import {
 	LogoutOutlined,
 	SettingsOutlined,
 } from "@mui/icons-material";
-import { Box, IconButton, useTheme, Button } from "@mui/material";
+import { Box, IconButton, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import LogoutModal from "../general/LogoutModal";
 
 const AccountControls = () => {
 	const [openLogout, setOpenLogout] = useState(false);
-	const theme = useTheme();
 	const handleLogoutOpen = () => setOpenLogout(true);
 	const handleLogoutClose = () => setOpenLogout(false);
 
@@ -30,7 +29,7 @@ const AccountControls = () => {
 					py: 1,
 					mt: { xs: 2, md: 0 },
 					mb: 3,
-					borderRadius: theme.radii.border3,
+					borderRadius: "30px",
 					border: "solid thin",
 					borderColor: "divider",
 					display: "flex",
@@ -52,11 +51,10 @@ const AccountControls = () => {
 				</IconButton>
 
 				<Button
-					variant="contained"
 					color="success"
 					component={Link}
 					to="/new-listing"
-					sx={{ ml: "auto", mr: 1, borderRadius: "30px", textTransform: "capitalize" }}
+					sx={{ ml: "auto", mr: 1 }}
 					endIcon={<AddOutlined />}
 				>
 					New

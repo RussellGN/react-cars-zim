@@ -79,9 +79,8 @@ const MiniAbout = () => {
 						component={Link}
 						endIcon={<ArrowForwardOutlined />}
 						to="/signup"
-						variant="outlined"
 						color="success"
-						sx={{ mt: 2, borderRadius: "3rem", textTransform: "capitalize" }}
+						sx={{ mt: 2 }}
 					>
 						Get Started
 					</Button>
@@ -156,9 +155,9 @@ const MiniAbout = () => {
 					to="/offers"
 					variant="outlined"
 					color="success"
-					sx={{ mt: 2, borderRadius: "3rem", textTransform: "capitalize" }}
+					sx={{ mt: 2 }}
 				>
-					Browse{" "}
+					Browse
 				</Button>
 			</Box>
 		</Container>

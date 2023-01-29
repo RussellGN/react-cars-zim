@@ -404,12 +404,7 @@ const AccountSection = ({ show, mode, setMode }) => {
 				<AccountDropdown handleLogoutOpen={handleLogoutOpen} />
 
 				{!user?.username && (
-					<Button
-						component={Link}
-						to="/login"
-						variant="contained"
-						sx={{ ml: 2, borderRadius: "3rem", textTransform: "capitalize" }}
-					>
+					<Button component={Link} to="/login" sx={{ ml: 2 }}>
 						Login
 					</Button>
 				)}
