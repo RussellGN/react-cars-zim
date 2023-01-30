@@ -1,9 +1,4 @@
-import {
-	InfoOutlined,
-	NotificationsOutlined,
-	PersonOutlined,
-	ReplyAllOutlined,
-} from "@mui/icons-material";
+import { NotificationsOutlined, PersonOutlined, ReplyAllOutlined } from "@mui/icons-material";
 import {
 	Box,
 	FormControl,
@@ -38,7 +33,7 @@ const NotificationSettings = () => {
 
 	return (
 		<>
-			<Typography>Select how you receive notifications.</Typography>
+			<Typography fontWeight="bold">Select how you receive notifications.</Typography>
 
 			<FormControl sx={{ my: 3 }} component="fieldset" variant="standard">
 				<FormGroup>
@@ -77,8 +72,11 @@ const NotificationSettings = () => {
 					/>
 				</FormGroup>
 			</FormControl>
+
 			<div>
-				<Button size="small">Save changes</Button>
+				<Button size="small" sx={{ px: 3 }}>
+					Save changes
+				</Button>
 			</div>
 		</>
 	);
@@ -87,20 +85,17 @@ const NotificationSettings = () => {
 const AccountSettings = () => {
 	return (
 		<>
-			<Typography>Deactivate or delete your account.</Typography>
-			<Box sx={{ display: "flex", my: 3 }}>
-				<InfoOutlined sx={{ mr: 2 }} />
-				<Typography variant="body2" sx={{ display: "flex" }}>
-					Deactivating your account will temporarily remove your offers and profile from
-					view on the platform, but nothing will be deleted. Your account will be
-					reactivated when you log in again.
-				</Typography>
-			</Box>
+			<Typography fontWeight="bold">Deactivate or delete your account.</Typography>
+			<Typography sx={{ my: 3 }}>
+				Deactivating your account will temporarily remove your offers and profile from view
+				on the platform, but nothing will be deleted. Your account will be reactivated when
+				you log in again.
+			</Typography>
 			<div>
-				<Button size="small" variant="outlined" sx={{ mr: 2 }}>
+				<Button size="small" variant="outlined" sx={{ mr: 2, px: 3 }}>
 					Deactivate
 				</Button>
-				<Button size="small" variant="text">
+				<Button size="small" variant="text" sx={{ px: 3 }}>
 					Delete
 				</Button>
 			</div>
@@ -115,9 +110,10 @@ const Settings = () => {
 	const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.values.md}px)`);
 
 	const openSettings = (settings) => {
-		console.log(settings, viewMenu);
 		setActiveSettings(settings);
-		setViewMenu(false);
+		if (isMobile) {
+			setViewMenu(false);
+		}
 	};
 
 	return (
@@ -126,6 +122,7 @@ const Settings = () => {
 				sx={{
 					display: "flex",
 					alignItems: "center",
+					justifyContent: "center",
 					m: 3,
 					mt: 0,
 				}}
@@ -134,12 +131,17 @@ const Settings = () => {
 					<BackButton />
 				) : (
 					<IconButton
+						onClick={() => setViewMenu(true)}
 						size="small"
-						onClick={setViewMenu(true)}
-						icon={<ReplyAllOutlined />}
-					/>
+						sx={{
+							border: "solid 1px",
+							borderColor: "divider",
+						}}
+					>
+						<ReplyAllOutlined />
+					</IconButton>
 				)}
-				<Typography variant="h5" sx={{ mx: isMobile === true ? 1 : "auto" }}>
+				<Typography variant="h5" sx={{ mx: isMobile === true ? 2 : "auto" }}>
 					Settings
 				</Typography>
 			</Box>
@@ -169,7 +171,9 @@ const Settings = () => {
 								borderRadius: "10px",
 								border: "solid 1px",
 								borderColor:
-									activeSettings === "notifications" ? "primary.main" : "divider",
+									!isMobile && activeSettings === "notifications"
+										? "primary.main"
+										: "divider",
 								backgroundColor:
 									theme.palette.mode === "dark" ? "background.paper" : "white",
 							}}
@@ -191,7 +195,9 @@ const Settings = () => {
 								borderRadius: "10px",
 								border: "solid 1px",
 								borderColor:
-									activeSettings === "account" ? "primary.main" : "divider",
+									!isMobile && activeSettings === "account"
+										? "primary.main"
+										: "divider",
 								backgroundColor:
 									theme.palette.mode === "dark" ? "background.paper" : "white",
 							}}
@@ -201,7 +207,7 @@ const Settings = () => {
 					</Box>
 				</Grid>
 
-				<Grid item xs sx={{ display: viewMenu === true ? "" : "none" }}>
+				<Grid item xs sx={{ display: isMobile && viewMenu === true ? "none" : "" }}>
 					<Box
 						sx={{
 							borderRadius: "20px",
@@ -209,7 +215,7 @@ const Settings = () => {
 								theme.palette.mode === "dark" ? "background.paper" : "white",
 							border: "solid 1px",
 							borderColor: "divider",
-							p: 3,
+							p: { xs: 2, sm: 3 },
 							minHeight: "65vh",
 							width: "100%",
 						}}

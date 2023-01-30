@@ -27,10 +27,6 @@
 
 # todo
 
-252. more orthodox notifications page
-253. more orthodox settings page
-254. maybe more settings options
-
 255. make it clearer to the user taht cars.zim is for advertising only and does not take pasrt in transacting
 256. give guidelines on how to proceed after contatcing owner of a listing
 257. refine image upload fields

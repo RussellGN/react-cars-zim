@@ -1,7 +1,5 @@
 import { HomeOutlined, ReplyAllOutlined } from "@mui/icons-material";
 import { IconButton, useMediaQuery, useTheme } from "@mui/material";
-import { useState } from "react";
-import { useEffect } from "react";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 
 const BackButton = ({ sx, floating, onlyRoute }) => {
@@ -39,7 +37,7 @@ const BackButton = ({ sx, floating, onlyRoute }) => {
 				component={Link}
 				to={onlyRoute}
 				size="small"
-				sx={{ ...floatingStyles, border: "solid thin" }}
+				sx={{ ...floatingStyles, border: "solid thin", borderColor: "divider" }}
 			>
 				{onlyRoute === "/" ? <HomeOutlined /> : <ReplyAllOutlined />}
 			</IconButton>
@@ -52,6 +50,7 @@ const BackButton = ({ sx, floating, onlyRoute }) => {
 			sx={{
 				...floatingStyles,
 				border: "solid thin",
+				borderColor: "divider",
 			}}
 		>
 			{location?.key === "default" ? <HomeOutlined /> : <ReplyAllOutlined />}

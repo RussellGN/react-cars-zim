@@ -1,27 +1,46 @@
 import {
-	Accordion,
-	AccordionDetails,
-	AccordionSummary,
-	Container,
-	Typography,
-	Box,
-	useTheme,
-} from "@mui/material";
-import {
-	NotificationsOutlined,
-	KeyboardArrowDownOutlined,
-	PersonOutlined,
-	InfoOutlined,
-	WarningOutlined,
-	LocalOfferOutlined,
+	DeleteOutlined,
 	EmailOutlined,
+	InfoOutlined,
+	LocalOfferOutlined,
+	NotificationsOutlined,
+	PersonOutlined,
+	ReplyAllOutlined,
+	SendOutlined,
+	WarningOutlined,
 } from "@mui/icons-material";
-import { useState } from "react";
-import AnimatedRoute from "../components/routes/AnimatedRoute";
+import {
+	Box,
+	Button,
+	Container,
+	Grid,
+	Typography,
+	useTheme,
+	useMediaQuery,
+	IconButton,
+	TextField,
+} from "@mui/material";
+import React, { useState } from "react";
 import BackButton from "../components/general/BackButton";
+import { useParams } from "react-router-dom";
 
 const NotificationTemplate = ({ notification }) => {
-	return <div>{notification.body}</div>;
+	return (
+		<div>
+			<Box
+				sx={{
+					mb: 2,
+					display: "flex",
+					alignItems: "center",
+					justifyContent: "space-between",
+				}}
+			>
+				<Typography fontWeight="bold">{notification.title}</Typography>
+				<Typography variant="caption">{notification.date.toLocaleDateString()}</Typography>
+			</Box>
+			<Typography>{notification.body}</Typography>
+		</div>
+	);
 };
 
 const NotificationIcon = ({ category, sx }) => {
@@ -39,11 +58,7 @@ const NotificationIcon = ({ category, sx }) => {
 	}
 };
 
-const Notifications = () => {
-	const theme = useTheme();
-	const [expanded, setExpanded] = useState(false);
-	const handleChange = (panel) => (e, isExpanded) => setExpanded(isExpanded ? panel : false);
-
+const Notifs2 = () => {
 	const notifications = [
 		{
 			id: 1,
@@ -74,57 +89,126 @@ const Notifications = () => {
 			body: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis beatae consequuntur repellendus tenetur architecto quo aliquid facilis eum, assumenda ipsam.",
 		},
 	];
+	const { id } = useParams();
+	const [activeNotification, setActiveNotification] = useState(
+		id ? notifications.find((notif) => notif.id.toString() === id.toString()) : null
+	);
+	const [viewMenu, setViewMenu] = useState(true);
+	const theme = useTheme();
+	const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.values.md}px)`);
+
+	const openNotification = (id) => {
+		setActiveNotification(notifications.find((notif) => notif.id === id));
+		if (isMobile) {
+			setViewMenu(false);
+		}
+	};
 
 	return (
-		<AnimatedRoute>
-			<Container maxWidth="sm">
-				<Typography
-					variant="h5"
-					sx={{ mb: 3, display: "flex", justifyContent: "center", alignItems: "center" }}
-				>
+		<Container>
+			<Box
+				sx={{
+					display: "flex",
+					alignItems: "center",
+					justifyContent: "center",
+					m: 3,
+					mt: 0,
+				}}
+			>
+				{viewMenu === true ? (
 					<BackButton />
-					<span style={{ marginLeft: "1rem" }}>
-						Notifications <NotificationsOutlined fontSize="inherit" sx={{ ml: 1 }} />
-					</span>
+				) : (
+					<IconButton
+						onClick={() => setViewMenu(true)}
+						size="small"
+						sx={{
+							border: "solid 1px",
+							borderColor: "divider",
+						}}
+					>
+						<ReplyAllOutlined />
+					</IconButton>
+				)}
+				<Typography variant="h5" sx={{ mx: isMobile === true ? 2 : "auto" }}>
+					Notifications
 				</Typography>
+			</Box>
 
-				<div>
-					{notifications?.map((notification) => {
-						return (
-							<Accordion
-								key={notification.id}
-								expanded={expanded === `panel-${notification.id}`}
-								onChange={handleChange(`panel-${notification.id}`)}
-								elevation={0}
-								sx={{ p: 0.5, backgroundColor: "background.default" }}
-							>
-								<AccordionSummary
-									expandIcon={<KeyboardArrowDownOutlined />}
-									aria-controls="panel1a-content"
-									id="panel1a-header"
-									sx={{ p: 0, backgroundColor: "background.default" }}
-								>
-									<Box
-										sx={{
-											width: "100%",
-											display: "flex",
-											alignItems: "center",
-										}}
-									>
-										<NotificationIcon
-											category={notification.category}
-											sx={{ mr: 1, fontSize: "inherit" }}
-										/>
-										<Typography noWrap sx={{ flexGrow: 1, pr: 2 }}>
-											{notification.title}
-										</Typography>
-										<span>{notification.date.toLocaleDateString()}</span>
-									</Box>
-								</AccordionSummary>
-
-								<AccordionDetails
+			<Grid container spacing={4}>
+				<Grid item xs={12} md={3} sx={{ display: viewMenu === true ? "" : "none" }}>
+					<Box
+						sx={{
+							minHeight: "65vh",
+							width: "100%",
+							display: "flex",
+							gap: 1,
+							flexDirection: "column",
+						}}
+					>
+						{notifications?.map((notification) => {
+							return (
+								<Button
+									key={notification.id}
+									startIcon={
+										<NotificationIcon category={notification.category} />
+									}
+									onClick={() => openNotification(notification.id)}
+									variant="outlined"
 									sx={{
-										p: 2,
+										justifyContent: "flex-start",
+										color: "inherit !important",
+										py: 2,
+										width: "100%",
+										gap: 0.5,
+										borderRadius: "10px",
+										border: "solid 1px",
+										borderColor:
+											!isMobile && activeNotification?.id === notification.id
+												? "primary.main"
+												: "divider",
+										backgroundColor:
+											theme.palette.mode === "dark"
+												? "background.paper"
+												: "white",
+									}}
+								>
+									<Typography
+										variant="body2"
+										noWrap
+										sx={{ flexGrow: 1, textAlign: "left" }}
+									>
+										{notification.title}
+									</Typography>
+									<Typography variant="caption">
+										{notification.date.toLocaleDateString()}
+									</Typography>
+								</Button>
+							);
+						})}
+					</Box>
+				</Grid>
+
+				<Grid item xs sx={{ display: isMobile && viewMenu === true ? "none" : "" }}>
+					<Box
+						sx={{
+							position: "relative",
+							borderRadius: "20px",
+							backgroundColor:
+								theme.palette.mode === "dark" ? "background.paper" : "white",
+							border: "solid 1px",
+							borderColor: "divider",
+							p: { xs: 2, sm: 3 },
+							minHeight: "65vh",
+							width: "100%",
+							display: "flex",
+							flexDirection: "column",
+							justifyContent: "space-between",
+						}}
+					>
+						{activeNotification ? (
+							<>
+								<Box
+									sx={{
 										backgroundColor:
 											theme.palette.mode === "light"
 												? "rgb(250,250,250)"
@@ -132,15 +216,74 @@ const Notifications = () => {
 										borderRadius: "10px",
 									}}
 								>
-									<NotificationTemplate notification={notification} />
-								</AccordionDetails>
-							</Accordion>
-						);
-					})}
-				</div>
-			</Container>
-		</AnimatedRoute>
+									<NotificationTemplate notification={activeNotification} />
+								</Box>
+
+								<Box
+									sx={{
+										gap: 2,
+										display: "flex",
+										justifyContent: "flex-end",
+										alignItems: "center",
+									}}
+								>
+									<TextField
+										size="small"
+										label="Send a response"
+										multiline
+										rows={1}
+										sx={{
+											width: "100%",
+											display:
+												activeNotification.category === "offer"
+													? ""
+													: "none",
+											"& .MuiInputBase-root": {
+												borderRadius: "30px",
+											},
+										}}
+									/>
+
+									<IconButton
+										size="small"
+										sx={{
+											display:
+												activeNotification.category === "offer"
+													? ""
+													: "none",
+										}}
+									>
+										<SendOutlined />
+									</IconButton>
+
+									<IconButton size="small">
+										<DeleteOutlined />
+									</IconButton>
+								</Box>
+							</>
+						) : (
+							<Typography
+								variant="h5"
+								sx={{
+									position: "absolute",
+									top: 0,
+									right: 0,
+									bottom: 0,
+									left: 0,
+									display: "flex",
+									alignItems: "center",
+									justifyContent: "center",
+									textAlign: "center",
+								}}
+							>
+								Tap to open <NotificationsOutlined sx={{ ml: 0.5 }} />
+							</Typography>
+						)}
+					</Box>
+				</Grid>
+			</Grid>
+		</Container>
 	);
 };
 
-export default Notifications;
+export default Notifs2;
