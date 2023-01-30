@@ -1,10 +1,22 @@
 {
   "files": {
-    "main.js": "/react-cars-zim/static/js/main.ed1e38be.js",
+    "main.js": "/react-cars-zim/static/js/main.2fc2cd44.js",
+    "static/media/porsche.JPG": "/react-cars-zim/static/media/porsche.5befac7238d35bb1b093.JPG",
+    "static/media/hillux1.jpeg": "/react-cars-zim/static/media/hillux1.59a78cad7ef5f5e39a9c.jpeg",
+    "static/media/hillux2.jpg": "/react-cars-zim/static/media/hillux2.f38cf4f0560feca39d1a.jpg",
+    "static/media/range-rover.JPEG": "/react-cars-zim/static/media/range-rover.bec2c50c26cbabda5b12.JPEG",
+    "static/media/cta-image.jpg": "/react-cars-zim/static/media/cta-image.b89c805ba04659c32f70.jpg",
+    "static/media/hero-image.png": "/react-cars-zim/static/media/hero-image.63d7c7f7bfe0aefa6fb3.png",
+    "static/media/corrola1.jpg": "/react-cars-zim/static/media/corrola1.df0169e98f49387586d6.jpg",
+    "static/media/corrola2.jpg": "/react-cars-zim/static/media/corrola2.8d6e9cb855f69679ca63.jpg",
+    "static/media/corrola3.jpg": "/react-cars-zim/static/media/corrola3.3daef07e704d1e425a5d.jpg",
+    "static/media/hillux3.jpeg": "/react-cars-zim/static/media/hillux3.ff9a028368bb5c5a43af.jpeg",
+    "static/media/about-image-1.svg": "/react-cars-zim/static/media/about-image-1.e680ee16d1eb6c9f5712e9abcca5be93.svg",
+    "static/media/display-photo.jpg": "/react-cars-zim/static/media/display-photo.341592f6e226c824cb21.jpg",
     "index.html": "/react-cars-zim/index.html",
-    "main.ed1e38be.js.map": "/react-cars-zim/static/js/main.ed1e38be.js.map"
+    "main.2fc2cd44.js.map": "/react-cars-zim/static/js/main.2fc2cd44.js.map"
   },
   "entrypoints": [
-    "static/js/main.ed1e38be.js"
+    "static/js/main.2fc2cd44.js"
   ]
 }
