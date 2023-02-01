@@ -16,7 +16,7 @@ const Footer = ({ marginTop }) => {
 	return (
 		<Box
 			sx={{
-				backgroundColor: "dark.main",
+				backgroundColor: "dark.dark",
 				color: "light.main",
 				marginTop: marginTop,
 			}}

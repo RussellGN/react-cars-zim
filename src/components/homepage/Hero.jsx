@@ -6,9 +6,10 @@ import heroImage from "./images/hero-image.png";
 const Hero = () => {
 	const theme = useTheme();
 	const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.values.md}px`);
+	const isTinyMobile = useMediaQuery(`(max-width: ${theme.breakpoints.values.sm}px`);
 
 	return (
-		<Container maxWidth="lg">
+		<Container>
 			<Grid
 				container
 				direction={isMobile ? "column-reverse" : "row"}
@@ -19,7 +20,7 @@ const Hero = () => {
 			>
 				<Grid item xs={12} md="auto">
 					<Typography
-						variant="h3"
+						variant={isTinyMobile ? "h4" : "h3"}
 						sx={{
 							textAlign: { xs: "center", md: "left" },
 							fontFamily: "kalam, cursive, roboto, serif",

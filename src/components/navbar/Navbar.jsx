@@ -1,5 +1,5 @@
 import SearchForm from "./SearchForm";
-import { Stack, AppBar, useTheme, Container } from "@mui/material";
+import { Stack, AppBar, useTheme, Container, Paper, Box } from "@mui/material";
 import AccountSection from "./AccountSection";
 import HeaderNavigation from "./HeaderNavigation";
 import MobileNavigation from "./MobileNavigation";
@@ -23,13 +23,14 @@ const Navbar = ({ mode, setMode }) => {
 	}
 
 	return (
-		<AppBar
-			elevation={3}
+		<Box
 			sx={{
+				boxShadow: theme.shadows[3],
 				position: "sticky",
+				zIndex: 1100,
 				top: 0,
 				left: 0,
-				backgroundColor: theme.palette.mode === "light" ? "background.paper" : "dark.main",
+				backgroundColor: "background.paper",
 				color: "inherit",
 				py: 2,
 				px: "0 !important", // this is here to prevent the appbar shifing  10px to the left because of the pop-up menus. I dont know why it works, just a bug i caught, or maybe its not
@@ -46,7 +47,7 @@ const Navbar = ({ mode, setMode }) => {
 			</Container>
 
 			<Alerts />
-		</AppBar>
+		</Box>
 	);
 };
 

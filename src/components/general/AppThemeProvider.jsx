@@ -7,16 +7,22 @@ const AppThemeProvider = ({ mode, children }) => {
 			text: {
 				primary: mode === "dark" ? "rgb(220,220,220)" : "rgb(100,100,100)",
 			},
-			dark: { main: "#212529" },
-			light: { main: "rgb(240,240,249)" },
-			background: {
-				default: mode === "dark" ? "rgba(40,40,40)" : "rgb(245,245,245)",
-				paper: mode === "dark" ? "rgba(50,50,50)" : "rgb(245,245,245)",
+			dark: {
+				main: "rgb(56, 62, 69)",
+				dark: "rgb(33, 37, 41)",
+				light: "rgb(71, 78, 87)",
 			},
+			light: { main: "rgb(240,240,249)" },
 		},
 	});
 
 	theme = createTheme(theme, {
+		palette: {
+			background: {
+				default: mode === "dark" ? theme.palette.dark.main : "rgb(245,245,245)",
+				paper: mode === "dark" ? theme.palette.dark.light : "rgb(245,245,245)",
+			},
+		},
 		gradient: {
 			main: `linear-gradient(to right, ${theme.palette.primary.main},${theme.palette.success.main})`,
 		},
@@ -42,6 +48,7 @@ const AppThemeProvider = ({ mode, children }) => {
 			},
 		},
 	});
+
 	return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 };
 
