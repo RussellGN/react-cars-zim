@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import AnimatedRoute from "../components/routes/AnimatedRoute";
-import { Grid, Container, Box, useTheme, Button } from "@mui/material";
+import { Grid, Container, Box, useTheme, Button, Typography } from "@mui/material";
 import AccountOverview from "../components/account/AccountOverview";
 import AccountControls from "../components/account/AccountControls";
 import Footer from "../components/general/Footer";
@@ -43,59 +43,65 @@ const Account = () => {
 										my: 4,
 									}}
 								>
-									<Button
-										size="small"
-										onClick={() => setOffersOnshow("mine")}
-										sx={{
-											borderRadius: "8px ",
-											background:
-												offersOnshow === "mine"
-													? theme.palette.divider
-													: "transparent",
-											color: theme.palette.text.primary,
-											margin: "0 5px",
-											border: "solid 1px",
-											boxShadow: 0,
-											borderColor: "transparent",
-											"&:hover": {
-												background:
-													offersOnshow === "mine"
-														? theme.palette.divider
-														: "transparent",
-												borderColor: theme.palette.divider,
-												boxShadow: 0,
-											},
-										}}
-									>
-										My Offers - 32
-									</Button>
+									{slug === user?.slug ? (
+										<>
+											<Button
+												size="small"
+												onClick={() => setOffersOnshow("mine")}
+												sx={{
+													borderRadius: "8px ",
+													background:
+														offersOnshow === "mine"
+															? theme.palette.divider
+															: "transparent",
+													color: theme.palette.text.primary,
+													margin: "0 5px",
+													border: "solid 1px",
+													boxShadow: 0,
+													borderColor: "transparent",
+													"&:hover": {
+														background:
+															offersOnshow === "mine"
+																? theme.palette.divider
+																: "transparent",
+														borderColor: theme.palette.divider,
+														boxShadow: 0,
+													},
+												}}
+											>
+												My Offers - 32
+											</Button>
 
-									<Button
-										size="small"
-										onClick={() => setOffersOnshow("saved")}
-										sx={{
-											borderRadius: "8px ",
-											background:
-												offersOnshow === "saved"
-													? theme.palette.divider
-													: "transparent",
-											color: theme.palette.text.primary,
-											margin: "0 5px",
-											border: "solid 1px",
-											boxShadow: 0,
-											borderColor: "transparent",
-											"&:hover": {
-												background:
-													offersOnshow === "saved"
-														? theme.palette.divider
-														: "transparent",
-												borderColor: theme.palette.divider,
-												boxShadow: 0,
-											},
-										}}
-									>
-										Saved - 14
-									</Button>
+											<Button
+												size="small"
+												onClick={() => setOffersOnshow("saved")}
+												sx={{
+													borderRadius: "8px ",
+													background:
+														offersOnshow === "saved"
+															? theme.palette.divider
+															: "transparent",
+													color: theme.palette.text.primary,
+													margin: "0 5px",
+													border: "solid 1px",
+													boxShadow: 0,
+													borderColor: "transparent",
+													"&:hover": {
+														background:
+															offersOnshow === "saved"
+																? theme.palette.divider
+																: "transparent",
+														borderColor: theme.palette.divider,
+														boxShadow: 0,
+													},
+												}}
+											>
+												Saved - 14
+											</Button>
+										</>
+									) : (
+										<Typography variant="h5">Offers - 32</Typography>
+									)}
 								</Box>
 
 								<OffersContent

@@ -126,7 +126,7 @@ const CustomStepper = ({ steps, activeStep, setActiveStep, contents }) => {
 				sx={{
 					p: { xs: 0, sm: 3 },
 					width: "100%",
-					minHeight: "55vh",
+					flexGrow: 1,
 				}}
 			>
 				{contents}

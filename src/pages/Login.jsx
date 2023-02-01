@@ -94,14 +94,26 @@ const Login = () => {
 							size="small"
 							label="Username / Email"
 							name="handle"
-							sx={{ mb: 2, width: "100%" }}
+							sx={{
+								mb: 3,
+								"& .MuiInputBase-root": {
+									borderRadius: "30px",
+								},
+								width: "100%",
+							}}
 						/>
 						<TextField
 							size="small"
 							label="Password"
 							name="password"
 							type="password"
-							sx={{ mb: 5, width: "100%" }}
+							sx={{
+								mb: 3,
+								"& .MuiInputBase-root": {
+									borderRadius: "30px",
+								},
+								width: "100%",
+							}}
 						/>
 						<Box
 							sx={{
@@ -117,8 +129,13 @@ const Login = () => {
 						</Box>
 
 						<Typography sx={{ width: "100%", mb: 2 }}>
-							Don't have an account?{" "}
-							<MaterialLink component={Link} to="/signup" underline="hover">
+							Don't have an account?
+							<MaterialLink
+								component={Link}
+								to="/signup"
+								underline="hover"
+								sx={{ ml: 0.5 }}
+							>
 								Sign Up.
 							</MaterialLink>
 						</Typography>

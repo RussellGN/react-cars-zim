@@ -1,4 +1,4 @@
-import { PersonAddOutlined, ManageAccountsOutlined, InfoOutlined } from "@mui/icons-material";
+import { PersonAddOutlined, ManageAccountsOutlined } from "@mui/icons-material";
 import {
 	Link as MaterialLink,
 	Container,
@@ -19,6 +19,7 @@ import BackButton from "../components/general/BackButton";
 import { UserContext } from "../components/static-backend/UserContext";
 import { useContext } from "react";
 import { useState } from "react";
+import accounts from "../components/static-backend/accounts";
 
 const AccountDetails = () => {
 	const { user, setUser } = useContext(UserContext);
@@ -53,19 +54,8 @@ const AccountDetails = () => {
 		e.preventDefault();
 		console.log(formValues);
 
-		const newUser = {
-			...user,
-			username: user?.username || formValues.username,
-			location: user?.location || formValues.location,
-			category: formValues.category,
-			phoneNumber: user?.phoneNumber || formValues.phoneNumber,
-			about: user?.about || formValues.about,
-		};
-		newUser.slug = newUser.username.replace(" ", "-").toLowerCase();
-
-		setUser(newUser);
-
-		navigate(`/account/${user?.slug}`);
+		setUser(accounts[0]);
+		navigate(`/account/${accounts[0].slug}`);
 	}
 
 	return (
@@ -122,22 +112,19 @@ const AccountDetails = () => {
 							<Typography
 								variant="body2"
 								sx={{
-									display: "flex",
-									alignItems: "center",
 									mt: -2,
-									color: "success.main",
 									mb: 4,
+									textAlign: "center",
 								}}
 							>
-								<InfoOutlined fontSize="small" sx={{ mr: 0.5 }} /> If you wish to
-								change your password, go to
+								Change your password,
 								<MaterialLink
 									component={Link}
 									to="/settings"
 									underline="hover"
 									sx={{ ml: 0.5 }}
 								>
-									settings
+									here
 								</MaterialLink>
 							</Typography>
 						) : (
@@ -150,7 +137,13 @@ const AccountDetails = () => {
 							name="username"
 							value={formValues.username}
 							onChange={changeFormValues}
-							sx={{ mb: 2, width: "100%" }}
+							sx={{
+								mb: 3,
+								"& .MuiInputBase-root": {
+									borderRadius: "30px",
+								},
+								width: "100%",
+							}}
 						/>
 
 						<TextField
@@ -159,7 +152,13 @@ const AccountDetails = () => {
 							name="location"
 							value={formValues.location}
 							onChange={changeFormValues}
-							sx={{ mb: 2, width: "100%" }}
+							sx={{
+								mb: 3,
+								"& .MuiInputBase-root": {
+									borderRadius: "30px",
+								},
+								width: "100%",
+							}}
 						/>
 
 						<TextField
@@ -168,10 +167,16 @@ const AccountDetails = () => {
 							name="phoneNumber"
 							value={formValues.phoneNumber}
 							onChange={changeFormValues}
-							sx={{ mb: 2, width: "100%" }}
+							sx={{
+								mb: 3,
+								"& .MuiInputBase-root": {
+									borderRadius: "30px",
+								},
+								width: "100%",
+							}}
 						/>
 
-						<FormControl sx={{ width: "100%", mb: 2, p: 2 }}>
+						<FormControl sx={{ width: "100%", mb: 3, p: 2 }}>
 							<FormLabel id="account-type-radios-label">Account Type</FormLabel>
 
 							<RadioGroup
@@ -202,7 +207,13 @@ const AccountDetails = () => {
 							name="about"
 							value={formValues.about}
 							onChange={changeFormValues}
-							sx={{ mb: 5, width: "100%" }}
+							sx={{
+								mb: 3,
+								"& .MuiInputBase-root": {
+									borderRadius: "20px",
+								},
+								width: "100%",
+							}}
 						/>
 
 						<Box
@@ -218,8 +229,13 @@ const AccountDetails = () => {
 								""
 							) : (
 								<Typography>
-									Already have an account?
-									<MaterialLink component={Link} to="/login" underline="hover">
+									Already have an <br /> account?
+									<MaterialLink
+										component={Link}
+										to="/login"
+										underline="hover"
+										sx={{ ml: 0.5 }}
+									>
 										Login.
 									</MaterialLink>
 								</Typography>

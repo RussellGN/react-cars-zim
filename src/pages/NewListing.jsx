@@ -97,22 +97,11 @@ const Contents = ({ activeStep, setActiveStep }) => {
 						How It Works
 					</Typography>
 
-					<Typography variant="body1" textAlign="center" sx={{ mb: 3 }}>
+					<Typography variant="body1" textAlign="center">
 						Sum dolor sit amet consectetur adipisicing elit. Dolorum fugiat nam, impedit
 						eum, quisquam facere odit distinctio optio rem vitae similique consequuntur
 						ab magnam, repudiandae hic odio eligendi dolores? Tempora ex magnam.
 					</Typography>
-
-					<Box sx={{ textAlign: "center" }}>
-						<Button
-							size="small"
-							onClick={() => setActiveStep((prev) => prev + 1)}
-							color="success"
-							sx={{ m: 1 }}
-						>
-							Proceed
-						</Button>
-					</Box>
 				</Box>
 			);
 		case 1:
@@ -162,16 +151,6 @@ const Contents = ({ activeStep, setActiveStep }) => {
 							},
 						}}
 					/>
-					<Box sx={{ textAlign: "center" }}>
-						<Button
-							size="small"
-							onClick={() => setActiveStep((prev) => prev + 1)}
-							color="success"
-							sx={{ m: 1 }}
-						>
-							Proceed
-						</Button>
-					</Box>
 				</Box>
 			);
 		case 2:
@@ -230,23 +209,12 @@ const Contents = ({ activeStep, setActiveStep }) => {
 						multiline
 						rows={3}
 						sx={{
-							mb: 3,
 							width: "100%",
 							"& .MuiInputBase-root": {
 								borderRadius: "10px",
 							},
 						}}
 					/>
-					<Box sx={{ textAlign: "center" }}>
-						<Button
-							size="small"
-							onClick={() => setActiveStep((prev) => prev + 1)}
-							color="success"
-							sx={{ m: 1 }}
-						>
-							Proceed
-						</Button>
-					</Box>
 				</Box>
 			);
 		case 3:
@@ -261,16 +229,6 @@ const Contents = ({ activeStep, setActiveStep }) => {
 							<ImageInput key={elem} />
 						))}
 					</Grid>
-					<Box sx={{ textAlign: "center" }}>
-						<Button
-							size="small"
-							onClick={() => setActiveStep((prev) => prev + 1)}
-							color="success"
-							sx={{ m: 1 }}
-						>
-							Proceed
-						</Button>
-					</Box>
 				</Box>
 			);
 		case 4:
@@ -280,22 +238,11 @@ const Contents = ({ activeStep, setActiveStep }) => {
 						Confirmation
 					</Typography>
 
-					<Typography variant="body1" textAlign="center" sx={{ mb: 3 }}>
+					<Typography variant="body1" textAlign="center">
 						Sum dolor sit amet consectetur adipisicing elit. Dolorum fugiat nam, impedit
 						eum, quisquam facere odit distinctio optio rem vitae similique consequuntur
 						ab magnam, repudiandae hic odio eligendi dolores? Tempora ex magnam.
 					</Typography>
-
-					<Box sx={{ textAlign: "center" }}>
-						<Button
-							size="small"
-							onClick={() => setActiveStep(1)}
-							color="success"
-							sx={{ m: 1 }}
-						>
-							Finish
-						</Button>
-					</Box>
 				</Box>
 			);
 		default:
@@ -332,7 +279,7 @@ const NewListing = () => {
 						component="form"
 						onSubmit={handleSubmit}
 						sx={{
-							minHeight: "90vh",
+							minHeight: { xs: "38rem", md: "36.5rem" },
 							boxShadow: theme.shadows[5],
 							borderRadius: "20px",
 							background: theme.palette.background.paper,
@@ -372,6 +319,37 @@ const NewListing = () => {
 									/>
 								}
 							/>
+							<Box
+								sx={{
+									display: "flex",
+									width: "100%",
+								}}
+							>
+								<Button
+									variant="text"
+									size="small"
+									onClick={() => setActiveStep((prev) => prev - 1)}
+									color="success"
+									sx={{
+										m: 1,
+										display: activeStep === 0 ? "none" : "",
+									}}
+								>
+									Back
+								</Button>
+								<Button
+									size="small"
+									onClick={() => setActiveStep((prev) => prev + 1)}
+									color="success"
+									sx={{
+										m: 1,
+										ml: "auto",
+										display: activeStep === steps.length - 1 ? "none" : "",
+									}}
+								>
+									Proceed
+								</Button>
+							</Box>
 						</Box>
 					</Box>
 				</Container>

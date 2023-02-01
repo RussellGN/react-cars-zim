@@ -4,7 +4,7 @@ import {
 	LocalPhoneOutlined,
 	LocationOnOutlined,
 } from "@mui/icons-material";
-import { useTheme, Box, Container, Typography, Button, TextField } from "@mui/material";
+import { useTheme, Box, Container, Typography, Button, TextField, Link } from "@mui/material";
 import AnimatedRoute from "../components/routes/AnimatedRoute";
 import CustomStepper from "../components/general/CustomStepper";
 import { useState } from "react";
@@ -62,7 +62,7 @@ const Contents = ({ activeStep, setActiveStep, listing }) => {
 						mb: 3,
 						width: "100%",
 						"& .MuiInputBase-root": {
-							borderRadius: "10px",
+							borderRadius: "30px",
 						},
 					}}
 					label="Your Offer - $"
@@ -95,7 +95,15 @@ const Contents = ({ activeStep, setActiveStep, listing }) => {
 				</Typography>
 
 				<div>
-					<Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
+					<Box
+						sx={{
+							display: "flex",
+							backgroundColor: "divider",
+							borderRadius: "30px",
+							p: 2,
+							mb: 3,
+						}}
+					>
 						<LocalPhoneOutlined fontSize="medium" />
 						<Box
 							sx={{
@@ -105,12 +113,19 @@ const Contents = ({ activeStep, setActiveStep, listing }) => {
 								pl: 1.5,
 							}}
 						>
-							<Typography variant="body1">Call</Typography>
 							<Typography variant="body2">{listing.owner.phoneNumber}</Typography>
 						</Box>
 					</Box>
 
-					<Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
+					<Box
+						sx={{
+							display: "flex",
+							backgroundColor: "divider",
+							borderRadius: "30px",
+							p: 2,
+							mb: 3,
+						}}
+					>
 						<EmailOutlined fontSize="medium" />
 						<Box
 							sx={{
@@ -120,12 +135,26 @@ const Contents = ({ activeStep, setActiveStep, listing }) => {
 								pl: 1.5,
 							}}
 						>
-							<Typography variant="body1">Email</Typography>
-							<Typography variant="body2">{listing.owner.email}</Typography>
+							<Link
+								component="a"
+								href={"mailto:" + listing.owner.email}
+								underline="hover"
+								variant="body2"
+							>
+								{listing.owner.email}
+							</Link>
 						</Box>
 					</Box>
 
-					<Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
+					<Box
+						sx={{
+							display: "flex",
+							backgroundColor: "divider",
+							borderRadius: "30px",
+							p: 2,
+							mb: 3,
+						}}
+					>
 						<LocationOnOutlined fontSize="medium" />
 						<Box
 							sx={{
@@ -135,7 +164,6 @@ const Contents = ({ activeStep, setActiveStep, listing }) => {
 								pl: 1.5,
 							}}
 						>
-							<Typography variant="body1">Location</Typography>
 							<Typography variant="body2">{listing.owner.location}</Typography>
 						</Box>
 					</Box>

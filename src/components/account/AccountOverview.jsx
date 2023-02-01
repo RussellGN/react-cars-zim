@@ -55,6 +55,7 @@ const AccountOverview = ({ account }) => {
 				/>
 				{slug === user?.slug ? (
 					<IconButton
+						size="small"
 						sx={{
 							backgroundColor: "dark.main",
 							color: "light.main",
@@ -73,6 +74,7 @@ const AccountOverview = ({ account }) => {
 					</IconButton>
 				) : (
 					<ShareButton
+						size="small"
 						placement="left"
 						sx={{
 							backgroundColor: "dark.main",

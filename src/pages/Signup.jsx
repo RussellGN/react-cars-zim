@@ -94,21 +94,39 @@ const Signup = () => {
 							label="Email"
 							type="email"
 							name="email"
-							sx={{ mb: 2, width: "100%" }}
+							sx={{
+								mb: 3,
+								"& .MuiInputBase-root": {
+									borderRadius: "30px",
+								},
+								width: "100%",
+							}}
 						/>
 						<TextField
 							size="small"
 							label="Password"
 							name="password1"
 							type="password"
-							sx={{ mb: 2, width: "100%" }}
+							sx={{
+								mb: 3,
+								"& .MuiInputBase-root": {
+									borderRadius: "30px",
+								},
+								width: "100%",
+							}}
 						/>
 						<TextField
 							size="small"
 							label="Confirm Password"
 							name="password2"
 							type="password"
-							sx={{ mb: 5, width: "100%" }}
+							sx={{
+								mb: 3,
+								"& .MuiInputBase-root": {
+									borderRadius: "30px",
+								},
+								width: "100%",
+							}}
 						/>
 						<Box
 							sx={{
@@ -120,8 +138,13 @@ const Signup = () => {
 							}}
 						>
 							<Typography>
-								Already have an account?{" "}
-								<MaterialLink component={Link} to="/login" underline="hover">
+								Already have an <br /> account?
+								<MaterialLink
+									component={Link}
+									to="/login"
+									underline="hover"
+									sx={{ ml: 0.5 }}
+								>
 									Login.
 								</MaterialLink>
 							</Typography>

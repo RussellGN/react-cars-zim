@@ -2,7 +2,7 @@ import { ShareOutlined } from "@mui/icons-material";
 import { IconButton, Tooltip, Zoom } from "@mui/material";
 import React, { useState } from "react";
 
-const ShareButton = ({ placement, sx }) => {
+const ShareButton = ({ size, placement, sx }) => {
 	const [openShareTooltip, setOpenShareTooltip] = useState(false);
 
 	const handleShareTooltipClose = () => {
@@ -29,7 +29,7 @@ const ShareButton = ({ placement, sx }) => {
 			placement={placement}
 			title="Copied Link!"
 		>
-			<IconButton sx={{ ml: "auto", ...sx }} onClick={handleShareTooltipOpen}>
+			<IconButton size={size} sx={{ ml: "auto", ...sx }} onClick={handleShareTooltipOpen}>
 				<ShareOutlined />
 			</IconButton>
 		</Tooltip>
