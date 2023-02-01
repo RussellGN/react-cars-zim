@@ -207,15 +207,7 @@ const Notifs2 = () => {
 					>
 						{activeNotification ? (
 							<>
-								<Box
-									sx={{
-										backgroundColor:
-											theme.palette.mode === "light"
-												? "rgb(250,250,250)"
-												: "background.paper",
-										borderRadius: "10px",
-									}}
-								>
+								<Box sx={{ borderRadius: "10px" }}>
 									<NotificationTemplate notification={activeNotification} />
 								</Box>
 

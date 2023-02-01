@@ -6,44 +6,64 @@ import {
 	Grid,
 	Typography,
 	IconButton,
+	useTheme,
 } from "@mui/material";
-import { GitHub } from "@mui/icons-material";
+import { GitHub, KeyboardDoubleArrowRightOutlined } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
 const Footer = ({ marginTop }) => {
+	const theme = useTheme();
 	return (
 		<Box
 			sx={{
-				backgroundColor: "rgb(50,50,50)",
-				color: "rgb(180,180,180)",
+				backgroundColor: "dark.main",
+				color: "light.main",
 				marginTop: marginTop,
 			}}
 		>
 			<Container sx={{ px: { md: 5 }, py: { xs: 3, md: 7 }, color: "inherit" }}>
-				<Grid container spacing={2} justifyContent="space-around" sx={{ color: "inherit" }}>
+				<Grid container spacing={4} justifyContent="space-around" sx={{ color: "inherit" }}>
 					<Grid item xs={12} md="auto" sx={{ color: "inherit" }}>
 						<Box
 							sx={{
 								display: "flex",
 								gap: 1.2,
 								flexDirection: { md: "column" },
+								justifyContent: "space-between",
 								flexWrap: "wrap",
 								color: "inherit",
 							}}
 						>
-							<Typography variant="h6" sx={{ width: "100%", mb: 2 }} colo="inherit">
+							<Typography variant="h6" sx={{ width: "100%", mb: 2 }} color="inherit">
 								Usefull Links
 							</Typography>
 
-							<MaterialLink component={Link} to="/about" color="inherit">
-								About
+							<MaterialLink
+								component={Link}
+								to="/about"
+								sx={{ display: "flex", alignItems: "center" }}
+								color="inherit"
+							>
+								<KeyboardDoubleArrowRightOutlined sx={{ mr: 0.5 }} /> About
 							</MaterialLink>
 
-							<MaterialLink component={Link} to="/contact" color="inherit">
+							<MaterialLink
+								component={Link}
+								to="/contact"
+								sx={{ display: "flex", alignItems: "center" }}
+								color="inherit"
+							>
+								<KeyboardDoubleArrowRightOutlined sx={{ mr: 0.5 }} />
 								Contact
 							</MaterialLink>
 
-							<MaterialLink component={Link} to="/contact" color="inherit">
+							<MaterialLink
+								component={Link}
+								to="/contact"
+								sx={{ display: "flex", alignItems: "center" }}
+								color="inherit"
+							>
+								<KeyboardDoubleArrowRightOutlined sx={{ mr: 0.5 }} />
 								Suggest
 							</MaterialLink>
 						</Box>

@@ -394,7 +394,12 @@ const AccountSection = ({ show, mode, setMode }) => {
 				handleLogoutOpen={handleLogoutOpen}
 			/>
 
-			<Box sx={{ display: { xs: show ? "flex" : "none", md: "flex" }, alignItems: "center" }}>
+			<Box
+				sx={{
+					display: { xs: show ? "flex" : "none", md: "flex" },
+					alignItems: "center",
+				}}
+			>
 				<NotificationsDropdown />
 
 				<IconButton color="inherit" onClick={changeMode} sx={{ ml: 2 }}>

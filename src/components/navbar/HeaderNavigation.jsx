@@ -23,7 +23,12 @@ const HeaderLink = styled(NavLink)(({ theme }) => ({
 
 const HeaderNavigation = () => {
 	return (
-		<Box sx={{ display: { xs: "none", md: "flex" }, alignItems: "flex-end" }}>
+		<Box
+			sx={{
+				display: { xs: "none", md: "flex" },
+				alignItems: "center",
+			}}
+		>
 			<Logo />
 			<nav>
 				<HeaderLink to="/" end>

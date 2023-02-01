@@ -1,5 +1,5 @@
 import SearchForm from "./SearchForm";
-import { Stack, AppBar, Container } from "@mui/material";
+import { Stack, AppBar, useTheme, Container } from "@mui/material";
 import AccountSection from "./AccountSection";
 import HeaderNavigation from "./HeaderNavigation";
 import MobileNavigation from "./MobileNavigation";
@@ -8,7 +8,7 @@ import Alerts from "./Alerts";
 
 const Navbar = ({ mode, setMode }) => {
 	const { pathname } = useLocation();
-
+	const theme = useTheme();
 	for (let route of [
 		"/login",
 		"/signup",
@@ -24,12 +24,12 @@ const Navbar = ({ mode, setMode }) => {
 
 	return (
 		<AppBar
-			elevation={1}
+			elevation={3}
 			sx={{
 				position: "sticky",
 				top: 0,
 				left: 0,
-				backgroundColor: "background.paper",
+				backgroundColor: theme.palette.mode === "light" ? "background.paper" : "dark.main",
 				color: "inherit",
 				py: 2,
 				px: "0 !important", // this is here to prevent the appbar shifing  10px to the left because of the pop-up menus. I dont know why it works, just a bug i caught, or maybe its not
@@ -37,7 +37,7 @@ const Navbar = ({ mode, setMode }) => {
 			}}
 		>
 			<Container>
-				<Stack direction="row" alignItems="flex-end" justifyContent="space-between">
+				<Stack direction="row" alignItems="center" justifyContent="space-between">
 					<HeaderNavigation />
 					<SearchForm />
 					<AccountSection mode={mode} setMode={setMode} />
