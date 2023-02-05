@@ -1,4 +1,4 @@
-import { AddOutlined, DeleteOutlined } from "@mui/icons-material";
+import { AddOutlined, CheckCircleOutlined, DeleteOutlined } from "@mui/icons-material";
 import {
 	useTheme,
 	Box,
@@ -13,24 +13,28 @@ import {
 	Select,
 	MenuItem,
 } from "@mui/material";
-
 import CustomStepper from "../components/general/CustomStepper";
 import { useRef, useState } from "react";
 import BackButton from "../components/general/BackButton";
 import AnimatedRoute from "../components/routes/AnimatedRoute";
+import { Link, useLocation } from "react-router-dom";
+import listings from "../components/static-backend/listings";
 
-const ImageInput = () => {
-	const [source, setSource] = useState("");
+const ImageInput = ({ name, value: source, changeImageValue }) => {
 	const inputRef = useRef();
 	const imageRef = useRef();
 
-	const addImage = () => {
-		inputRef?.current?.click();
+	const addOrRemoveImage = () => {
+		if (source) {
+			changeImageValue(name, "");
+		} else inputRef?.current?.click();
 	};
 
 	const showImage = () => {
-		const url = URL.createObjectURL(inputRef.current.files[0]);
-		setSource(url);
+		if (inputRef.current.files.length > 0) {
+			const url = URL.createObjectURL(inputRef.current.files[0]);
+			changeImageValue(name, url);
+		}
 	};
 
 	return (
@@ -41,12 +45,12 @@ const ImageInput = () => {
 					width: "100%",
 					height: "6rem",
 					borderRadius: "10px",
-					border: "solid thin",
+					border: source ? "" : "solid thin",
 					borderColor: "divider",
 				}}
 			>
 				<IconButton
-					onClick={addImage}
+					onClick={addOrRemoveImage}
 					sx={{
 						width: "100%",
 						height: "100%",
@@ -54,10 +58,16 @@ const ImageInput = () => {
 						top: 0,
 						left: 0,
 						borderRadius: "10px",
+						transition: "all 0.2s",
+						"&:hover": {
+							backgroundColor: source ? "rgba(255,0,0,0.8)" : "",
+							color: source ? "white" : "",
+						},
 					}}
 				>
 					{source === "" ? <AddOutlined /> : <DeleteOutlined />}
 				</IconButton>
+
 				<img
 					ref={imageRef}
 					src={source ? source : ""}
@@ -65,15 +75,16 @@ const ImageInput = () => {
 					style={{
 						display: source === "" ? "none" : "block",
 						borderRadius: "10px",
-						border: "solid thin",
 						width: "100%",
 						objectFit: "cover",
 						height: "6rem",
 					}}
 				/>
+
 				<input
 					multiple={false}
 					onChange={showImage}
+					name={name}
 					ref={inputRef}
 					type="file"
 					accept="image/*"
@@ -84,10 +95,29 @@ const ImageInput = () => {
 	);
 };
 
-const Contents = ({ activeStep, setActiveStep }) => {
-	const [category, setCategory] = useState("");
+const Contents = ({ activeStep, setActiveStep, formData, setFormData }) => {
+	function handleFormDataChange(e) {
+		setFormData((prev) => {
+			return {
+				...prev,
+				[e.target.name]: e.target.value,
+			};
+		});
+	}
 
-	const handleCategoryChange = (e) => setCategory(e.target.value);
+	function changeImageValue(name, value) {
+		setFormData((prev) => {
+			return {
+				...prev,
+				images: {
+					...prev.images,
+					[name]: value,
+				},
+			};
+		});
+	}
+
+	const { pathname } = useLocation();
 
 	switch (activeStep) {
 		case 0:
@@ -115,6 +145,8 @@ const Contents = ({ activeStep, setActiveStep }) => {
 						size="small"
 						variant="outlined"
 						name="name"
+						value={formData.name}
+						onChange={handleFormDataChange}
 						label="Name Of Vehicle"
 						sx={{
 							mb: 3,
@@ -124,11 +156,14 @@ const Contents = ({ activeStep, setActiveStep }) => {
 							},
 						}}
 					/>
+
 					<TextField
 						size="small"
 						variant="outlined"
 						type="number"
 						name="price"
+						value={formData.price}
+						onChange={handleFormDataChange}
 						label="Price - $"
 						sx={{
 							mb: 3,
@@ -138,10 +173,13 @@ const Contents = ({ activeStep, setActiveStep }) => {
 							},
 						}}
 					/>
+
 					<TextField
 						size="small"
 						variant="outlined"
 						name="location"
+						value={formData.location}
+						onChange={handleFormDataChange}
 						label="Location"
 						sx={{
 							mb: 3,
@@ -175,9 +213,9 @@ const Contents = ({ activeStep, setActiveStep }) => {
 								labelId="demo-simple-select-label"
 								id="demo-simple-select"
 								name="category"
-								value={category}
+								value={formData.category}
+								onChange={handleFormDataChange}
 								label="Category"
-								onChange={handleCategoryChange}
 							>
 								<MenuItem value="c">Car</MenuItem>
 								<MenuItem value="m">Motorbike</MenuItem>
@@ -190,8 +228,10 @@ const Contents = ({ activeStep, setActiveStep }) => {
 					<TextField
 						size="small"
 						variant="outlined"
-						name="mileage"
 						type="number"
+						name="mileage"
+						value={formData.mileage}
+						onChange={handleFormDataChange}
 						label="Mileage - km"
 						sx={{
 							mb: 3,
@@ -201,10 +241,13 @@ const Contents = ({ activeStep, setActiveStep }) => {
 							},
 						}}
 					/>
+
 					<TextField
 						size="small"
 						variant="outlined"
 						name="details"
+						value={formData.details}
+						onChange={handleFormDataChange}
 						label="Details"
 						multiline
 						rows={3}
@@ -223,10 +266,14 @@ const Contents = ({ activeStep, setActiveStep }) => {
 					<Typography variant="h6" sx={{ mb: 3, textAlign: "center" }}>
 						Upload Images
 					</Typography>
-
 					<Grid container>
-						{[1, 2, 3, 4, 5, 6].map((elem) => (
-							<ImageInput key={elem} />
+						{Object.keys(formData.images).map((item) => (
+							<ImageInput
+								key={item}
+								name={item}
+								value={formData.images[item]}
+								changeImageValue={changeImageValue}
+							/>
 						))}
 					</Grid>
 				</Box>
@@ -234,15 +281,27 @@ const Contents = ({ activeStep, setActiveStep }) => {
 		case 4:
 			return (
 				<Box>
-					<Typography variant="h6" sx={{ mb: 3, textAlign: "center" }}>
-						Confirmation
-					</Typography>
-
-					<Typography variant="body1" textAlign="center">
-						Sum dolor sit amet consectetur adipisicing elit. Dolorum fugiat nam, impedit
-						eum, quisquam facere odit distinctio optio rem vitae similique consequuntur
-						ab magnam, repudiandae hic odio eligendi dolores? Tempora ex magnam.
-					</Typography>
+					<Box
+						sx={{
+							display: "flex",
+							flexDirection: "column",
+							alignItems: "center",
+							gap: 3,
+						}}
+					>
+						<CheckCircleOutlined sx={{ fontSize: "5rem" }} />
+						<Typography sx={{ textAlign: "center" }}>
+							Your listing has been <br />{" "}
+							{pathname.includes("/edit-listing") ? "updated" : "uploaded"}!
+						</Typography>
+						<Button
+							size="small"
+							component={Link}
+							to="/view-offer/toyota-hillux-legend-45-1"
+						>
+							View
+						</Button>
+					</Box>
 				</Box>
 			);
 		default:
@@ -251,15 +310,30 @@ const Contents = ({ activeStep, setActiveStep }) => {
 };
 
 const NewListing = () => {
+	const [formData, setFormData] = useState({
+		name: "",
+		price: "",
+		location: "",
+		mileage: "",
+		category: "",
+		details: "",
+		images: {
+			image1: "",
+			image2: "",
+			image3: "",
+			image4: "",
+			image5: "",
+			image6: "",
+		},
+	});
+
 	const [activeStep, setActiveStep] = useState(0);
 
 	const theme = useTheme();
+
 	const steps = [" Info  ", "Details", "Details", "Images", "Confirm"];
 
-	function handleSubmit(e) {
-		e.preventDefault();
-		console.log("hello");
-	}
+	if (activeStep === steps.length - 1) console.log(formData);
 
 	return (
 		<AnimatedRoute>
@@ -277,7 +351,6 @@ const NewListing = () => {
 				<Container maxWidth="sm">
 					<Box
 						component="form"
-						onSubmit={handleSubmit}
 						sx={{
 							minHeight: { xs: "38rem", md: "36.5rem" },
 							boxShadow: theme.shadows[5],
@@ -293,7 +366,7 @@ const NewListing = () => {
 								width: "100%",
 							}}
 						>
-							<BackButton />
+							<BackButton onlyRoute={activeStep === steps.length - 1 ? "/" : ""} />
 						</Box>
 
 						<Box
@@ -312,8 +385,11 @@ const NewListing = () => {
 								steps={steps}
 								activeStep={activeStep}
 								setActiveStep={setActiveStep}
+								hideAtConfirm
 								contents={
 									<Contents
+										formData={formData}
+										setFormData={setFormData}
 										activeStep={activeStep}
 										setActiveStep={setActiveStep}
 									/>
@@ -332,7 +408,10 @@ const NewListing = () => {
 									color="success"
 									sx={{
 										m: 1,
-										display: activeStep === 0 ? "none" : "",
+										display:
+											activeStep === 0 || activeStep === steps.length - 1
+												? "none"
+												: "",
 									}}
 								>
 									Back
@@ -347,7 +426,7 @@ const NewListing = () => {
 										display: activeStep === steps.length - 1 ? "none" : "",
 									}}
 								>
-									Proceed
+									{activeStep === steps.length - 2 ? "Finish" : "Proceed"}
 								</Button>
 							</Box>
 						</Box>

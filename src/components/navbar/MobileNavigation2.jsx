@@ -1,4 +1,15 @@
-import { Button, Badge, styled, Drawer, Backdrop, Box, IconButton, useTheme } from "@mui/material";
+import {
+	Collapse,
+	Typography,
+	Button,
+	Badge,
+	Avatar,
+	styled,
+	Drawer,
+	Backdrop,
+	Box,
+	IconButton,
+} from "@mui/material";
 import {
 	AddOutlined,
 	LightModeOutlined,
@@ -7,58 +18,50 @@ import {
 	MenuOutlined,
 	SearchOutlined,
 	NotificationsOutlined,
-	KeyboardDoubleArrowRightOutlined,
+	ExpandMoreOutlined,
 } from "@mui/icons-material";
 import Logo from "./Logo";
 import { useState, useContext } from "react";
 import SearchForm from "./SearchForm";
 import { Link, NavLink } from "react-router-dom";
 
+import * as React from "react";
 import { UserContext } from "../static-backend/UserContext";
 
-const LinkItem = ({ to, label, icon, setOpenBackdrop }) => {
-	const theme = useTheme();
-	return (
-		<Button
-			component={NavLink}
-			onClick={() => {
-				setOpenBackdrop(false);
-			}}
-			to={to}
-			end
-			sx={{
-				width: "90%",
-				mx: "auto",
-				mb: 0.5,
-				borderRadius: "15px",
-				textDecoration: "none",
-				padding: theme.spacing(2),
-				backgroundColor: theme.palette.dark.main,
-				color: theme.palette.light.main,
-				justifyContent: "flex-start",
-				fontSize: theme.typography.body1,
-				gap: 2,
-				"&:hover": {
-					backgroundColor: theme.palette.dark.main,
-					color: theme.palette.light.main,
-				},
-				"&.active": {
-					border: "solid 1px",
-					borderColor: "primary.main",
-				},
-			}}
-			startIcon={icon || <KeyboardDoubleArrowRightOutlined />}
-		>
-			{label}
-		</Button>
-	);
-};
+const MobileLink = styled(NavLink)(({ theme }) => ({
+	color: "inherit",
+	marginBottom: theme.spacing(1),
+	textDecoration: "none",
+	transition: "all 0.2s",
+	display: "block",
+	"&.active, &:hover": {
+		color: theme.palette.primary.light,
+	},
+}));
 
-const SearchComp = () => {
+const MobileNavigation2 = ({ mode, setMode }) => {
+	const { user } = useContext(UserContext);
+	const [expanded, setExpanded] = useState(false);
 	const [openDrawer, setOpenDrawer] = useState(false);
+	const [openBackdrop, setOpenBackdrop] = useState(false);
+
+	const handleExpandClick = () => setExpanded(!expanded);
+
+	const changeMode = () => {
+		setOpenBackdrop(true);
+		if (mode === "dark") setMode("light");
+		else setMode("dark");
+	};
 
 	return (
-		<>
+		<Box
+			sx={{
+				flexGrow: 1,
+				display: { xs: "flex", md: "none" },
+				justifyContent: "space-between",
+				alignItems: "center",
+			}}
+		>
 			<IconButton color="inherit" onClick={() => setOpenDrawer(true)}>
 				<SearchOutlined />
 			</IconButton>
@@ -85,22 +88,9 @@ const SearchComp = () => {
 					<SearchForm show={true} setOpenDrawer={setOpenDrawer} />
 				</Box>
 			</Drawer>
-		</>
-	);
-};
 
-const MenuComp = ({ mode, setMode }) => {
-	const { user } = useContext(UserContext);
-	const [openBackdrop, setOpenBackdrop] = useState(false);
+			<Logo />
 
-	const changeMode = () => {
-		setOpenBackdrop(true);
-		if (mode === "dark") setMode("light");
-		else setMode("dark");
-	};
-
-	return (
-		<>
 			<IconButton color="inherit" onClick={() => setOpenBackdrop(true)}>
 				<MenuOutlined />
 			</IconButton>
@@ -114,7 +104,6 @@ const MenuComp = ({ mode, setMode }) => {
 			>
 				<Box
 					sx={{
-						width: "100%",
 						display: "flex",
 						flexDirection: "column",
 						justifyContent: "center",
@@ -141,6 +130,7 @@ const MenuComp = ({ mode, setMode }) => {
 									max={9}
 									onClick={() => {
 										setOpenBackdrop(false);
+										setExpanded(false);
 									}}
 									color="success"
 									component={Link}
@@ -164,6 +154,7 @@ const MenuComp = ({ mode, setMode }) => {
 							<Button
 								onClick={() => {
 									setOpenBackdrop(false);
+									setExpanded(false);
 								}}
 								color="success"
 								component={Link}
@@ -186,6 +177,7 @@ const MenuComp = ({ mode, setMode }) => {
 						<IconButton
 							onClick={() => {
 								setOpenBackdrop(false);
+								setExpanded(false);
 							}}
 							color="light"
 						>
@@ -193,7 +185,7 @@ const MenuComp = ({ mode, setMode }) => {
 						</IconButton>
 					</Box>
 
-					{/* {user?.username ? (
+					{user?.username ? (
 						<Box
 							sx={{
 								mb: 4,
@@ -220,53 +212,130 @@ const MenuComp = ({ mode, setMode }) => {
 						</Box>
 					) : (
 						""
-					)} */}
-
-					<LinkItem setOpenBackdrop={setOpenBackdrop} to="/" label="Home" />
-					<LinkItem setOpenBackdrop={setOpenBackdrop} to="/offers" label="Offers" />
-
-					{user?.slug ? (
-						<LinkItem
-							setOpenBackdrop={setOpenBackdrop}
-							to={"/account/" + user.slug}
-							label="Account"
-						/>
-					) : (
-						<>
-							<LinkItem setOpenBackdrop={setOpenBackdrop} to="/login" label="Login" />
-							<LinkItem
-								setOpenBackdrop={setOpenBackdrop}
-								to="/signup"
-								label="Signup"
-							/>
-						</>
 					)}
 
-					<LinkItem setOpenBackdrop={setOpenBackdrop} to="/about" label="About" />
-					<LinkItem setOpenBackdrop={setOpenBackdrop} to="/contact" label="Contact" />
+					<MobileLink
+						onClick={() => {
+							setOpenBackdrop(false);
+							setExpanded(false);
+						}}
+						to="/"
+						end
+						sx={{ color: "light.main" }}
+					>
+						Home
+					</MobileLink>
+
+					<MobileLink
+						onClick={() => {
+							setOpenBackdrop(false);
+							setExpanded(false);
+						}}
+						to="/offers"
+						sx={{ color: "light.main" }}
+					>
+						Offers
+					</MobileLink>
+
+					{user?.username ? (
+						<MobileLink
+							onClick={() => {
+								setOpenBackdrop(false);
+								setExpanded(false);
+							}}
+							to={`/account/${user.slug}`}
+							sx={{ color: "light.main" }}
+						>
+							Account
+						</MobileLink>
+					) : (
+						<MobileLink
+							onClick={() => {
+								setOpenBackdrop(false);
+								setExpanded(false);
+							}}
+							to={`/login`}
+							sx={{ color: "light.main" }}
+						>
+							Login
+						</MobileLink>
+					)}
+
+					<Typography
+						onClick={handleExpandClick}
+						variant="body1"
+						sx={{
+							display: "flex",
+							alignItems: "center",
+							my: 2,
+							cursor: "pointer",
+							color: "light.main",
+						}}
+					>
+						{expanded === true ? "less" : "more"}{" "}
+						<ExpandMoreOutlined
+							sx={{
+								ml: 0.3,
+								transform: expanded === true ? "rotate(180deg)" : "",
+								transition: "transform 0.2s",
+							}}
+						/>
+					</Typography>
+
+					<Collapse
+						in={expanded}
+						timeout="auto"
+						unmountOnExit
+						sx={{ textAlign: "center" }}
+					>
+						<MobileLink
+							onClick={() => {
+								setOpenBackdrop(false);
+								setExpanded(false);
+							}}
+							to="/about"
+							sx={{ color: "light.main" }}
+						>
+							About
+						</MobileLink>
+
+						<MobileLink
+							onClick={() => {
+								setOpenBackdrop(false);
+								setExpanded(false);
+							}}
+							to="/contact"
+							sx={{ color: "light.main" }}
+						>
+							Contact Us
+						</MobileLink>
+
+						<MobileLink
+							onClick={() => {
+								setOpenBackdrop(false);
+								setExpanded(false);
+							}}
+							to="/report"
+							sx={{ color: "light.main" }}
+						>
+							Report
+						</MobileLink>
+
+						<MobileLink
+							onClick={() => {
+								setOpenBackdrop(false);
+								setExpanded(false);
+							}}
+							to="/signup"
+							sx={{ color: "light.main" }}
+						>
+							Signup
+						</MobileLink>
+					</Collapse>
 				</Box>
 			</Backdrop>
-		</>
-	);
-};
-
-const MobileNavigation = ({ mode, setMode }) => {
-	return (
-		<Box
-			sx={{
-				flexGrow: 1,
-				display: { xs: "flex", md: "none" },
-				justifyContent: "space-between",
-				alignItems: "center",
-			}}
-		>
-			<SearchComp />
-
-			<Logo />
-
-			<MenuComp mode={mode} setMode={setMode} />
 		</Box>
 	);
 };
 
-export default MobileNavigation;
+export default MobileNavigation2;

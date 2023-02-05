@@ -14,6 +14,7 @@ const Navbar = ({ mode, setMode }) => {
 		"/signup",
 		"/enquire",
 		"/new-listing",
+		"/edit-listing",
 		"/account-details",
 		"/edit-account-details",
 	]) {

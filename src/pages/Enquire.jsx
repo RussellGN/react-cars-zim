@@ -1,18 +1,41 @@
 import {
+	CheckCircleOutlined,
 	EmailOutlined,
 	LocalOfferOutlined,
 	LocalPhoneOutlined,
 	LocationOnOutlined,
 } from "@mui/icons-material";
-import { useTheme, Box, Container, Typography, Button, TextField, Link } from "@mui/material";
+import {
+	useTheme,
+	Box,
+	Container,
+	Typography,
+	Button,
+	TextField,
+	Link as MaterialLink,
+} from "@mui/material";
 import AnimatedRoute from "../components/routes/AnimatedRoute";
 import CustomStepper from "../components/general/CustomStepper";
 import { useState } from "react";
 import BackButton from "../components/general/BackButton";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import listings from "../components/static-backend/listings";
 
 const Contents = ({ activeStep, setActiveStep, listing }) => {
+	const [finished, setFinished] = useState(false);
+	const {
+		owner: { username, slug },
+	} = listing;
+
+	function handleSubmit(e) {
+		e.preventDefault();
+		console.log({
+			bid: e.bid,
+			queries: e.queries,
+		});
+		setFinished(true);
+	}
+
 	if (activeStep === 0) {
 		return (
 			<Box>
@@ -48,45 +71,81 @@ const Contents = ({ activeStep, setActiveStep, listing }) => {
 			</Box>
 		);
 	} else if (activeStep === 1) {
-		return (
-			<Box>
-				<Typography variant="h6" sx={{ mb: 3, textAlign: "center" }}>
-					Make a Formal Bid
-				</Typography>
-
-				<TextField
-					type="number"
-					size="small"
-					variant="outlined"
-					sx={{
-						mb: 3,
-						width: "100%",
-						"& .MuiInputBase-root": {
-							borderRadius: "30px",
-						},
-					}}
-					label="Your Offer - $"
-				/>
-				<TextField
-					size="small"
-					variant="outlined"
-					label="Queries"
-					sx={{
-						mb: 3,
-						width: "100%",
-						"& .MuiInputBase-root": {
-							borderRadius: "10px",
-						},
-					}}
-					multiline
-					rows={3}
-				/>
-
-				<Box sx={{ textAlign: "center" }}>
-					<Button color="success">Finish</Button>
+		if (finished)
+			return (
+				<Box>
+					<Box
+						sx={{
+							display: "flex",
+							flexDirection: "column",
+							alignItems: "center",
+							gap: 3,
+						}}
+					>
+						<CheckCircleOutlined sx={{ fontSize: "5rem" }} />
+						<Typography sx={{ textAlign: "center" }}>
+							Your bid was sent! Feel free to contact
+							<MaterialLink
+								underline="hover"
+								component={MaterialLink}
+								to={"/account/" + slug}
+								sx={{ mx: 0.7 }}
+							>
+								{username}
+							</MaterialLink>
+							directly if a response is <br /> taking too long.
+						</Typography>
+						<Button onClick={() => setActiveStep(2)} size="small">
+							Contact
+						</Button>
+					</Box>
 				</Box>
-			</Box>
-		);
+			);
+		else
+			return (
+				<Box component="form" onSubmit={handleSubmit}>
+					<Typography variant="h6" sx={{ mb: 3, textAlign: "center" }}>
+						Make a Formal Bid
+					</Typography>
+
+					<TextField
+						required
+						type="number"
+						name="bid"
+						size="small"
+						variant="outlined"
+						sx={{
+							mb: 3,
+							width: "100%",
+							"& .MuiInputBase-root": {
+								borderRadius: "30px",
+							},
+						}}
+						label="Your Offer - $"
+					/>
+					<TextField
+						size="small"
+						variant="outlined"
+						label="Queries"
+						name="queries"
+						sx={{
+							mb: 3,
+							width: "100%",
+							"& .MuiInputBase-root": {
+								borderRadius: "10px",
+							},
+						}}
+						multiline
+						rows={3}
+					/>
+
+					<Box sx={{ textAlign: "center" }}>
+						<Button type="submit" onClick={handleSubmit} color="success">
+							Finish
+						</Button>
+					</Box>
+				</Box>
+			);
 	} else {
 		return (
 			<Box>
@@ -135,14 +194,14 @@ const Contents = ({ activeStep, setActiveStep, listing }) => {
 								pl: 1.5,
 							}}
 						>
-							<Link
+							<MaterialLink
 								component="a"
 								href={"mailto:" + listing.owner.email}
 								underline="hover"
 								variant="body2"
 							>
 								{listing.owner.email}
-							</Link>
+							</MaterialLink>
 						</Box>
 					</Box>
 
@@ -183,11 +242,6 @@ const Enquire = () => {
 
 	const listing = listings.find((listing) => listing.slug === slug);
 
-	function handleSubmit(e) {
-		e.preventDefault();
-		console.log("hello");
-	}
-
 	return (
 		<AnimatedRoute>
 			<Box
@@ -203,8 +257,6 @@ const Enquire = () => {
 			>
 				<Container maxWidth="sm">
 					<Box
-						component="form"
-						onSubmit={handleSubmit}
 						sx={{
 							minHeight: "90vh",
 							boxShadow: theme.shadows[5],

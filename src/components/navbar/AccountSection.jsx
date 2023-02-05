@@ -22,6 +22,7 @@ import {
 	LocalOfferOutlined,
 	EmailOutlined,
 	AddOutlined,
+	KeyboardDoubleArrowRightOutlined,
 } from "@mui/icons-material";
 import { Link, useLocation } from "react-router-dom";
 import { useContext, useState } from "react";
@@ -33,32 +34,32 @@ const CustomNotificationIcon = ({ category, sx }) => {
 		case "account":
 			return (
 				<ListItemIcon sx={sx}>
-					<PersonOutlined fontSize="inherit" />
+					<PersonOutlined fontSize="small" />
 				</ListItemIcon>
 			);
 
 		case "message":
 			return (
 				<ListItemIcon sx={sx}>
-					<EmailOutlined fontSize="inherit" />
+					<EmailOutlined fontSize="small" />
 				</ListItemIcon>
 			);
 		case "offer":
 			return (
 				<ListItemIcon sx={sx}>
-					<LocalOfferOutlined fontSize="inherit" />
+					<LocalOfferOutlined fontSize="small" />
 				</ListItemIcon>
 			);
 		case "warning":
 			return (
 				<ListItemIcon sx={sx}>
-					<WarningOutlined fontSize="inherit" />
+					<WarningOutlined fontSize="small" />
 				</ListItemIcon>
 			);
 		default:
 			return (
 				<ListItemIcon sx={sx}>
-					<InfoOutlined fontSize="inherit" />
+					<InfoOutlined fontSize="small" />
 				</ListItemIcon>
 			);
 	}
@@ -180,7 +181,22 @@ const NotificationsDropdown = () => {
 						</MenuItem>
 					);
 				})}
-				<MenuItem component={Link} to="/notifications" sx={{ p: 0 }}>
+
+				<MenuItem
+					component={Link}
+					to="/notifications"
+					sx={{
+						maxWidth: "20rem",
+						px: 2.5,
+						backgroundColor: "divider",
+						py: 1,
+					}}
+				>
+					<KeyboardDoubleArrowRightOutlined fontSize="small" sx={{ mr: 2 }} />
+					<Typography variant="body2">view all</Typography>
+				</MenuItem>
+
+				{/* <MenuItem component={Link} to="/notifications" sx={{ p: 0 }}>
 					<Typography
 						variant="caption"
 						sx={{
@@ -192,7 +208,7 @@ const NotificationsDropdown = () => {
 					>
 						view all
 					</Typography>
-				</MenuItem>
+				</MenuItem> */}
 			</Menu>
 		</>
 	);

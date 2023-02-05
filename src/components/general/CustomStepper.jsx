@@ -92,7 +92,7 @@ const CustomConnector = ({ active, length }) => {
 	);
 };
 
-const CustomStepper = ({ steps, activeStep, setActiveStep, contents }) => {
+const CustomStepper = ({ steps, activeStep, setActiveStep, contents, hideAtConfirm }) => {
 	const length = steps.length;
 	const multiplier = 1 / length;
 	return (
@@ -105,6 +105,11 @@ const CustomStepper = ({ steps, activeStep, setActiveStep, contents }) => {
 					gap: `calc(${3 * multiplier}rem + 6px)`,
 					// gx: `calc(${6 / length}rem + 6px)`,
 					justifyContent: "center",
+
+					visibility:
+						steps[activeStep].toLowerCase().includes("confirm") && hideAtConfirm
+							? "hidden"
+							: "",
 					mb: 3,
 				}}
 			>

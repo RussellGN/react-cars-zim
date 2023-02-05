@@ -36,6 +36,7 @@ import { humanizeDate } from "../components/utils/humanizeDate";
 import ShareButton from "../components/general/ShareButton";
 import BackButton from "../components/general/BackButton";
 import listings from "../components/static-backend/listings";
+import Related from "../components/view-offer/Related";
 
 const SaveButton = ({ placement }) => {
 	const [openTooltip, setOpenTooltip] = useState(false);
@@ -99,7 +100,12 @@ const ViewOffer = () => {
 				<Typography
 					variant="h5"
 					textAlign="center"
-					sx={{ my: 4, display: "flex", alignItems: "center", justifyContent: "center" }}
+					sx={{
+						my: 4,
+						display: "flex",
+						alignItems: "center",
+						justifyContent: "center",
+					}}
 				>
 					<BackButton />
 					<span style={{ marginLeft: "1rem" }}>{listing.name}</span>
@@ -349,12 +355,15 @@ const ViewOffer = () => {
 							)}
 							<ShareButton
 								placement={isMobile ? "top" : "left"}
-								sx={{ ml: user?.username === listing.owner.username ? "auto" : "" }}
+								sx={{
+									ml: user?.username === listing.owner.username ? "auto" : "",
+								}}
 							/>
 						</Stack>
 					</Box>
 				</Box>
 			</Container>
+			<Related />
 		</AnimatedRoute>
 	);
 };

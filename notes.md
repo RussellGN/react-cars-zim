@@ -27,12 +27,7 @@
 
 # todo
 
-255. make it clearer to the user taht cars.zim is for advertising only and does not take pasrt in transacting
-256. give guidelines on how to proceed after contatcing owner of a listing
-257. refine image upload fields
-258. refine listing creation
-259. write tests
-260. fix dropdowns
+257. write tests
 
 # bonus...search for animated components library
 
