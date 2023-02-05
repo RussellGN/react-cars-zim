@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/react-cars-zim/static/js/main.2fc2cd44.js",
+    "main.js": "/react-cars-zim/static/js/main.8e623ff0.js",
     "static/media/porsche.JPG": "/react-cars-zim/static/media/porsche.5befac7238d35bb1b093.JPG",
     "static/media/hillux1.jpeg": "/react-cars-zim/static/media/hillux1.59a78cad7ef5f5e39a9c.jpeg",
     "static/media/hillux2.jpg": "/react-cars-zim/static/media/hillux2.f38cf4f0560feca39d1a.jpg",
@@ -11,12 +11,11 @@
     "static/media/corrola2.jpg": "/react-cars-zim/static/media/corrola2.8d6e9cb855f69679ca63.jpg",
     "static/media/corrola3.jpg": "/react-cars-zim/static/media/corrola3.3daef07e704d1e425a5d.jpg",
     "static/media/hillux3.jpeg": "/react-cars-zim/static/media/hillux3.ff9a028368bb5c5a43af.jpeg",
-    "static/media/about-image-1.svg": "/react-cars-zim/static/media/about-image-1.e680ee16d1eb6c9f5712e9abcca5be93.svg",
     "static/media/display-photo.jpg": "/react-cars-zim/static/media/display-photo.341592f6e226c824cb21.jpg",
     "index.html": "/react-cars-zim/index.html",
-    "main.2fc2cd44.js.map": "/react-cars-zim/static/js/main.2fc2cd44.js.map"
+    "main.8e623ff0.js.map": "/react-cars-zim/static/js/main.8e623ff0.js.map"
   },
   "entrypoints": [
-    "static/js/main.2fc2cd44.js"
+    "static/js/main.8e623ff0.js"
   ]
 }
