@@ -12,6 +12,7 @@ import {
 	InputLabel,
 	Select,
 	MenuItem,
+	useMediaQuery,
 } from "@mui/material";
 import CustomStepper from "../components/general/CustomStepper";
 import { useRef, useState } from "react";
@@ -23,7 +24,8 @@ import listings from "../components/static-backend/listings";
 const ImageInput = ({ name, value: source, changeImageValue }) => {
 	const inputRef = useRef();
 	const imageRef = useRef();
-
+	const theme = useTheme();
+	const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.values.md}px)`);
 	const addOrRemoveImage = () => {
 		if (source) {
 			changeImageValue(name, "");
@@ -59,10 +61,12 @@ const ImageInput = ({ name, value: source, changeImageValue }) => {
 						left: 0,
 						borderRadius: "10px",
 						transition: "all 0.2s",
-						"&:hover": {
-							backgroundColor: source ? "rgba(255,0,0,0.8)" : "",
-							color: source ? "white" : "",
-						},
+						"&:hover": !isMobile
+							? {
+									backgroundColor: source ? "rgba(255,0,0,0.8)" : "",
+									color: source ? "white" : "",
+							  }
+							: "",
 					}}
 				>
 					{source === "" ? <AddOutlined /> : <DeleteOutlined />}
