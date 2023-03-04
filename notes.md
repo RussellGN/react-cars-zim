@@ -2,14 +2,14 @@
 
 # delayed
 
-50. review all components
 51. work on the vehicle categories (listings and switching between them)
-52. prevent scroll up when going bck from to view-offer and similar
+52. create account modal for certain features, if user is not logged in
 53. make sure everything thats clickable actualy does something
-54. create a sort of guide through the site to better showcase the site and what its like when logged in/out and so forth
-55. popup helpers for some componennts (double pa to activate on mobile)
-56. create account modal for certain features, if user is not logged in
+54. popup helpers for some componennts (double pa to activate on mobile)
+55. create a sort of guide through the site to better showcase the site and what its like when logged in/out and so forth
+56. prevent scroll up when going bck from to view-offer and similar
 57. research input pattern prop and makeit work
+58. review all components
 
 # internet needed
 

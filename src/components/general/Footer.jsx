@@ -134,8 +134,8 @@ const Footer = ({ marginTop }) => {
 					<Box sx={{ display: "flex", color: "inherit" }}>
 						<IconButton
 							color="inherit"
-							component={Link}
-							to="https://www.github/RussellGN/react-cars-zim"
+							component="a"
+							href="https://www.github/RussellGN/react-cars-zim"
 							sx={{ mx: 0.5 }}
 						>
 							<GitHub />

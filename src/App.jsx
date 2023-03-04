@@ -8,7 +8,8 @@ import { UserContextProvider } from "./components/static-backend/UserContext";
 import AppThemeProvider from "./components/general/AppThemeProvider";
 
 const App = () => {
-	const { matches: prefersDark } = window.matchMedia("(prefers-color-scheme: dark)");
+	// const { matches: prefersDark } = window.matchMedia("(prefers-color-scheme: dark)");
+	const prefersDark = false;
 	const [mode, setMode] = useState(prefersDark === true ? "dark" : "light");
 
 	return (

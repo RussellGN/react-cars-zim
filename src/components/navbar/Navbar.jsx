@@ -34,7 +34,7 @@ const Navbar = ({ mode, setMode }) => {
 				backgroundColor: "background.paper",
 				color: "inherit",
 				py: 2,
-				px: "0 !important", // this is here to prevent the appbar shifing  10px to the left because of the pop-up menus. I dont know why it works, just a bug i caught, or maybe its not
+				px: "0 !important", // this is here to prevent the appbar shifting  10px to the left because of the pop-up menus. I dont know why it works, just a bug i caught, or maybe its not.
 				mb: 5,
 			}}
 		>
